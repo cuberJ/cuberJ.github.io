@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>连锁超市 · 模拟浏览器购物主页</title>
+  <style>
+    /* 颜色：白/红/淡灰/黑 */
+    :root {
+      --red: #e53935;
+      --red-dark: #c62828;
+      --white: #fff;
+      --light: #f5f6f7;
+      --gray: #ddd;
+      --text: #222;
+      --muted: #666;
+      --green: #27c93f; /* 选项栏隐藏按钮色 */
+      --yellow: #ffbd2e; /* 缩小 */
+      --close: #ff5f56; /* 关闭 */
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--light);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif}
+    .wrap{max-width:1000px;margin:24px auto;border:1px solid var(--gray);border-radius:12px;overflow:hidden;background:var(--white)}
+    header{background:#000;color:#fff;padding:12px 16px}
+    /* 顶部浏览器框架 */
+    .top{background:#000;color:#fff;padding:8px 12px;border-bottom:1px solid #111}
+    .top .row{display:flex;align-items:center;gap:12px}
+    .controls{display:flex;gap:8px}
+    .dot{width:12px;height:12px;border-radius:50%}
+    .dot.close{background:var(--close)}
+    .dot.min{background:var(--yellow)}
+    .dot.hide{background:var(--green)}
+    .tabbar{display:flex;gap:8px;margin-left:auto}
+    .tab{padding:6px 10px;border-radius:8px;background:#222;color:#fff;border:1px solid #333;cursor:pointer}
+    .tab.active{background:var(--red);border-color:var(--red-dark)}
+    .urlbar{margin-top:8px}
+    .urlbar input{width:100%;padding:10px 12px;border:1px solid var(--gray);border-radius:8px;background:#fff;color:#111}
+    .options{background:#111;color:#bbb;padding:6px 12px;font-size:13px;border-top:1px solid #222}
+    .options.hidden{display:none}
+
+    /* 宣传轮播 */
+    .promo{position:relative;overflow:hidden;border-bottom:1px solid var(--gray)}
+    .slides{display:flex;width:300%;transition:transform .5s ease}
+    .slide{flex:0 0 100%;height:220px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff}
+    .s1{background:linear-gradient(135deg,#ff8a80,var(--red))}
+    .s2{background:linear-gradient(135deg,#ef9a9a,#d32f2f)}
+    .s3{background:linear-gradient(135deg,#f48fb1,#ad1457)}
+    .arrows{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 8px}
+    .arrow{background:rgba(0,0,0,.35);color:#fff;border:none;border-radius:6px;font-size:20px;width:36px;height:36px;cursor:pointer}
+    .dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:6px}
+    .dotp{width:8px;height:8px;border-radius:50%;background:#fff;opacity:.6}
+    .dotp.active{opacity:1;background:#000}
+
+    /* 导航栏 */
+    nav.menu{display:flex;gap:16px;padding:12px 16px;border-bottom:1px solid var(--gray);background:#fafafa}
+    nav.menu a{color:var(--red);text-decoration:none;font-weight:600}
+
+    /* 内容分区卡片 */
+    .card{padding:16px;border-bottom:1px solid var(--gray)}
+    .card h3{margin:0 0 8px;color:var(--red-dark)}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* 购物区 */
+    .shop{padding:16px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:520px){.grid{grid-template-columns:1fr}}
+    .item{border:1px solid var(--gray);border-radius:10px;background:#fff;display:flex;flex-direction:column}
+    .pic{height:110px;display:flex;align-items:center;justify-content:center;font-size:40px;background:#f9f9f9;border-bottom:1px solid var(--gray)}
+    .info{padding:10px 12px}
+    .name{font-weight:600}
+    .price{color:#000}
+    .actions{display:flex;align-items:center;gap:8px;padding:10px 12px;border-top:1px solid var(--gray)}
+    .btn{padding:6px 10px;border:1px solid var(--gray);border-radius:6px;background:#fff;cursor:pointer}
+    .btn.add{background:var(--red);border-color:var(--red-dark);color:#fff}
+    .qty{margin-left:auto;font-weight:700}
+
+    /* 结算区 */
+    .checkout{display:flex;align-items:center;gap:12px;padding:16px;border-top:2px solid var(--gray);background:#fafafa}
+    .total{font-size:18px;font-weight:700}
+    .pay{margin-left:auto;background:#000;color:#fff;border:none;border-radius:8px;padding:10px 16px;cursor:pointer}
+    .pay:disabled{opacity:.5;cursor:not-allowed}
+
+    /* 底部状态栏 */
+    .status{display:flex;gap:18px;align-items:center;padding:10px 16px;border-top:1px solid var(--gray);background:#f0f0f0}
+    .status a{color:#111;text-decoration:none}
+    .status .mail .has{display:none}
+    body[data-has-mail="true"] .status .mail .has{display:inline}
+    body[data-has-mail="true"] .status .mail .none{display:none}
+  </style>
+  <link rel="stylesheet" href="css/taskbar.css" />
+  <link rel="stylesheet" href="css/chrome.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>连锁超市</header>
+    <main>
+      <!-- 宣传栏（轮播） -->
+      <section class="promo" id="top">
+        <div class="slides" id="slides">
+          <div class="slide s1">全城狂欢 · 红色大促</div>
+          <div class="slide s2">会员日 · 满减不停</div>
+          <div class="slide s3">生鲜到家 · 当日达</div>
+        </div>
+        <div class="arrows">
+          <button class="arrow" id="prev">‹</button>
+          <button class="arrow" id="next">›</button>
+        </div>
+        <div class="dots" id="dots"></div>
+      </section>
+
+      <!-- 导航栏 -->
+      <nav class="menu">
+        <a href="about.html">超市简介</a>
+        <a href="deals.html">今日特价</a>
+        <a href="macellum.html">Macellum事迹</a>
+        <a href="login.html">员工账号登录区</a>
+      </nav>
+
+      <!-- 购物区 -->
+      <section class="shop">
+        <h3 style="margin:0 0 10px;color:var(--red-dark)">购物区</h3>
+        <div class="grid" id="products"></div>
+      </section>
+
+      <!-- 结算区 -->
+      <section class="checkout">
+        <div class="total">累计金额：<span id="total">¥0.00</span></div>
+        <button class="pay" id="checkout">结算</button>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // 初始化邮件图标状态
+    function applyMailIcon(){
+      const has = localStorage.getItem('hasMail') === 'true';
+      document.body.dataset.hasMail = has ? 'true' : 'false';
+    }
+    applyMailIcon();
+
+    // 已移除本地窗口控制，统一使用全局浏览器栏（chrome.js）
+
+
+
+    // 轮播逻辑
+    const slides = document.getElementById('slides');
+    const dotBox = document.getElementById('dots');
+    let idx = 0; const totalSlides = 3;
+    for(let i=0;i<totalSlides;i++){ const d=document.createElement('div'); d.className='dotp'+(i===0?' active':''); dotBox.appendChild(d); }
+    function updateDots(){
+      [...dotBox.children].forEach((d,i)=>{ d.classList.toggle('active', i===idx); });
+    }
+    function go(n){ idx=(n+totalSlides)%totalSlides; slides.style.transform=`translateX(-${idx*100}%)`; updateDots(); }
+    document.getElementById('prev').onclick=()=>go(idx-1);
+    document.getElementById('next').onclick=()=>go(idx+1);
+    setInterval(()=>go(idx+1), 3500);
+
+    // 商品与购物车
+    const items=[
+      {id:'apple',name:'苹果',price:3.5,emoji:'🍎'},
+      {id:'milk',name:'牛奶',price:5.0,emoji:'🥛'},
+      {id:'bread',name:'面包',price:4.0,emoji:'🍞'},
+      {id:'egg',name:'鸡蛋',price:0.8,emoji:'🥚'},
+      {id:'coffee',name:'咖啡',price:12.0,emoji:'☕'},
+      {id:'detergent',name:'洗衣液',price:25.0,emoji:'🧴'},
+      {id:'tissue',name:'纸巾',price:8.9,emoji:'🧻'},
+      {id:'toothpaste',name:'牙膏',price:14.5,emoji:'🪥'}
+    ];
+    const cart={};
+    const products=document.getElementById('products');
+    const totalEl=document.getElementById('total');
+    function render(){
+      products.innerHTML='';
+      items.forEach(it=>{
+        const card=document.createElement('div'); card.className='item';
+        card.innerHTML=`
+          <div class='pic'>${it.emoji}</div>
+          <div class='info'><div class='name'>${it.name}</div><div class='price'>¥${it.price.toFixed(2)}</div></div>
+          <div class='actions'>
+            <button class='btn del' aria-label='删除'>删除</button>
+            <button class='btn add' aria-label='添加'>添加</button>
+            <div class='qty'>数量：<span>0</span></div>
+          </div>`;
+        const qtyEl=card.querySelector('.qty span');
+        function updateQty(n){ cart[it.id]=Math.max(0, Math.min(10, (cart[it.id]||0)+n)); qtyEl.textContent=cart[it.id]; updateTotal(); }
+        card.querySelector('.add').addEventListener('click',()=>{ const q=cart[it.id]||0; if(q>=10){alert('每样物品最多购买 10 件');} updateQty(+1); });
+        card.querySelector('.del').addEventListener('click',()=>updateQty(-1));
+        products.appendChild(card);
+      });
+    }
+    function updateTotal(){
+      let total=0; items.forEach(it=>{ const q=cart[it.id]||0; total+=q*it.price; });
+      totalEl.textContent='¥'+total.toFixed(2);
+      document.getElementById('checkout').disabled = total<=0;
+    }
+    render(); updateTotal();
+
+    // 结算
+    document.getElementById('checkout').addEventListener('click',()=>{
+      let lines=items.filter(it=>cart[it.id]>0).map(it=>`${it.name} x${cart[it.id]} = ¥${(it.price*cart[it.id]).toFixed(2)}`);
+      alert((lines.length?lines.join('\n')+'\n':'')+`总计：${totalEl.textContent}`);
+    });
+  </script>
+  <script src="js/chrome.js" defer></script>
+  <script src="js/taskbar.js" defer></script>
+</body>
+</html>

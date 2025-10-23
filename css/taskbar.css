@@ -1,0 +1,11 @@
+:root{--taskbar-height:48px}
+/* 为避免内容被覆盖，给页面预留底部空间 */
+body{padding-bottom:var(--taskbar-height)}
+
+.taskbar{position:fixed;left:0;right:0;bottom:0;height:var(--taskbar-height);background:#202124;color:#eaeaea;border-top:1px solid #444;display:flex;align-items:center;gap:16px;padding:0 12px;z-index:9999}
+.taskbar a{color:#eaeaea;text-decoration:none;padding:8px 12px;border-radius:6px;display:inline-flex;align-items:center;gap:6px}
+.taskbar a:hover{background:rgba(255,255,255,.08)}
+.taskbar .spacer{margin-left:auto}
+.taskbar .mail .has{display:none}
+body[data-has-mail="true"] .taskbar .mail .has{display:inline}
+body[data-has-mail="true"] .taskbar .mail .none{display:none}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>每日新闻</title>
+<style>
+  :root{--gray:#ddd;--light:#f5f6f7;--text:#222;--muted:#666}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;margin:0;background:var(--light);color:var(--text)}
+  .wrap{max-width:1000px;margin:24px auto;background:#fff;border:1px solid var(--gray);border-radius:12px;overflow:hidden}
+  header{background:#000;color:#fff;padding:12px 16px}
+  main{padding:16px}
+  .list{display:flex;flex-direction:column;gap:12px}
+  .item{border:1px solid var(--gray);border-radius:12px;overflow:hidden}
+  .head{display:flex;justify-content:space-between;gap:12px;padding:12px;background:#fafafa;border-bottom:1px solid var(--gray);cursor:pointer}
+  .title{font-weight:700}
+  .time{color:#666;white-space:nowrap}
+  .preview{padding:12px;color:#444}
+  .display{display:none;border-top:1px solid var(--gray)}
+  .display .inner{padding:12px}
+  .display img{width:100%;height:auto;border-radius:10px;border:1px solid var(--gray);margin:0 0 12px}
+  .display .fixed{line-height:1.8;color:#333}
+  .item.expanded .display{display:block}
+  .hint{color:var(--muted);font-size:13px;margin-top:10px}
+</style>
+<link rel="stylesheet" href="css/taskbar.css" />
+<link rel="stylesheet" href="css/chrome.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>每日新闻</header>
+  <main>
+    <div class="list" id="list">
+      <div class="item" id="n1">
+        <div class="head"><div class="title">社区新店开业</div><div class="time">发布时间：2024-10-20</div></div>
+        <div class="preview">新店正式营业，开业期间推出多项优惠活动，欢迎到店体验。</div>
+        <div class="display"><div class="inner">
+          <img src="picture/监控画面内容.png" alt="新闻图片占位" />
+          <p class="fixed">这是写死的新闻展示文案。用于演示点击展开后的显示区域，包含固定文字与图片。</p>
+        </div></div>
+      </div>
+      <div class="item" id="n2">
+        <div class="head"><div class="title">冷链升级扩容</div><div class="time">发布时间：2024-10-21</div></div>
+        <div class="preview">物流冷链设备升级完成，进一步保障生鲜品质与配送时效。</div>
+        <div class="display"><div class="inner">
+          <img src="picture/监控画面内容.png" alt="新闻图片占位" />
+          <p class="fixed">这是写死的新闻展示文案。用于演示点击展开后的显示区域，包含固定文字与图片。</p>
+        </div></div>
+      </div>
+      <div class="item" id="n3">
+        <div class="head"><div class="title">会员积分体系优化</div><div class="time">发布时间：2024-10-22</div></div>
+        <div class="preview">积分获取与兑换规则优化，新增更多礼品与折扣权益。</div>
+        <div class="display"><div class="inner">
+          <img src="picture/监控画面内容.png" alt="新闻图片占位" />
+          <p class="fixed">这是写死的新闻展示文案。用于演示点击展开后的显示区域，包含固定文字与图片。</p>
+        </div></div>
+      </div>
+      <div class="item" id="n4">
+        <div class="head"><div class="title">到店自提上线</div><div class="time">发布时间：2024-10-23</div></div>
+        <div class="preview">线上下单到店自提服务上线，缩短等待时间，提高购物效率。</div>
+        <div class="display"><div class="inner">
+          <img src="picture/监控画面内容.png" alt="新闻图片占位" />
+          <p class="fixed">这是写死的新闻展示文案。用于演示点击展开后的显示区域，包含固定文字与图片。</p>
+        </div></div>
+      </div>
+      <div class="item" id="n5">
+        <div class="head"><div class="title">门店安全演练</div><div class="time">发布时间：2024-10-24</div></div>
+        <div class="preview">门店定期开展安全演练，提升员工安全意识与应急处置能力。</div>
+        <div class="display"><div class="inner">
+          <img src="picture/监控画面内容.png" alt="新闻图片占位" />
+          <p class="fixed">这是写死的新闻展示文案。用于演示点击展开后的显示区域，包含固定文字与图片。</p>
+        </div></div>
+      </div>
+    </div>
+    <p class="hint">点击新闻标题栏可展开或收起展示栏。</p>
+  </main>
+</div>
+<script>
+  document.querySelectorAll('.item .head').forEach(function(h){
+    h.addEventListener('click', function(){
+      var item = h.parentElement;
+      item.classList.toggle('expanded');
+    });
+  });
+</script>
+<script src="js/chrome.js" defer></script>
+<script src="js/taskbar.js" defer></script>
+</body>
+</html>

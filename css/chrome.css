@@ -1,0 +1,13 @@
+/* 全局顶部浏览器栏 */
+:root{--red:#e53935;--red-dark:#c62828;--yellow:#ffbd2e;--green:#27c93f;--close:#ff5f56;--text:#fff;--bg:#000}
+.chrome{background:var(--bg);color:var(--text);padding:8px 12px;border-bottom:1px solid #111}
+.chrome .row{display:flex;align-items:center;gap:12px}
+.chrome .controls{display:flex;gap:8px}
+.chrome .dot{width:12px;height:12px;border-radius:50%}
+.chrome .dot.close{background:var(--close)}
+.chrome .dot.min{background:var(--yellow)}
+.chrome .dot.hide{background:var(--green)}
+.chrome .urlbar{margin-top:8px}
+.chrome .urlbar input{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#111}
+.chrome .options{background:#111;color:#bbb;padding:6px 12px;font-size:13px;border-top:1px solid #222}
+.chrome .options.hidden{display:none}

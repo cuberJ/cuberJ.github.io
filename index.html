@@ -3,33 +3,61 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nightshade Macellum</title>
+  <title>夜色玛奇莲 · 猜谜游戏</title>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Nightshade Macellum</h1>
-  </header>
+  <!-- 顶部黑色顶栏（不含内容） -->
+  <header class="topbar" aria-label="顶部状态栏"></header>
+
+  <!-- 顶部下方：游戏配图大板块 -->
+  <section class="hero-image">
+    <figure>
+      <img src="picture/监控画面内容.png" alt="游戏配图" />
+      <figcaption>游戏配图</figcaption>
+    </figure>
+  </section>
+
   <main class="container">
-    <section>
-      <h2>项目素材预览</h2>
-      <p>从 <code>picture</code> 文件夹加载示例素材：</p>
-      <figure>
-        <img src="picture/监控画面内容.png" alt="监控画面内容" />
-        <figcaption>picture/监控画面内容.png</figcaption>
-      </figure>
+    <!-- 声明 -->
+    <section class="card" id="disclaimer">
+      <h2>声明</h2>
+      <p>本游戏纯属虚构，与任何现实组织或人物无关，仅用于娱乐与学习。</p>
+      <p>本游戏可视为我很喜欢的一部小说的同人作品。为防止剧透，小说的名称需要各位玩家在游戏结尾才能得知哦。</p>
+      <p>如果对游戏有任何问题或建议，欢迎联系我。</p>
     </section>
 
-    <section>
-      <h2>结构说明</h2>
-      <ul>
-        <li>首页：<code>index.html</code></li>
-        <li>样式：<code>css/</code> 目录下的 <code>styles.css</code></li>
-        <li>图片素材：直接引用 <code>picture/</code> 目录</li>
-      </ul>
-      <p>此结构可直接用于 GitHub Pages 托管（仓库根目录为 Pages 源）。</p>
+    <!-- 游戏玩法介绍 -->
+    <section class="card" id="how-to-play">
+      <h2>游戏玩法介绍</h2>
+      <ol>
+        <li>本游戏的推进方式有两种：在特定页面搜索关键词。或者直接拼接的url链接</li>
+        <li>搜索关键词需要严格按照规定格式输入（作者已经尽量做模糊匹配了……奈何能力有限）</li>
+        <li>本作所有url链接格式均为https://cuberJ.github.io/xxxxxx.html。当你觉得游戏线索缺失的时候，不妨尝试一下拼一个关键词跳转吧</li>
+        例如：页面中暗示“猫”是一个关键词，你可以尝试跳转https://cuberJ.github.io/cat.html
+      </ol>
+    </section>
+
+    <!-- 游戏的引言 -->
+    <section class="card" id="introduction">
+      <h2>游戏的引言</h2>
+      <p>
+        你是一个推理游戏爱好者，有着旺盛的好奇心。在读高中的你，结识了很多全国各地的笔友，哪怕从未和这些信纸另一端的朋友相见过，但你一直很喜欢这种不停结交新朋友的过程。<b></b>
+        <p>这一天，你收到了一封陌生笔友的邮件，他告诉你，这个超市的背后，被他发现了一些有趣的东西。<b></b></p>
+        <p>“这个超市购物网站远不止购物这么简单哦！”<b></b></p>
+       <p>为了解开这一个陌生人的谜题，你决定沿着这个页面搜索下去。</p>
+      </p>
+    </section>
+
+    <!-- 游戏入口 -->
+    <section class="card" id="entry">
+      <h2>游戏的入口</h2>
+      <p>准备好了吗？点击下方按钮，欢迎来到Macellum超市。</p>
+      <p><a class="cta" href="supermarket.html">进入游戏</a></p>
     </section>
   </main>
-  <footer>© 2025 Nightshade Macellum</footer>
+
+  <!-- 底部灰色底栏，可写版权或声明信息 -->
+  <footer class="bottombar">© 2025 Nightshade Macellum · 页面内容仅用于演示 · 版权声明</footer>
 </body>
 </html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>邮件 · 模拟电脑</title>
+<style>
+  :root{--gray:#ddd;--light:#f5f6f7;--text:#222;--muted:#666}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;margin:0;background:var(--light);color:var(--text)}
+  .wrap{max-width:900px;margin:24px auto;background:#fff;border:1px solid var(--gray);border-radius:12px;overflow:hidden}
+  header{background:#000;color:#fff;padding:12px 16px}
+  main{padding:16px}
+  #state{margin:0 0 12px;color:#333}
+  .mail-list{display:flex;flex-direction:column;gap:12px}
+  .mail-item{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--gray);border-radius:10px;background:#eee;cursor:pointer}
+  .mail-item.read{background:#fff}
+  .left{display:flex;flex-direction:column;gap:6px}
+  .sender{font-weight:600}
+  .email{color:#555;font-size:13px}
+  .preview{color:#666}
+  .time{color:#666;white-space:nowrap}
+  .muted{color:var(--muted);font-size:13px;margin-top:12px}
+  /* 弹出层 */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:9998}
+  .modal.show{display:flex}
+  .dialog{background:#fff;border:1px solid var(--gray);border-radius:12px;padding:16px;max-width:520px;box-shadow:0 12px 36px rgba(0,0,0,0.12)}
+  .dialog h3{margin:0 0 10px}
+  .dialog .meta{color:#555;font-size:14px;margin:6px 0 12px}
+  .dialog .fixed{color:#333;line-height:1.7}
+  .dialog .actions{display:flex;justify-content:flex-end;margin-top:12px}
+  .dialog button{padding:8px 12px;border:1px solid var(--gray);background:#fff;border-radius:8px;cursor:pointer}
+  .dialog button.primary{background:#e53935;color:#fff;border-color:#c62828}
+</style>
+<link rel="stylesheet" href="css/taskbar.css" />
+<link rel="stylesheet" href="css/chrome.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>邮件</header>
+  <main>
+    <p id="state">当前状态：有未读邮件</p>
+    <div class="mail-list" id="list"></div>
+    <p class="muted">首次点击某一封邮件会将其标记为已读，底部任务栏的“邮件/有未读邮件”会随状态同步。</p>
+  </main>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="邮件详情">
+  <div class="dialog">
+    <h3>邮件详情</h3>
+    <p class="fixed" id="fixed">这是一段固定的演示文字，用于展示弹出的邮件详情页面。该文本被写死在 mail.html 中。</p>
+    <div class="meta">
+      <div>发件人：<span id="mSender"></span></div>
+      <div>邮箱：<span id="mEmail"></span></div>
+    </div>
+    <div class="actions">
+      <button id="close">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const mails = [
+    {id:'mail-1', sender:'张伟', email:'zhangwei@example.com', preview:'请查收本周的销售报表，...', time:'2024-10-21 09:30'},
+    {id:'mail-2', sender:'王芳', email:'wangfang@example.com', preview:'关于促销活动的门店物料，...', time:'2024-10-22 14:05'},
+    {id:'mail-3', sender:'李雷', email:'lilei@example.com', preview:'系统维护将在今晚 23:00 进行，...', time:'2024-10-23 18:45'}
+  ];
+  const list = document.getElementById('list');
+  const modal = document.getElementById('modal');
+  const mSender = document.getElementById('mSender');
+  const mEmail = document.getElementById('mEmail');
+  const stateEl = document.getElementById('state');
+
+  function getRead(){
+    try{ return JSON.parse(localStorage.getItem('mail.read')||'[]') }catch(e){ return [] }
+  }
+  function setRead(ids){
+    localStorage.setItem('mail.read', JSON.stringify(ids));
+  }
+  function syncState(){
+    const readIds = getRead();
+    const unread = mails.length - readIds.length;
+    const has = unread > 0;
+    localStorage.setItem('hasMail', has ? 'true' : 'false');
+    document.body.dataset.hasMail = has ? 'true' : 'false';
+    stateEl.textContent = '当前状态：' + (has ? '有未读邮件' : '全部已读');
+  }
+  function render(){
+    const readIds = getRead();
+    list.innerHTML='';
+    mails.forEach(m=>{
+      const row=document.createElement('div');
+      row.className='mail-item'+(readIds.includes(m.id)?' read':'');
+      row.innerHTML = '<div class="left">'
+        + '<div class="sender">'+m.sender+'</div>'
+        + '<div class="email">'+m.email+'</div>'
+        + '<div class="preview">'+m.preview+'</div>'
+        + '</div>'
+        + '<div class="time">'+m.time+'</div>';
+      row.addEventListener('click', ()=>{
+        // 第一次点击标记为已读
+        const currentRead = getRead();
+        if(!currentRead.includes(m.id)){
+          currentRead.push(m.id);
+          setRead(currentRead);
+          row.classList.add('read');
+        }
+        // 展开弹窗
+        mSender.textContent = m.sender;
+        mEmail.textContent = m.email;
+        modal.classList.add('show');
+        syncState();
+      });
+      list.appendChild(row);
+    });
+  }
+
+  document.getElementById('close').addEventListener('click', ()=>{
+    modal.classList.remove('show');
+  });
+
+  // 初始化状态：如果尚未有 read 记录，则表示均未读
+  if(!localStorage.getItem('mail.read')){
+    setRead([]);
+  }
+  render();
+  syncState();
+})();
+</script>
+<script src="js/chrome.js" defer></script>
+<script src="js/taskbar.js" defer></script>
+</body>
+</html>
