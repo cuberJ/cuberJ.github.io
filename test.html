@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect with Flashing Alert</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .alert {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click the button to redirect</h1>
+    <button id="redirectButton">Go to Another Page</button>
+
+    <div id="alertBox" class="alert">
+        请来Milarvoz找我
+    </div>
+
+    <script>
+        document.getElementById('redirectButton').addEventListener('click', function() {
+            var alertBox = document.getElementById('alertBox');
+
+            // Show the alert box
+            alertBox.style.display = 'block';
+
+            // Set a timeout to hide the alert box and redirect after 0.5 seconds
+            setTimeout(function() {
+                alertBox.style.display = 'none';
+                window.location.href = 'https://www.docker.com/'; // Replace with your target URL
+            }, 100); // 500 milliseconds = 0.5 seconds
+        });
+    </script>
+</body>
+</html>
