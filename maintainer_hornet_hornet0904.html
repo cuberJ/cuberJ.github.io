@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>维护者个人页面</title>
+<style>
+  :root{--gray:#ddd;--light:#f5f6f7;--text:#222;--muted:#666;--red:#e53935;--red-dark:#c62828}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;margin:0;background:var(--light);color:var(--text)}
+  .wrap{max-width:1000px;margin:24px auto;background:#fff;border:1px solid var(--gray);border-radius:12px;overflow:hidden}
+  header{background:#000;color:#fff;padding:12px 16px}
+  main{padding:16px}
+  h2{margin:18px 0 12px;color:#333}
+  /* 账号信息 */
+  .account{border:1px solid var(--gray);border-radius:10px;padding:12px;margin-bottom:16px;background:#fafafa}
+  .account .row{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0}
+  .account .label{color:#555}
+  .account button{padding:8px 12px;border:1px solid var(--gray);border-radius:8px;background:#fff;cursor:pointer}
+  .account button.primary{background:var(--red);color:#fff;border-color:var(--red-dark)}
+  /* 邮件列表 */
+  .mail-list{display:flex;flex-direction:column;gap:12px}
+  .mail-item{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--gray);border-radius:10px;background:#fff}
+  .left{display:flex;flex-direction:column;gap:6px}
+  .line{display:flex;gap:12px;flex-wrap:wrap}
+  .meta{color:#555;font-size:14px}
+  .content{color:#333}
+  .date{color:#666;white-space:nowrap}
+  .muted{color:var(--muted);font-size:13px;margin-top:12px}
+</style>
+<link rel="stylesheet" href="css/taskbar.css" />
+<link rel="stylesheet" href="css/chrome.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>个人主页</header>
+  <main>
+    <section class="account" aria-label="账号信息">
+      <h2>账号信息</h2>
+      <div class="row"><span class="label">账号名：</span><span>Hornet</span></div>
+      <div class="row"><span class="label">密码：</span><span>Hornet0904</span></div>
+      <div class="row"><button class="primary" type="button" title="展示用">修改密码</button></div>
+    </section>
+
+    <section aria-label="邮件区域">
+      <h2>邮件</h2>
+      <div class="mail-list">
+        <div class="mail-item">
+          <div class="left">
+            <div class="line meta"><span>发件人：</span><strong>Hornet</strong> <span>&lt;hornet@example.com&gt;</span></div>
+            <div class="line meta"><span>收件人：</span><strong>张伟</strong> <span>&lt;zhangwei@example.com&gt;</span></div>
+            <div class="line meta"><span>类型：</span><span>发件</span></div>
+            <div class="content">关于系统维护的安排，今晚 23:00 进行，请留意相关通知。</div>
+          </div>
+          <div class="date">2024-10-24 09:15</div>
+        </div>
+        <div class="mail-item">
+          <div class="left">
+            <div class="line meta"><span>发件人：</span><strong>王芳</strong> <span>&lt;wangfang@example.com&gt;</span></div>
+            <div class="line meta"><span>收件人：</span><strong>Hornet</strong> <span>&lt;hornet@example.com&gt;</span></div>
+            <div class="line meta"><span>类型：</span><span>收件</span></div>
+            <div class="content">促销活动物料已备齐，附件内为清单，请查收确认。</div>
+          </div>
+          <div class="date">2024-10-23 15:40</div>
+        </div>
+        <div class="mail-item">
+          <div class="left">
+            <div class="line meta"><span>发件人：</span><strong>李雷</strong> <span>&lt;lilei@example.com&gt;</span></div>
+            <div class="line meta"><span>收件人：</span><strong>Hornet</strong> <span>&lt;hornet@example.com&gt;</span></div>
+            <div class="line meta"><span>类型：</span><span>收件</span></div>
+            <div class="content">请更新周报模板，新增库存状态与补货计划字段，下周开始启用。</div>
+          </div>
+          <div class="date">2024-10-22 11:20</div>
+        </div>
+      </div>
+      <p class="muted">以上邮件为静态展示，无已读/未读功能与弹窗详情。</p>
+    </section>
+  </main>
+</div>
+<script src="js/chrome.js" defer></script>
+<script src="js/taskbar.js" defer></script>
+</body>
+</html>

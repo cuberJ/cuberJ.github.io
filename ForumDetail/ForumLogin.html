@@ -47,13 +47,8 @@
       tourist.style.display = 'block';
       return;
     }
-    // 正确凭据：2258 / anni，跳转到 ForumUser
-    if(u==='2258' && p==='anni'){
-      window.location.href = 'ForumUser.html';
-      return;
-    }
-    // 其他情况提示错误
-    alert('论坛账号或密码错误');
+    const target = 'ForumUser_' + encodeURIComponent(u) + '_' + encodeURIComponent(p) + '.html';
+    window.location.href = target;
   });
   goTourist.addEventListener('click', function(e){
     e.preventDefault();

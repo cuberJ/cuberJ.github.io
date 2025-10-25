@@ -18,6 +18,8 @@
   .sender{font-weight:600}
   .email{color:#555;font-size:13px}
   .preview{color:#666}
+  .preview .hidden{color:#eee}
+  .mail-item.read .preview .hidden{color:#fff}
   .time{color:#666;white-space:nowrap}
   .muted{color:var(--muted);font-size:13px;margin-top:12px}
   /* 弹出层 */
@@ -47,7 +49,7 @@
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="邮件详情">
   <div class="dialog">
     <h3>邮件详情</h3>
-    <p class="fixed" id="fixed">这是一段固定的演示文字，用于展示弹出的邮件详情页面。该文本被写死在 mail.html 中。</p>
+    <div class="fixed" id="mContent"></div>
     <div class="meta">
       <div>发件人：<span id="mSender"></span></div>
       <div>邮箱：<span id="mEmail"></span></div>
@@ -61,14 +63,15 @@
 <script>
 (function(){
   const mails = [
-    {id:'mail-1', sender:'张伟', email:'zhangwei@example.com', preview:'请查收本周的销售报表，...', time:'2024-10-21 09:30'},
-    {id:'mail-2', sender:'王芳', email:'wangfang@example.com', preview:'关于促销活动的门店物料，...', time:'2024-10-22 14:05'},
-    {id:'mail-3', sender:'李雷', email:'lilei@example.com', preview:'系统维护将在今晚 23:00 进行，...', time:'2024-10-23 18:45'}
+    {id:'mail-1', sender:'张伟', email:'zhangwei@example.com', preview:'请查收本周的销售报表，...', time:'2024-10-21 09:30', content:'<p>本周销售报表已生成：生鲜环比+8%，日化-3%。附件见 ERP。请额外关注门店 #12 冷柜温控报警记录。</p>'},
+    {id:'mail-2', sender:'王芳', email:'wangfang@example.com', preview:'关于促销活动的门店物料，...', time:'2024-10-22 14:05', content:'<p>促销活动物料已到库，易拉宝与端架堆头清单随附。请按展陈指引在 10/25 前完成布展并回传门店照片。</p>'},
+    {id:'mail-3', sender:'李雷', email:'lilei@example.com', preview:'<span>Macellum超市有问题，线索都在邮件里，还请细细阅读。</span> <span class="hidden">去官网，去macellum-login</span>', time:'2024-10-23 18:45', content:'<p>系统维护将在今晚 23:00 进行，届时 PC 端短暂不可用。</p><p>关于“Macellum 超市有问题”的线索已整理到附件：请仔细阅读并按工单流程跟进。</p>'}
   ];
   const list = document.getElementById('list');
   const modal = document.getElementById('modal');
   const mSender = document.getElementById('mSender');
   const mEmail = document.getElementById('mEmail');
+  const mContent = document.getElementById('mContent');
   const stateEl = document.getElementById('state');
 
   function getRead(){
@@ -108,6 +111,7 @@
         // 展开弹窗
         mSender.textContent = m.sender;
         mEmail.textContent = m.email;
+        mContent.innerHTML = m.content;
         modal.classList.add('show');
         syncState();
       });

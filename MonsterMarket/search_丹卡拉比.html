@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>搜索 · 丹卡拉比</title>
+<style>
+  :root{--gray:#ddd;--light:#f5f6f7;--text:#222;--muted:#666}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;margin:0;background:var(--light);color:var(--text)}
+  .wrap{max-width:900px;margin:24px auto;background:#fff;border:1px solid var(--gray);border-radius:12px;overflow:hidden}
+  header{background:#000;color:#fff;padding:12px 16px}
+  main{padding:16px}
+  .list{display:flex;flex-direction:column;gap:12px}
+  .item{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--gray);border-radius:10px;background:#eee;cursor:pointer}
+  .item.read{background:#fff}
+  .left{display:flex;flex-direction:column;gap:6px}
+  .title{font-weight:600}
+  .meta{color:#555;font-size:13px}
+  .status{color:#666;white-space:nowrap}
+  /* 弹出层 */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:9998}
+  .modal.show{display:flex}
+  .dialog{background:#fff;border:1px solid var(--gray);border-radius:12px;padding:16px;max-width:560px;box-shadow:0 12px 36px rgba(0,0,0,0.12)}
+  .dialog h3{margin:0 0 10px}
+  .dialog .meta{color:#555;font-size:14px;margin:6px 0 12px}
+  .dialog .content{color:#333;line-height:1.7}
+  .dialog .grid{display:grid;grid-template-columns:100px 1fr;gap:8px;margin-top:8px}
+  .dialog .actions{display:flex;justify-content:flex-end;margin-top:12px}
+  .dialog button{padding:8px 12px;border:1px solid var(--gray);background:#fff;border-radius:8px;cursor:pointer}
+</style>
+<link rel="stylesheet" href="../css/taskbar.css" />
+<link rel="stylesheet" href="../css/chrome.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>搜索结果：丹卡拉比</header>
+  <main>
+    <div class="list" id="list"></div>
+    <p class="muted">点击任一条目可查看该结果的详细内容。</p>
+  </main>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="搜索结果详情">
+  <div class="dialog">
+    <h3 id="dTitle">标题</h3>
+    <div class="meta"><span id="dUser"></span> · <span id="dDate"></span> · <span id="dStatus"></span></div>
+    <div class="content" id="dContent"></div>
+    <div class="grid">
+      <div>品种：</div><div id="dVariety"></div>
+      <div>品质：</div><div id="dQuality"></div>
+      <div>备注：</div><div id="dRemark"></div>
+      <div>交易价格：</div><div id="dPrice"></div>
+    </div>
+    <div class="actions"><button id="dClose">关闭</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const results = [
+    {id:'r1', title:'丹卡拉比 · 今年采收第一批', userId:'U-3791', date:'2024-10-18', status:'待交易', content:'本批为今年采收第一批，成色均匀，含水率稳定，支持托管与当面验货。', variety:'丹卡拉比', quality:'A级', remark:'支持自提；含基础检测报告', price:'￥380/箱'},
+    {id:'r2', title:'丹卡拉比 · 小批量试投', userId:'U-4920', date:'2024-10-20', status:'已发布', content:'小批量试投放，主要面向长期合作商，附带工艺说明与溯源信息。', variety:'丹卡拉比', quality:'B级', remark:'限老客户；附溯源码', price:'￥320/箱'},
+    {id:'r3', title:'求购 · 丹卡拉比原料', userId:'U-1188', date:'2024-10-22', status:'求购中', content:'需要丹卡拉比原料用于试验，数量 30 箱，要求供货稳定。', variety:'丹卡拉比', quality:'不限', remark:'需含运输保险', price:'面议'}
+  ];
+
+  const list = document.getElementById('list');
+  const modal = document.getElementById('modal');
+  const dTitle = document.getElementById('dTitle');
+  const dUser = document.getElementById('dUser');
+  const dDate = document.getElementById('dDate');
+  const dStatus = document.getElementById('dStatus');
+  const dContent = document.getElementById('dContent');
+  const dVariety = document.getElementById('dVariety');
+  const dQuality = document.getElementById('dQuality');
+  const dRemark = document.getElementById('dRemark');
+  const dPrice = document.getElementById('dPrice');
+
+  function render(){
+    list.innerHTML='';
+    results.forEach(r=>{
+      const row=document.createElement('div');
+      row.className='item';
+      row.innerHTML = '<div class="left">'
+        + '<div class="title">'+r.title+'</div>'
+        + '<div class="meta">用户ID：'+r.userId+' · 发帖日期：'+r.date+'</div>'
+        + '</div>'
+        + '<div class="status">交易状态：'+r.status+'</div>';
+      row.addEventListener('click',()=>{
+        dTitle.textContent=r.title;
+        dUser.textContent='用户ID：'+r.userId;
+        dDate.textContent='发帖日期：'+r.date;
+        dStatus.textContent='交易状态：'+r.status;
+        dContent.textContent=r.content;
+        dVariety.textContent=r.variety;
+        dQuality.textContent=r.quality;
+        dRemark.textContent=r.remark;
+        dPrice.textContent=r.price;
+        modal.classList.add('show');
+      });
+      list.appendChild(row);
+    });
+  }
+  render();
+  document.getElementById('dClose').addEventListener('click',()=>{
+    modal.classList.remove('show');
+  });
+})();
+</script>
+<script src="../js/chrome.js" defer></script>
+<script src="../js/taskbar.js" defer></script>
+</body>
+</html>
