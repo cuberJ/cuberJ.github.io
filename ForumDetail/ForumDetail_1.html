@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>帖子详情 1</title>
+<style>
+  :root{
+    --bg-start:#0c1f3f; --bg-end:#0b5a6a; --accent:#ffeb3b; --accent-2:#6ae8ff; --text:#eaf7ff; --muted:#9dbbd3; --card-bg:rgba(10,21,40,.72); --card-border:rgba(255,255,255,.18);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;color:var(--text);background:linear-gradient(135deg,var(--bg-start),var(--bg-end))}
+  .wrap{max-width:1100px;margin:24px auto;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;background:rgba(8,16,30,.55);backdrop-filter:blur(6px)}
+  header{padding:12px 16px;border-bottom:1px solid var(--card-border);color:#fff}
+  main{padding:16px}
+  .block{border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg);padding:12px;margin-bottom:12px}
+  .top{display:flex;gap:16px;color:var(--muted);font-size:14px;margin-bottom:8px}
+  .middle{display:grid;grid-template-columns:1fr 300px;gap:12px;align-items:start}
+  .content{line-height:1.8;color:#e0e0f6}
+  .image-box{border:1px solid var(--card-border);border-radius:10px;background:rgba(255,255,255,.06);padding:8px}
+  .image-box img{width:100%;height:240px;object-fit:cover;border-radius:8px}
+  .bottom{color:var(--muted);font-size:13px;margin-top:8px}
+</style>
+<link rel="stylesheet" href="../css/taskbar.css" />
+<link rel="stylesheet" href="../css/chrome.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>怪物论坛 - 帖子详情</header>
+  <main>
+    <section class="block">
+      <div class="top"><span>ID：ghost001</span><span>楼层：1楼</span></div>
+      <div class="middle">
+        <div class="content">首帖：讨论夜色主题与怪物设定的融合。希望通过深海蓝与蓝绿青的配色，提升氛围与沉浸感。欢迎补充视觉规范、交互细节与内容组织建议。</div>
+        <div class="image-box"><img src="../picture/监控画面内容.png" alt="配图" /></div>
+      </div>
+      <div class="bottom">时间：2024-10-21 20:18</div>
+    </section>
+    <section class="block">
+      <div class="top"><span>ID：readerA</span><span>楼层：2楼</span></div>
+      <div class="middle">
+        <div class="content">个人感觉夜色配色与论坛的可读性需要权衡。可考虑加大对比度、在标题与按钮处使用明黄色强调，同时正文维持柔和的青蓝。</div>
+        <div class="image-box"><img src="../picture/家庭合照.png" alt="配图" /></div>
+      </div>
+      <div class="bottom">时间：2024-10-21 21:02</div>
+    </section>
+    <section class="block">
+      <div class="top"><span>ID：mod_alpha</span><span>楼层：3楼</span></div>
+      <div class="middle">
+        <div class="content">建议将首页导航与帖子列表的层次更清晰：导航采用明黄突出激活态，列表卡片保持半透明深色底与白字，提升可读性。</div>
+        <div class="image-box"><img src="../picture/SPECIES公司简介.png" alt="配图" /></div>
+      </div>
+      <div class="bottom">时间：2024-10-21 22:10</div>
+    </section>
+  </main>
+</div>
+<script src="../js/chrome.js" defer></script>
+<script src="../js/taskbar.js" defer></script>
+</body>
+</html>

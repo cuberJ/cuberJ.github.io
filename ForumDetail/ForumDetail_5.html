@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>帖子详情 5</title>
+<style>
+  :root{--bg-start:#0c1f3f; --bg-end:#0b5a6a; --accent:#ffeb3b; --accent-2:#6ae8ff; --text:#eaf7ff; --muted:#9dbbd3; --card-bg:rgba(10,21,40,.72); --card-border:rgba(255,255,255,.18)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;color:var(--text);background:linear-gradient(135deg,var(--bg-start),var(--bg-end))}
+  .wrap{max-width:1100px;margin:24px auto;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;background:rgba(8,16,30,.55);backdrop-filter:blur(6px)}
+  header{padding:12px 16px;border-bottom:1px solid var(--card-border);color:#fff}
+  main{padding:16px}
+  .block{border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg);padding:12px;margin-bottom:12px}
+  .top{display:flex;gap:16px;color:var(--muted);font-size:14px;margin-bottom:8px}
+  .middle{display:grid;grid-template-columns:1fr 300px;gap:12px;align-items:start}
+  .content{line-height:1.8;color:#e0e0f6}
+  .image-box{border:1px solid var(--card-border);border-radius:10px;background:rgba(255,255,255,.06);padding:8px}
+  .image-box img{width:100%;height:240px;object-fit:cover;border-radius:8px}
+  .bottom{color:var(--muted);font-size:13px;margin-top:8px}
+</style>
+<link rel="stylesheet" href="../css/taskbar.css" />
+<link rel="stylesheet" href="../css/chrome.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>怪物论坛 - 帖子详情</header>
+  <main>
+    <section class="block">
+      <div class="top"><span>ID：perf_hunter</span><span>楼层：1楼</span></div>
+      <div class="middle">
+        <div class="content">精华主题：性能优化案例。通过压缩、懒加载、SSR 与缓存策略综合提升页面速度。</div>
+        <div class="image-box"><img src="../picture/监控画面内容.png" alt="配图" /></div>
+      </div>
+      <div class="bottom">时间：2024-10-27 11:12</div>
+    </section>
+    <section class="block">
+      <div class="top"><span>ID：helper77</span><span>楼层：2楼</span></div>
+      <div class="middle">
+        <div class="content">尤其在移动端，低端设备的渲染路径要尽量简化；资源按需加载。</div>
+        <div class="image-box"><img src="../picture/家庭合照.png" alt="配图" /></div>
+      </div>
+      <div class="bottom">时间：2024-10-27 12:05</div>
+    </section>
+    <section class="block">
+      <div class="top"><span>ID：design_mech</span><span>楼层：3楼</span></div>
+      <div class="middle">
+        <div class="content">优化不仅限于技术，内容呈现方式也要避免无意义长列表与图片堆叠。</div>
+        <div class="image-box"><img src="../picture/SPECIES公司简介.png" alt="配图" /></div>
+      </div>
+      <div class="bottom">时间：2024-10-27 14:33</div>
+    </section>
+  </main>
+</div>
+<script src="../js/chrome.js" defer></script>
+<script src="../js/taskbar.js" defer></script>
+</body>
+</html>

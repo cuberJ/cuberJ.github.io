@@ -29,7 +29,8 @@ html, body {
 }
 /* 顶部下方配图大板块 */
 .hero-image figure { margin: 0; }
-.hero-image img { display: block; width: 100%; height: 360px; object-fit: cover; filter: saturate(105%); }
+/* 统一 16:9 比例，保持响应式填充 */
+.hero-image img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; filter: saturate(105%); }
 .hero-image figcaption { display: none; }
 
 /* 主体内容 */

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MonsterForum 怪物论坛</title>
+<style>
+  :root{
+    --bg-start:#0c1f3f; /* 深海蓝 */
+    --bg-end:#0b5a6a;   /* 蓝绿青 */
+    --accent:#ffeb3b;   /* 明黄强调 */
+    --accent-2:#6ae8ff; /* 霓虹青蓝 */
+    --text:#eaf7ff;
+    --muted:#9dbbd3;
+    --card-bg:rgba(10,21,40,.72);
+    --card-border:rgba(255,255,255,.18);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;background:linear-gradient(135deg,var(--bg-start),var(--bg-end));color:var(--text)}
+  .wrap{max-width:1100px;margin:24px auto;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;background:rgba(8,16,30,.55);backdrop-filter:blur(6px)}
+  header{padding:12px 16px;border-bottom:1px solid var(--card-border);color:#fff}
+  main{padding:16px}
+  .forum-title{font-size:28px;font-weight:800;letter-spacing:1px;color:#fff;margin:0 0 12px;text-shadow:0 2px 8px rgba(0,0,0,.35)}
+  .forum-nav{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.08);border:1px solid var(--card-border);padding:10px 12px;border-radius:10px}
+  .forum-nav a{color:#fff;text-decoration:none;padding:6px 10px;border:1px solid var(--card-border);border-radius:8px;background:rgba(255,255,255,.08)}
+  .forum-nav a.active{background:var(--accent);color:#000;border-color:#eecf4b}
+  .forum-nav .search{flex:1;min-width:200px;padding:8px 10px;border:1px solid var(--card-border);border-radius:8px;background:rgba(255,255,255,.12);color:#fff}
+  .forum-nav .search::placeholder{color:#ddd}
+  .forum-nav .search-btn{padding:8px 12px;border:1px solid #eecf4b;border-radius:8px;background:var(--accent);color:#000;cursor:pointer}
+
+  .posts{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+  .post{border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg);padding:12px}
+  .post h3{margin:0 0 6px;font-size:18px}
+  .post h3 a{color:#fff;text-decoration:none}
+  .post h3 a:hover{color:var(--accent)}
+  .snippet{color:#e0e0f6;line-height:1.7;margin:6px 0 10px}
+  .meta{display:flex;gap:16px;color:var(--muted);font-size:13px}
+
+  /* 底部任务栏与顶栏由现有脚本注入 */
+</style>
+<link rel="stylesheet" href="../css/taskbar.css" />
+<link rel="stylesheet" href="../css/chrome.css" />
+</head>
+<body data-page-index="14/36">
+<div class="wrap">
+  <header>怪物论坛</header>
+  <main>
+    <div class="forum-title">MonsterForum 怪物论坛</div>
+    <div class="forum-nav">
+    <a href="#" class="active" data-tab="posts">看贴</a>
+    <a href="#" data-tab="featured">精华贴</a>
+    <button class="search-btn" type="button">前往兽的交易市场</button>
+  </div>
+
+    <div class="posts" id="posts">
+      <article class="post">
+        <h3><a href="ForumDetail_1.html">[讨论] 夜色主题与怪物设定的融合</a></h3>
+        <p class="snippet">借鉴夜色配色的论坛皮肤能否增强沉浸感？欢迎分享你的视觉与交互建议……</p>
+        <div class="meta"><span>回帖：12</span><span>日期：2024-10-21</span><span>ID：ghost001</span></div>
+      </article>
+      <article class="post">
+        <h3><a href="ForumDetail_2.html">[分享] 新手引导与版规建议</a></h3>
+        <p class="snippet">为新入站访客设计更易懂的版规说明与提问模板，减少重复问题，提高讨论质量……</p>
+        <div class="meta"><span>回帖：7</span><span>日期：2024-10-22</span><span>ID：mod_alpha</span></div>
+      </article>
+      <article class="post">
+        <h3><a href="ForumDetail_3.html">[求助] 帖子图片加载缓慢的排查</a></h3>
+        <p class="snippet">上传图片过大或格式不合适会导致加载缓慢，是否应启用自动压缩与延迟加载？……</p>
+        <div class="meta"><span>回帖：18</span><span>日期：2024-10-23</span><span>ID：helper77</span></div>
+      </article>
+      <article class="post">
+        <h3><a href="ForumDetail_4.html">[建议] 精华帖评选机制优化</a></h3>
+        <p class="snippet">引入多维度评分（内容质量、互动深度、原创度），并透明化评选流程，提升认可度……</p>
+        <div class="meta"><span>回帖：25</span><span>日期：2024-10-24</span><span>ID：insight_bot</span></div>
+      </article>
+      <article class="post">
+        <h3><a href="ForumDetail_5.html">[公告] 论坛维护与功能更新</a></h3>
+        <p class="snippet">我们正在进行夜间维护，预计凌晨 2 点结束。本次更新将优化检索与提升移动端体验……</p>
+        <div class="meta"><span>回帖：3</span><span>日期：2024-10-25</span><span>ID：admin</span></div>
+      </article>
+    </div>
+
+    <div class="posts" id="featured" style="display:none">
+      <article class="post">
+        <h3><a href="ForumDetail_4.html">[精华] 主题皮肤设计规范与组件库</a></h3>
+        <p class="snippet">从配色、间距、动效到可访问性，输出一套易维护的主题设计规范……</p>
+        <div class="meta"><span>回帖：33</span><span>日期：2024-10-26</span><span>ID：design_mech</span></div>
+      </article>
+      <article class="post">
+        <h3><a href="ForumDetail_5.html">[精华] 论坛性能优化案例</a></h3>
+        <p class="snippet">记录静态资源压缩、图片懒加载、SSR 与缓存策略带来的性能提升……</p>
+        <div class="meta"><span>回帖：41</span><span>日期：2024-10-27</span><span>ID：perf_hunter</span></div>
+      </article>
+      <article class="post">
+        <h3><a href="ForumDetail_6.html">[精华] 运营与社区治理实践</a></h3>
+        <p class="snippet">如何在鼓励创作与抑制噪音之间保持平衡？分享规则制定与执行经验……</p>
+        <div class="meta"><span>回帖：52</span><span>日期：2024-10-28</span><span>ID：ops_master</span></div>
+      </article>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+  const tabs=document.querySelectorAll('.forum-nav a');
+  const sections={posts:document.getElementById('posts'),featured:document.getElementById('featured')};
+  tabs.forEach(a=>a.addEventListener('click',function(e){
+    e.preventDefault();
+    const tab=this.getAttribute('data-tab');
+    tabs.forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+    sections.posts.style.display=tab==='posts'?'flex':'none';
+    sections.featured.style.display=tab==='featured'?'flex':'none';
+  }));
+  const marketBtn=document.querySelector('.search-btn');
+  if(marketBtn){
+    marketBtn.addEventListener('click',function(){
+      alert('非常抱歉，原交易市场维护中。请尝试通过其他方式进入临时交易市场。');
+    });
+  }
+})();
+</script>
+<script src="../js/chrome.js" defer></script>
+<script src="../js/taskbar.js" defer></script>
+</body>
+</html>

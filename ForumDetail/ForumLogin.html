@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>论坛登录</title>
+<style>
+  :root{--red:#e53935;--red-dark:#c62828;--gray:#ddd}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;margin:0;background:#f5f6f7;color:#222}
+  .wrap{max-width:1000px;margin:24px auto;background:#fff;border:1px solid var(--gray);border-radius:12px;overflow:hidden}
+  header{background:#000;color:#fff;padding:12px 16px}
+  main{padding:16px}
+  h1{margin:0 0 12px;color:var(--red-dark)}
+  form{display:flex;flex-direction:column;gap:12px}
+  input{padding:8px;border:1px solid var(--gray);border-radius:6px}
+  button{padding:8px 12px;border:1px solid var(--gray);border-radius:8px;background:#fff;cursor:pointer}
+  button.primary{background:var(--red);color:#fff;border-color:var(--red-dark)}
+  .muted{color:#666;font-size:13px;margin-top:12px}
+</style>
+<link rel="stylesheet" href="../css/taskbar.css" />
+<link rel="stylesheet" href="../css/chrome.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>论坛登录</header>
+  <main>
+    <h1>登录论坛</h1>
+    <form id="forumLoginForm">
+      <input type="text" id="forumUser" placeholder="论坛账号" />
+      <input type="password" id="forumPass" placeholder="密码" />
+      <button class="primary" type="submit">登录</button>
+    </form>
+    <p id="tourist" class="muted" style="display:none">只想来转一转？也许可以试试最新推出的游客模式？...... <a href="#" id="goTourist">进入首页</a></p>
+  </main>
+</div>
+<script>
+(function(){
+  const form = document.getElementById('forumLoginForm');
+  const tourist = document.getElementById('tourist');
+  const goTourist = document.getElementById('goTourist');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const u = (document.getElementById('forumUser').value||'').trim();
+    const p = (document.getElementById('forumPass').value||'').trim();
+    // 若账号和密码都为空，显示游客模式入口
+    if(u==='' && p===''){
+      tourist.style.display = 'block';
+      return;
+    }
+    // 正确凭据：2258 / anni，跳转到 ForumUser
+    if(u==='2258' && p==='anni'){
+      window.location.href = 'ForumUser.html';
+      return;
+    }
+    // 其他情况提示错误
+    alert('论坛账号或密码错误');
+  });
+  goTourist.addEventListener('click', function(e){
+    e.preventDefault();
+    window.location.href = 'MonsterForum.html';
+  });
+})();
+</script>
+<script src="../js/chrome.js" defer></script>
+<script src="../js/taskbar.js" defer></script>
+</body>
+</html>

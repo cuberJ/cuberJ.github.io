@@ -74,6 +74,7 @@
     .btn{padding:6px 10px;border:1px solid var(--gray);border-radius:6px;background:#fff;cursor:pointer}
     .btn.add{background:var(--red);border-color:var(--red-dark);color:#fff}
     .qty{margin-left:auto;font-weight:700}
+    .added{padding:8px 12px;border-top:1px dashed var(--gray);background:#fafafa;color:#333}
 
     /* 结算区 */
     .checkout{display:flex;align-items:center;gap:12px;padding:16px;border-top:2px solid var(--gray);background:#fafafa}
@@ -91,7 +92,7 @@
   <link rel="stylesheet" href="css/taskbar.css" />
   <link rel="stylesheet" href="css/chrome.css" />
 </head>
-<body>
+<body data-page-index="6/36">
   <div class="wrap">
     <header>连锁超市</header>
     <main>
@@ -114,7 +115,6 @@
         <a href="about.html">超市简介</a>
         <a href="deals.html">今日特价</a>
         <a href="macellum.html">Macellum事迹</a>
-        <a href="login.html">员工账号登录区</a>
       </nav>
 
       <!-- 购物区 -->
@@ -158,7 +158,7 @@
 
     // 商品与购物车
     const items=[
-      {id:'apple',name:'苹果',price:3.5,emoji:'🍎'},
+      {id:'apple',name:'苹果',price:3.5,emoji:'🥔'},
       {id:'milk',name:'牛奶',price:5.0,emoji:'🥛'},
       {id:'bread',name:'面包',price:4.0,emoji:'🍞'},
       {id:'egg',name:'鸡蛋',price:0.8,emoji:'🥚'},
@@ -181,9 +181,16 @@
             <button class='btn del' aria-label='删除'>删除</button>
             <button class='btn add' aria-label='添加'>添加</button>
             <div class='qty'>数量：<span>0</span></div>
-          </div>`;
+          </div>
+          <div class='added'>已添加：<span class='added-count'>0</span> 件</div>`;
         const qtyEl=card.querySelector('.qty span');
-        function updateQty(n){ cart[it.id]=Math.max(0, Math.min(10, (cart[it.id]||0)+n)); qtyEl.textContent=cart[it.id]; updateTotal(); }
+         const addedEl=card.querySelector('.added-count');
+         function updateQty(n){
+           cart[it.id]=Math.max(0, Math.min(10, (cart[it.id]||0)+n));
+           qtyEl.textContent=cart[it.id];
+           if(addedEl) addedEl.textContent=cart[it.id];
+           updateTotal();
+         }
         card.querySelector('.add').addEventListener('click',()=>{ const q=cart[it.id]||0; if(q>=10){alert('每样物品最多购买 10 件');} updateQty(+1); });
         card.querySelector('.del').addEventListener('click',()=>updateQty(-1));
         products.appendChild(card);
@@ -198,8 +205,14 @@
 
     // 结算
     document.getElementById('checkout').addEventListener('click',()=>{
-      let lines=items.filter(it=>cart[it.id]>0).map(it=>`${it.name} x${cart[it.id]} = ¥${(it.price*cart[it.id]).toFixed(2)}`);
-      alert((lines.length?lines.join('\n')+'\n':'')+`总计：${totalEl.textContent}`);
+      const selected = items.filter(it=> (cart[it.id]||0) > 0);
+      let lines = selected.map(it=>`${it.name} x${cart[it.id]} = ¥${(it.price*cart[it.id]).toFixed(2)}`);
+      let msg = (lines.length? lines.join('\n')+'\n':'') + `总计：${totalEl.textContent}`;
+      const onlyThree = (cart['apple']===1) && (cart['bread']===1) && (cart['toothpaste']===1) && selected.length===3;
+      if(onlyThree){
+        msg += '\n临时交易市场链接关键字：TempTradeMarket';
+      }
+      alert(msg);
     });
   </script>
   <script src="js/chrome.js" defer></script>
