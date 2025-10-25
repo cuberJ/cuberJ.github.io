@@ -29,13 +29,33 @@
   <header>员工账号登录</header>
   <main>
     <h1>登录</h1>
-    <form onsubmit="event.preventDefault();alert('模拟登录成功');">
-      <input type="text" placeholder="员工编号" />
-      <input type="password" placeholder="密码" />
-      <button class="primary">登录</button>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="员工编号" />
+      <input type="password" id="password" placeholder="密码" />
+      <button class="primary" type="submit">登录</button>
     </form>
   </main>
 </div>
+<script>
+(function(){
+  const form = document.getElementById('loginForm');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const username = (document.getElementById('username').value || '').trim();
+    const password = (document.getElementById('password').value || '').trim();
+    if(username === 'xiaohe' && password === '20240709'){
+      alert('用户密码仍为初始密码，未经修改，账号已被锁定，无法登录。请联系主管或管理员。');
+      return;
+    }
+    if(username === 'Hornet' && password === 'Hornet0904'){
+      window.location.href = 'maintainer.html';
+      return;
+    }
+    alert('账号或密码错误');
+  });
+})();
+</script>
 <script src="js/chrome.js" defer></script>
 <script src="js/taskbar.js" defer></script>
 </body>

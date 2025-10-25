@@ -12,7 +12,7 @@
       '    <span class="dot hide" id="global-hide-options" title="隐藏选项栏"></span>\n' +
       '  </div>\n' +
       '</div>\n' +
-      '<div class="urlbar"><input id="global-url" type="text" aria-label="地址栏"/></div>\n' +
+      '<div class="urlbar"><input id="global-url" type="text" aria-label="地址栏"/><button id="global-challenge" class="challenge" type="button" title="跳转到输入的URL">挑战</button></div>\n' +
       '<div class="options" id="global-options">← 返回 · → 前进 · ⟳ 刷新 · ☆ 收藏</div>';
     document.body.insertBefore(root, document.body.firstChild);
 
@@ -50,18 +50,27 @@
       target.setAttribute('data-min-hidden', hidden ? 'false' : 'true');
     });
 
-    // 地址栏回车跳转
+    // 地址栏回车跳转 + 挑战按钮跳转（限制前缀）
+    var prefix = 'file:///Users/cairenjie/Documents/NightshadeMacellum/';
+    function navigate(v){
+      if(!v) return;
+      if(v.startsWith(prefix)){
+        location.href = v;
+      } else {
+        alert('请输入以 ' + prefix + ' 为开头的有效地址');
+      }
+    }
     urlInput && urlInput.addEventListener('keydown', function(e){
       if(e.key==='Enter'){
-        var v=urlInput.value.trim();
-        if(!v) return;
-        if(/^[a-z]+:\/\//i.test(v) || v.startsWith('/')){
-          location.href=v;
-        } else {
-          location.href=v; // 支持输入相对路径，如 about.html
-        }
+        navigate(urlInput.value.trim());
       }
     });
+    var challengeBtn = document.getElementById('global-challenge');
+    if(challengeBtn){
+      challengeBtn.addEventListener('click', function(){
+        navigate(urlInput ? urlInput.value.trim() : '');
+      });
+    }
   }
 
   window.addEventListener('DOMContentLoaded', function(){

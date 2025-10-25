@@ -7,7 +7,9 @@
 .chrome .dot.close{background:var(--close)}
 .chrome .dot.min{background:var(--yellow)}
 .chrome .dot.hide{background:var(--green)}
-.chrome .urlbar{margin-top:8px}
-.chrome .urlbar input{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#111}
+.chrome .urlbar{margin-top:8px;display:flex;gap:8px}
+.chrome .urlbar input{flex:1;width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#111}
+.chrome .urlbar .challenge{padding:10px 12px;border:1px solid #c62828;border-radius:8px;background:#e53935;color:#fff;cursor:pointer}
+.chrome .urlbar .challenge:hover{background:#d32f2f}
 .chrome .options{background:#111;color:#bbb;padding:6px 12px;font-size:13px;border-top:1px solid #222}
 .chrome .options.hidden{display:none}
