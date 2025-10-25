@@ -48,7 +48,15 @@
       return;
     }
     const target = 'ForumUser_' + encodeURIComponent(u) + '_' + encodeURIComponent(p) + '.html';
-    window.location.href = target;
+    fetch(target, { method: 'HEAD' }).then(res => {
+      if(res.ok){
+        window.location.href = target;
+      } else {
+        alert("用户名或密码不正确")
+      }
+    }).catch(()=>{
+      alert("用户名或密码不正确")
+    });
   });
   goTourist.addEventListener('click', function(e){
     e.preventDefault();

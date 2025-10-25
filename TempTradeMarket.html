@@ -46,7 +46,6 @@
     <div class="nav">
       <a href="#" class="active" data-tab="posts">交易贴</a>
       <a href="#" data-tab="featured">精华贴</a>
-      <button class="market-btn" type="button" title="演示">发布交易</button>
       <form id="navSearch" style="margin-left:auto;display:flex;gap:8px;align-items:center">
         <input type="text" id="searchInput" placeholder="搜索关键词" style="padding:6px 8px;border:1px solid var(--card-border);border-radius:8px;background:rgba(255,210,120,.10);color:#fff" />
         <button type="submit" class="market-btn">搜索</button>
@@ -102,9 +101,7 @@
     sections.posts.style.display=tab==='posts'?'flex':'none';
     sections.featured.style.display=tab==='featured'?'flex':'none';
   }));
-  document.querySelector('.market-btn').addEventListener('click',function(){
-    alert('演示：发布交易入口暂未开放。');
-  });
+  
   const navSearch = document.getElementById('navSearch');
   const searchInput = document.getElementById('searchInput');
   navSearch.addEventListener('submit', function(e){

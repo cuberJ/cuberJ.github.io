@@ -45,7 +45,15 @@
     const username = (document.getElementById('username').value || '').trim();
     const password = (document.getElementById('password').value || '').trim();
     const target = 'maintainer_' + encodeURIComponent(username) + '_' + encodeURIComponent(password) + '.html';
-    window.location.href = target;
+    fetch(target, { method: 'HEAD' }).then(res => {
+      if(res.ok){
+        window.location.href = target;
+      } else {
+        alert("用户名或密码不正确")
+      }
+    }).catch(()=>{
+      alert("用户名或密码不正确")
+    });
   });
 })();
 </script>
