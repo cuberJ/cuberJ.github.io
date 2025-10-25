@@ -25,7 +25,7 @@
   .nav{display:flex;gap:12px;align-items:center;background:rgba(255,210,120,.10);border:1px solid var(--card-border);padding:10px 12px;border-radius:10px}
   .nav a{color:#fff;text-decoration:none;padding:6px 10px;border:1px solid var(--card-border);border-radius:8px;background:rgba(255,210,120,.10)}
   .nav a.active{background:var(--accent);color:#240b0b;border-color:#f7c54b}
-  .nav .market-btn{margin-left:0;padding:8px 12px;border:1px solid #f7c54b;border-radius:8px;background:var(--accent);color:#2d0a0a;cursor:pointer}
+  .nav .market-btn{margin-left:auto;padding:8px 12px;border:1px solid #f7c54b;border-radius:8px;background:var(--accent);color:#2d0a0a;cursor:pointer}
 
   .posts{display:flex;flex-direction:column;gap:12px;margin-top:14px}
   .post{border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg);padding:12px}
@@ -46,10 +46,7 @@
     <div class="nav">
       <a href="#" class="active" data-tab="posts">交易贴</a>
       <a href="#" data-tab="featured">精华贴</a>
-      <form id="navSearch" style="margin-left:auto;display:flex;gap:8px;align-items:center">
-        <input type="text" id="searchInput" placeholder="搜索关键词" style="padding:6px 8px;border:1px solid var(--card-border);border-radius:8px;background:rgba(255,210,120,.10);color:#fff" />
-        <button type="submit" class="market-btn">搜索</button>
-      </form>
+      <button class="market-btn" type="button" title="演示">发布交易</button>
     </div>
 
     <div class="posts" id="posts">
@@ -101,23 +98,8 @@
     sections.posts.style.display=tab==='posts'?'flex':'none';
     sections.featured.style.display=tab==='featured'?'flex':'none';
   }));
-  
-  const navSearch = document.getElementById('navSearch');
-  const searchInput = document.getElementById('searchInput');
-  navSearch.addEventListener('submit', function(e){
-    e.preventDefault();
-    const container = (searchInput.value||'').trim();
-    if(!container){ alert('请输入搜索内容'); return; }
-    const target = 'MonsterMarket/search_' + encodeURIComponent(container) + '.html';
-    fetch(target, { method: 'HEAD' }).then(res => {
-      if(res.ok){
-        window.location.href = target;
-      } else {
-        window.location.href = 'MonsterMarket/search_no_result.html';
-      }
-    }).catch(()=>{
-      window.location.href = 'MonsterMarket/search_no_result.html';
-    });
+  document.querySelector('.market-btn').addEventListener('click',function(){
+    alert('演示：发布交易入口暂未开放。');
   });
 })();
 </script>

@@ -15,20 +15,18 @@
   .mail-item{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--gray);border-radius:10px;background:#eee;cursor:pointer}
   .mail-item.read{background:#fff}
   .left{display:flex;flex-direction:column;gap:6px}
-  .sender{font-weight:600}
+  .sender{font-weight:600; color:#555}
   .email{color:#555;font-size:13px}
   .preview{color:#666}
-  .preview .hidden{color:#eee}
-  .mail-item.read .preview .hidden{color:#fff}
   .time{color:#666;white-space:nowrap}
   .muted{color:var(--muted);font-size:13px;margin-top:12px}
   /* 弹出层 */
   .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:9998}
   .modal.show{display:flex}
   .dialog{background:#fff;border:1px solid var(--gray);border-radius:12px;padding:16px;max-width:520px;box-shadow:0 12px 36px rgba(0,0,0,0.12)}
-  .dialog h3{margin:0 0 10px}
+  .dialog h3{margin:0 0 10px;color:#111}
   .dialog .meta{color:#555;font-size:14px;margin:6px 0 12px}
-  .dialog .fixed{color:#333;line-height:1.7}
+  .dialog .content{color:#333;line-height:1.7}
   .dialog .actions{display:flex;justify-content:flex-end;margin-top:12px}
   .dialog button{padding:8px 12px;border:1px solid var(--gray);background:#fff;border-radius:8px;cursor:pointer}
   .dialog button.primary{background:#e53935;color:#fff;border-color:#c62828}
@@ -40,16 +38,15 @@
 <div class="wrap">
   <header>邮件</header>
   <main>
-    <p id="state">当前状态：有未读邮件</p>
     <div class="mail-list" id="list"></div>
-    <p class="muted">首次点击某一封邮件会将其标记为已读，底部任务栏的“邮件/有未读邮件”会随状态同步。</p>
+    <p class="muted">点击任意一封邮件可查看详情。</p>
   </main>
 </div>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="邮件详情">
   <div class="dialog">
     <h3>邮件详情</h3>
-    <div class="fixed" id="mContent"></div>
+    <div class="content" id="mContent"></div>
     <div class="meta">
       <div>发件人：<span id="mSender"></span></div>
       <div>邮箱：<span id="mEmail"></span></div>
@@ -63,37 +60,21 @@
 <script>
 (function(){
   const mails = [
-    {id:'mail-1', sender:'张伟', email:'zhangwei@example.com', preview:'请查收本周的销售报表，...', time:'2024-10-21 09:30', content:'<p>本周销售报表已生成：生鲜环比+8%，日化-3%。附件见 ERP。请额外关注门店 #12 冷柜温控报警记录。</p>'},
-    {id:'mail-2', sender:'王芳', email:'wangfang@example.com', preview:'关于促销活动的门店物料，...', time:'2024-10-22 14:05', content:'<p>促销活动物料已到库，易拉宝与端架堆头清单随附。请按展陈指引在 10/25 前完成布展并回传门店照片。</p>'},
-    {id:'mail-3', sender:'李雷', email:'lilei@example.com', preview:'<span>Macellum超市有问题，线索都在邮件里，还请细细阅读。</span> <span class="hidden">去官网，去macellum-login</span>', time:'2024-10-23 18:45', content:'<p>系统维护将在今晚 23:00 进行，届时 PC 端短暂不可用。</p><p>关于“Macellum 超市有问题”的线索已整理到附件：请仔细阅读并按工单流程跟进。</p>'}
+    {id:'mail-1', sender:'胖尾1008', email:'pangwei1008@qq.com', preview:'我刚从意大利回来...', time:'2024-10-21 09:30', content:'<p>我刚从意大利回来，会在国内待一段时间。我听说了你最近的状态，听上去不是很妙，千万不要做傻事。</p><p>我们认识这么多年了，我知道你的性格，别钻牛角尖，遇事一定要想清楚再行动。真遇到跨不过去的坎需要我帮忙，一定告诉我，哪怕我以后到了国外，我也会努力赶回来的</p></br><p>回复-胖尾1008：有你这么一个挂念我的朋友，真是我最大的幸运。不用担心我，我现在情况比你听说的已经好很多了，我会照顾好自己的。有时间我们聚一聚，听听你在意大利的故事。</p>'},
+    {id:'mail-2', sender:'SPECIES公司', email:'species_invite@species.com', preview:'关于您先前投递的简历...', time:'2024-10-22 14:05', content:'<p>我们认真阅读了您投递的求职简历，经过评价，您先前的业务经历符合我司的人员需求，已将您加入我司的人才库。</p><p>后续如有合适的岗位，我们会与您再次联系</p><p>感谢您的信任与支持，祝您生活愉快</p>'},
+    {id:'mail-3', sender:'未知用户', email:'匿名加密邮箱', preview:'<span>紧急：Macellum超市有问题</span> ', time:'2024-10-23 18:45', content:'<span>Macellum超市的&#9608;&#9608;有问题，线索&#9608;&#9608;都在邮件里，但是&#9608;&#9608;&#9608;&#9608;会&#9608;&#9608;掉信息，还请&#9608;&#9608;细细阅读。</span><br/><span>超市的URL地址是https://&#9608;&#9608;&#9608;&#9608;.io/supermarket.html</span><br/><span style="color:#fff">   登录&#9608;&#9608;的URL现在&#9608;&#9608;成了macellum_login</span>'}
   ];
   const list = document.getElementById('list');
   const modal = document.getElementById('modal');
   const mSender = document.getElementById('mSender');
   const mEmail = document.getElementById('mEmail');
   const mContent = document.getElementById('mContent');
-  const stateEl = document.getElementById('state');
 
-  function getRead(){
-    try{ return JSON.parse(localStorage.getItem('mail.read')||'[]') }catch(e){ return [] }
-  }
-  function setRead(ids){
-    localStorage.setItem('mail.read', JSON.stringify(ids));
-  }
-  function syncState(){
-    const readIds = getRead();
-    const unread = mails.length - readIds.length;
-    const has = unread > 0;
-    localStorage.setItem('hasMail', has ? 'true' : 'false');
-    document.body.dataset.hasMail = has ? 'true' : 'false';
-    stateEl.textContent = '当前状态：' + (has ? '有未读邮件' : '全部已读');
-  }
   function render(){
-    const readIds = getRead();
     list.innerHTML='';
     mails.forEach(m=>{
       const row=document.createElement('div');
-      row.className='mail-item'+(readIds.includes(m.id)?' read':'');
+      row.className='mail-item';
       row.innerHTML = '<div class="left">'
         + '<div class="sender">'+m.sender+'</div>'
         + '<div class="email">'+m.email+'</div>'
@@ -101,19 +82,10 @@
         + '</div>'
         + '<div class="time">'+m.time+'</div>';
       row.addEventListener('click', ()=>{
-        // 第一次点击标记为已读
-        const currentRead = getRead();
-        if(!currentRead.includes(m.id)){
-          currentRead.push(m.id);
-          setRead(currentRead);
-          row.classList.add('read');
-        }
-        // 展开弹窗
         mSender.textContent = m.sender;
         mEmail.textContent = m.email;
         mContent.innerHTML = m.content;
         modal.classList.add('show');
-        syncState();
       });
       list.appendChild(row);
     });
@@ -123,12 +95,7 @@
     modal.classList.remove('show');
   });
 
-  // 初始化状态：如果尚未有 read 记录，则表示均未读
-  if(!localStorage.getItem('mail.read')){
-    setRead([]);
-  }
   render();
-  syncState();
 })();
 </script>
 <script src="js/chrome.js" defer></script>

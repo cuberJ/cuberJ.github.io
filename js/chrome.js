@@ -9,30 +9,16 @@
       '  <div class="controls" title="窗口控制">\n' +
       '    <span class="dot close" id="global-close" title="关闭"></span>\n' +
       '    <span class="dot min" id="global-min" title="缩小"></span>\n' +
-      '    <span class="dot hide" id="global-hide-options" title="隐藏选项栏"></span>\n' +
       '  </div>\n' +
       '</div>\n' +
-      '<div class="urlbar"><input id="global-url" type="text" aria-label="地址栏"/><button id="global-challenge" class="challenge" type="button" title="跳转到输入的URL">挑战</button></div>\n' +
-      '<div class="options" id="global-options">← 返回 · → 前进 · ⟳ 刷新 · ☆ 收藏</div>';
+      '<div class="urlbar"><input id="global-url" type="text" aria-label="地址栏"/><button id="global-jump" class="jump" type="button" title="跳转到输入的URL">跳转</button></div>';
     document.body.insertBefore(root, document.body.firstChild);
 
     // 初始化地址栏为当前URL
     var urlInput=document.getElementById('global-url');
     if(urlInput) urlInput.value=window.location.href;
 
-    // 选项栏显示/隐藏
-    document.getElementById('global-hide-options').addEventListener('click', function(){
-      var opt=document.getElementById('global-options');
-      if(opt) opt.classList.toggle('hidden');
-    });
-    // 返回/前进/刷新/收藏（简单实现：点击选项栏文本即可）
-    document.getElementById('global-options').addEventListener('click', function(e){
-      var t=e.target.textContent.trim();
-      if(t.includes('返回')) history.back();
-      else if(t.includes('前进')) history.forward();
-      else if(t.includes('刷新')) location.reload();
-      else if(t.includes('收藏')) alert('模拟：已添加到收藏');
-    });
+
     // 关闭（模拟）：隐藏页面主体并提示
     document.getElementById('global-close').addEventListener('click', function(){
       var overlay=document.createElement('div');
@@ -51,7 +37,7 @@
     });
 
     // 地址栏回车跳转 + 挑战按钮跳转（限制前缀）
-    var prefix = 'file:///Users/cairenjie/Documents/NightshadeMacellum/';
+    var prefix = 'https://cuberj.github.io';
     function navigate(v){
       if(!v) return;
       if(v.startsWith(prefix)){
@@ -65,9 +51,9 @@
         navigate(urlInput.value.trim());
       }
     });
-    var challengeBtn = document.getElementById('global-challenge');
-    if(challengeBtn){
-      challengeBtn.addEventListener('click', function(){
+    var jumpBtn = document.getElementById('global-jump');
+    if(jumpBtn){
+      jumpBtn.addEventListener('click', function(){
         navigate(urlInput ? urlInput.value.trim() : '');
       });
     }

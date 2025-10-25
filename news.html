@@ -13,7 +13,7 @@
   .list{display:flex;flex-direction:column;gap:12px}
   .item{border:1px solid var(--gray);border-radius:12px;overflow:hidden}
   .head{display:flex;justify-content:space-between;gap:12px;padding:12px;background:#fafafa;border-bottom:1px solid var(--gray);cursor:pointer}
-  .title{font-weight:700}
+  .title{font-weight:800;font-size:20px;color:#111}
   .time{color:#666;white-space:nowrap}
   .preview{padding:12px;color:#444}
   .display{display:none;border-top:1px solid var(--gray)}
@@ -22,6 +22,17 @@
   .display .fixed{line-height:1.8;color:#333}
   .item.expanded .display{display:block}
   .hint{color:var(--muted);font-size:13px;margin-top:10px}
+  /* 弹出层（新闻详情） */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:9998}
+  .modal.show{display:flex}
+  .dialog{background:#fff;border:1px solid var(--gray);border-radius:12px;padding:16px;max-width:520px;box-shadow:0 12px 36px rgba(0,0,0,0.12)}
+  .dialog h3{margin:0 0 10px;color:#111}
+  .dialog .time{color:#555;font-size:14px;margin:6px 0 12px}
+  .dialog .content{color:#333;line-height:1.7}
+  .dialog img{width:100%;height:auto;border-radius:10px;border:1px solid var(--gray);margin:0 0 12px}
+  .dialog .actions{display:flex;justify-content:flex-end;margin-top:12px}
+  .dialog button{padding:8px 12px;border:1px solid var(--gray);background:#fff;border-radius:8px;cursor:pointer}
+  .dialog button.primary{background:#e53935;color:#fff;border-color:#c62828}
 </style>
 <link rel="stylesheet" href="css/taskbar.css" />
 <link rel="stylesheet" href="css/chrome.css" />
@@ -72,16 +83,49 @@
         </div></div>
       </div>
     </div>
-    <p class="hint">点击新闻标题栏可展开或收起展示栏。</p>
+    <p class="hint">点击新闻标题将在当前页面弹出详情框。</p>
   </main>
 </div>
+<div class="modal" id="newsModal" role="dialog" aria-modal="true" aria-label="新闻详情">
+  <div class="dialog">
+    <h3 id="nTitle">新闻详情</h3>
+    <p class="time" id="nTime"></p>
+    <div class="content" id="nContent"></div>
+    <div class="actions">
+      <button id="newsClose">关闭</button>
+    </div>
+  </div>
+</div>
 <script>
-  document.querySelectorAll('.item .head').forEach(function(h){
-    h.addEventListener('click', function(){
-      var item = h.parentElement;
-      item.classList.toggle('expanded');
+  (function(){
+    var map = {
+      n1: { title: '社区新店开业', time: '发布时间：2024-10-20', content: '新店正式营业，开业期间推出多项优惠活动，欢迎到店体验。' },
+      n2: { title: '冷链升级扩容', time: '发布时间：2024-10-21', content: '物流冷链设备升级完成，进一步保障生鲜品质与配送时效。' },
+      n3: { title: '会员积分体系优化', time: '发布时间：2024-10-22', content: '积分获取与兑换规则优化，新增更多礼品与折扣权益。' },
+      n4: { title: '到店自提上线', time: '发布时间：2024-10-23', content: '线上下单到店自提服务上线，缩短等待时间，提高购物效率。' },
+      n5: { title: '门店安全演练', time: '发布时间：2024-10-24', content: '门店定期开展安全演练，提升员工安全意识与应急处置能力。' }
+    };
+    var fixedText = '这是写死的新闻展示文案。用于展示点击展开后的显示区域，包含固定文字与图片。';
+    var modal = document.getElementById('newsModal');
+    var nTitle = document.getElementById('nTitle');
+    var nTime = document.getElementById('nTime');
+    var nContent = document.getElementById('nContent');
+    document.querySelectorAll('.item .head').forEach(function(h){
+      h.addEventListener('click', function(){
+        var id = h.parentElement.id;
+        var data = map[id] || { title:'未找到该新闻', time:'', content:'您访问的新闻不存在或已被移除。' };
+        nTitle.textContent = data.title;
+        nTime.textContent = data.time;
+        nContent.innerHTML = '<img src="picture/监控画面内容.png" alt="新闻图片占位" />'
+          + '<p>'+ data.content +'</p>'
+          + '<p>'+ fixedText +'</p>';
+        modal.classList.add('show');
+      });
     });
-  });
+    document.getElementById('newsClose').addEventListener('click', function(){
+      modal.classList.remove('show');
+    });
+  })();
 </script>
 <script src="js/chrome.js" defer></script>
 <script src="js/taskbar.js" defer></script>
