@@ -31,7 +31,10 @@
   <main>
     <h1>登录</h1>
     <div class="notice">
-      登录说明：请输入您的平台账号与密码，登录后可访问交易广场和个人中心。若忘记密码，请先通过找回流程重置；公共设备请勿保存密码。
+      <p>登录说明：</p>
+      <p>用户名均为个人姓名拼音</p>
+      <p>员工初始密码为本人入职日期，格式例如：20100109。请尽快修改初始密码</p>
+      <p>主管初始密码为本人姓名拼音+工号，格式例如：liwei1004</p>
     </div>
     <form id="loginForm">
       <input type="text" id="username" placeholder="员工编号" />
@@ -49,7 +52,7 @@
     const username = (document.getElementById('username').value || '').trim();
     const password = (document.getElementById('password').value || '').trim();
     const target = 'maintainer_' + encodeURIComponent(username) + '_' + encodeURIComponent(password) + '.html';
-    if (username=="xiaohe" && password=="20240709"){
+    if (username=="xiaohe" && password=="20230709"){
       alert("该账户未及时修改密码，账号已锁定。解封账号请联系张佳主管")
       return;
     }

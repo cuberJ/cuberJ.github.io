@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>维护者个人页面</title>
+<style>
+  :root{--gray:#ddd;--light:#f5f6f7;--text:#222;--muted:#666;--red:#e53935;--red-dark:#c62828}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;margin:0;background:var(--light);color:var(--text)}
+  .wrap{max-width:1000px;margin:24px auto;background:#fff;border:1px solid var(--gray);border-radius:12px;overflow:hidden}
+  header{background:#000;color:#fff;padding:12px 16px}
+  main{padding:16px}
+  h2{margin:18px 0 12px;color:#333}
+  /* 账号信息 */
+  .account{border:1px solid var(--gray);border-radius:10px;padding:12px;margin-bottom:16px;background:#fafafa}
+  .account .row{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0}
+  .account .label{color:#555}
+  .account button{padding:8px 12px;border:1px solid var(--gray);border-radius:8px;background:#fff;cursor:pointer}
+  .account button.primary{background:var(--red);color:#fff;border-color:var(--red-dark)}
+  /* 邮件列表 */
+  .mail-list{display:flex;flex-direction:column;gap:12px}
+  .mail-item{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--gray);border-radius:10px;background:#fff}
+  .left{display:flex;flex-direction:column;gap:6px}
+  .line{display:flex;gap:12px;flex-wrap:wrap}
+  .meta{color:#555;font-size:14px}
+  .content{color:#333}
+  .date{color:#666;white-space:nowrap}
+  .muted{color:var(--muted);font-size:13px;margin-top:12px}
+</style>
+<link rel="stylesheet" href="css/taskbar.css" />
+<link rel="stylesheet" href="css/chrome.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>个人主页</header>
+  <main>
+    <section class="account" aria-label="账号信息">
+      <h2>账号信息</h2>
+      <div class="row"><span class="label">账号名：hornet</span><span>Hornet</span></div>
+      <div class="row"><span class="label">密码：hornet0904</span><span>Hornet0904</span></div>
+      <div class="row"><button class="primary" type="button" title="展示用">修改密码</button></div>
+    </section>
+
+    <section aria-label="邮件区域">
+      <h2>邮件</h2>
+      <div class="mail-list">
+        <div class="mail-item">
+          <div class="left">
+            <div class="line meta"><span>发件人：</span><strong>张天翼（已认证-总经理）</strong> <span>&lt;zhangtianyi-1@example.com&gt;</span></div>
+            <div class="line meta"><span>收件人：</span><strong>张佳（已认证-主管）</strong> <span>&lt;zhangjia-5@example.com&gt;</span></div>
+            <div class="line meta"><span>类型：</span><span>收件</span></div>
+            <div class="content">特价信息已同步发送至系统，请及时更新本周的特价信息，切勿遗漏。</div>
+          </div>
+          <div class="date">2024-10-22 09:15</div>
+        </div>
+        <div class="mail-item">
+          <div class="left">
+            <div class="line meta"><span>发件人：</span><strong>张佳（已认证-主管）</strong> <span>&lt;zhangjia-5@example.com&gt;</span></div>
+            <div class="line meta"><span>收件人：</span><strong>捕兽人-新用户</strong> <span>&lt;邮件已加密&gt;</span></div>
+            <div class="line meta"><span>类型：</span><span>发件</span></div>
+            <div class="content">欢迎加入捕兽人论坛。本论坛由Macellum集团维护，论坛入口地址URL为Forum_login。新手引导和捕兽相关事项请查看论坛。论坛发言请遵守相关规定，避免违规操作导致封号。</div>
+          </div>
+          <div class="date">2024-10-15 15:40</div>
+        </div>
+        <div class="mail-item">
+          <div class="left">
+            <div class="line meta"><span>发件人：</span><strong>李清泉(已认证-员工)</strong> <span>&lt;liqingyuan-3@example.com&gt;</span></div>
+            <div class="line meta"><span>收件人：</span><strong>张佳（已认证-主管）</strong> <span>&lt;zhangjia-5@example.com&gt;</span></div>
+            <div class="line meta"><span>类型：</span><span>收件</span></div>
+            <div class="content">新的货物已到，装卸工作计划于明日展开</div>
+          </div>
+          <div class="date">2024-10-10 11:20</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="js/chrome.js" defer></script>
+<script src="js/taskbar.js" defer></script>
+</body>
+</html>

@@ -17,8 +17,8 @@
   button.primary{background:var(--red);color:#fff;border-color:var(--red-dark)}
   .muted{color:#666;font-size:13px;margin-top:12px}
 </style>
-<link rel="stylesheet" href="../css/taskbar.css" />
-<link rel="stylesheet" href="../css/chrome.css" />
+<link rel="stylesheet" href="css/taskbar.css" />
+<link rel="stylesheet" href="css/chrome.css" />
 </head>
 <body>
 <div class="wrap">
@@ -47,7 +47,7 @@
       tourist.style.display = 'block';
       return;
     }
-    const target = 'ForumUser_' + encodeURIComponent(u) + '_' + encodeURIComponent(p) + '.html';
+    const target = 'ForumDetail/ForumUser_' + encodeURIComponent(u) + '_' + encodeURIComponent(p) + '.html';
     fetch(target, { method: 'HEAD' }).then(res => {
       if(res.ok){
         window.location.href = target;
@@ -60,11 +60,11 @@
   });
   goTourist.addEventListener('click', function(e){
     e.preventDefault();
-    window.location.href = 'MonsterForum.html';
+    window.location.href = 'ForumDetail/MonsterForum.html';
   });
 })();
 </script>
-<script src="../js/chrome.js" defer></script>
-<script src="../js/taskbar.js" defer></script>
+<script src="js/chrome.js" defer></script>
+<script src="js/taskbar.js" defer></script>
 </body>
 </html>
