@@ -45,6 +45,10 @@
     const username = (document.getElementById('username').value || '').trim();
     const password = (document.getElementById('password').value || '').trim();
     const target = 'maintainer_' + encodeURIComponent(username) + '_' + encodeURIComponent(password) + '.html';
+    if (username=="xiaohe" && password=="20240709"){
+      alert("该账户未及时修改密码，账号已锁定。解封账号请联系张佳主管")
+      return;
+    }
     fetch(target, { method: 'HEAD' }).then(res => {
       if(res.ok){
         window.location.href = target;
