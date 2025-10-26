@@ -8,7 +8,9 @@
   :root{--red:#e53935;--red-dark:#c62828;--gray:#ddd}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;margin:0;background:#f5f6f7;color:#222}
   .wrap{max-width:1000px;margin:24px auto;background:#fff;border:1px solid var(--gray);border-radius:12px;overflow:hidden}
-  header{background:#000;color:#fff;padding:12px 16px}
+  header{background:#000;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+  header .back-btn{background:#fff;color:#111;border:1px solid var(--gray);border-radius:8px;padding:6px 10px;text-decoration:none}
+  header .back-btn:hover{background:#f5f5f5}
   main{padding:16px}
   h1{margin:0 0 12px;color:var(--red-dark)}
   .deal{padding:10px 12px;border:1px solid var(--gray);border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between}
@@ -23,12 +25,15 @@
 </head>
 <body>
 <div class="wrap">
-  <header>今日特价</header>
+  <header>
+    <span>今日特价</span>
+    <a class="back-btn" href="supermarket.html">返回超市</a>
+  </header>
   <main>
     <h1>限时优惠</h1>
-    <div class="deal"><span>苹果（精品）</span><strong>¥2.99 / 斤</strong></div>
-    <div class="deal"><span>牛奶（1L）</span><strong>第二件半价</strong></div>
-    <div class="deal"><span>纸巾（10卷）</span><strong>买三送一</strong></div>
+    <div class="deal"><span>土豆🥔</span><strong>原价5元，现价3.5元</strong></div>
+    <div class="deal"><span>面包🍞</span><strong>原价10元，现价4元</strong></div>
+    <div class="deal"><span>牙刷🪥</span><strong>原价18，现价14.5元</strong></div>
   </main>
 </div>
 <script src="js/chrome.js" defer></script>

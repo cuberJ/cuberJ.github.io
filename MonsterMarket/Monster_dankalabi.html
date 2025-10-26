@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Monster · Dankalabi</title>
+<style>
+  :root{
+    /* 复用 TempTradeMarket 的暖色系暗红棕配色 */
+    --bg-start:#3a0e0e;
+    --bg-end:#6b1f1f;
+    --accent:#ffd54f;
+    --accent-2:#ffb300;
+    --text:#fff7e6;
+    --muted:#e3c98b;
+    --card-bg:rgba(45,10,10,.72);
+    --card-border:rgba(255,220,120,.28);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;background:linear-gradient(145deg,var(--bg-start),var(--bg-end));color:var(--text)}
+  .wrap{max-width:1100px;margin:24px auto;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;background:rgba(50,12,12,.55);backdrop-filter:blur(6px)}
+  header{padding:12px 16px;border-bottom:1px solid var(--card-border);color:#fff}
+  main{padding:16px}
+  .title{font-size:28px;font-weight:800;letter-spacing:1px;color:var(--accent);margin:0 0 12px;text-shadow:0 2px 8px rgba(0,0,0,.35)}
+  .intro{border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg);padding:12px;color:#ffead1;line-height:1.8}
+  .link-input{margin-top:14px;border:1px solid var(--card-border);border-radius:12px;background:rgba(255,210,120,.10);padding:12px}
+  .link-input h3{margin:0 0 8px;color:#fff}
+  .link-input form{display:flex;gap:10px}
+  .link-input input{flex:1;padding:10px 12px;border:1px solid var(--card-border);border-radius:10px;background:#fff;color:#240b0b}
+  .link-input button{padding:10px 12px;border:1px solid #f7c54b;border-radius:10px;background:var(--accent);color:#2d0a0a;cursor:pointer}
+  .link-input button:hover{background:var(--accent-2)}
+
+  /* 弹窗 */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999}
+  .modal.show{display:flex}
+  .modal .box{width:min(90vw,720px);border:1px solid var(--card-border);border-radius:14px;background:rgba(30,8,8,.88);color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+  .modal .inner{padding:14px}
+  .modal .image{display:flex;justify-content:center;align-items:center}
+  .modal .image img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--card-border);background:#120606}
+  .modal .text{margin-top:12px;text-align:center;color:#ffead1;line-height:1.8}
+  .modal .actions{display:flex;justify-content:flex-end;margin-top:10px;gap:8px}
+  .modal .goto{padding:8px 12px;border:1px solid #f7c54b;border-radius:8px;background:var(--accent);color:#2d0a0a;cursor:pointer}
+  .modal .close{padding:8px 12px;border:1px solid #f7c54b;border-radius:8px;background:var(--accent);color:#2d0a0a;cursor:pointer}
+</style>
+<link rel="stylesheet" href="css/taskbar.css" />
+<link rel="stylesheet" href="css/chrome.css" />
+</head>
+<body data-page-index="31/36">
+<div class="wrap">
+  <header>怪物 · 丹卡拉比</header>
+  <main>
+    <div class="title">Monster · Dankalabi</div>
+    <section class="intro" aria-label="文字介绍">
+      丹卡拉比是一种源自虚拟世界设定的怪物资料条目，页面配色延续临时交易市场的暖色系结构以保持统一的视觉语言。下方可输入任意网页链接，系统会根据链接关键词展示对应的提示图片与说明文字。
+    </section>
+
+    <section class="link-input" aria-label="网页链接输入区">
+      <h3>输入网页链接，查看提示</h3>
+      <form id="linkForm">
+        <input id="linkInput" type="url" placeholder="例如：https://cuberj.github.io/NightshadeMacellum/develop/news.html" aria-label="网页链接" />
+        <button type="submit" title="解析链接">解析</button>
+      </form>
+      <p style="color:#ffead1;margin:8px 0 0">不同的关键词对应不同的图片与说明：如包含 <code>monster/dankalabi</code>、<code>supermarket/macellum</code>、<code>temp/market/trade</code>、<code>news/doi</code> 等。</p>
+    </section>
+
+    <!-- 弹窗：图片 + 居中文案 -->
+    <div class="modal" id="modal" aria-hidden="true">
+      <div class="box" role="dialog" aria-modal="true" aria-label="提示框">
+        <div class="inner">
+          <div class="image"><img id="modal-image" src="picture/logo.png" alt="提示配图" /></div>
+          <div class="text" id="modal-text">这里将显示与链接对应的说明文字。</div>
+          <div class="actions">
+            <button class="goto" id="modal-goto" type="button" style="display:none">跳转查看</button>
+            <button class="close" id="modal-close" type="button">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+  const form=document.getElementById('linkForm');
+  const input=document.getElementById('linkInput');
+  const modal=document.getElementById('modal');
+  const img=document.getElementById('modal-image');
+  const text=document.getElementById('modal-text');
+  const closeBtn=document.getElementById('modal-close');
+  const gotoBtn=document.getElementById('modal-goto');
+
+  function pickContent(v){
+    const s=(v||'').toLowerCase();
+    // 校验 URL 格式
+    let isValid=true;
+    try{ new URL(s); }catch(e){ isValid=false; }
+    const map = {
+      diamond: 'photo_diamond.html',
+      persuit: 'photo_persuit.html',
+      disappear: 'photo_disappear.html',
+      time: 'photo_time.html',
+      happy: 'photo_happy.html'
+    };
+    let target='';
+    for(const key in map){
+      if(s.includes(key)){ target = '../photoIntroduction/' + map[key]; break; }
+    }
+    if(isValid && target){
+      return {src:'picture/家庭合照.png', msg:'解析完成，收获到了一些回忆', ok:true, target};
+    }
+    const failMsg = isValid ? '未识别的链接，请检查输入内容。' : '请输入有效的 URL 链接。';
+    return {src:'picture/监控画面内容.png', msg:failMsg, ok:false};
+  }
+
+  function showModal(data){
+    img.src=data.src; text.textContent=data.msg;
+    // 控制跳转按钮显示与目标
+    if(gotoBtn){
+      gotoBtn.style.display = data.ok ? 'inline-block' : 'none';
+      gotoBtn.setAttribute('data-target', data.target || '');
+    }
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden','false');
+  }
+  function hideModal(){
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden','true');
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const v=input.value.trim();
+    const data=pickContent(v);
+    showModal(data);
+  });
+  closeBtn.addEventListener('click', hideModal);
+  if(gotoBtn){
+    gotoBtn.addEventListener('click', function(){
+      const t=this.getAttribute('data-target');
+      if(t){ window.location.href=t; }
+    });
+  }
+  modal.addEventListener('click', function(e){ if(e.target===modal) hideModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideModal(); });
+})();
+</script>
+<script src="js/chrome.js" defer></script>
+<script src="js/taskbar.js" defer></script>
+</body>
+</html>

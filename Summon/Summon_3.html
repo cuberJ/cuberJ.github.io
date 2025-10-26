@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Summon · 第三章</title>
+<style>
+  :root{ --bg-start:#1a1a1a; --bg-end:#333; --text:#f2f2f2; --card:rgba(255,255,255,.06); --border:rgba(255,255,255,.16); --accent:#ffeb3b; --accent-2:#eecf4b }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;background:linear-gradient(135deg,var(--bg-start),var(--bg-end));color:var(--text)}
+  .wrap{max-width:1000px;margin:24px auto;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.05);backdrop-filter:blur(6px)}
+  header{padding:12px 16px;border-bottom:1px solid var(--border)}
+  main{padding:16px}
+  .title{font-size:26px;font-weight:800;margin:0 0 12px}
+  .step{display:none;border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--card);margin-bottom:12px;opacity:0;transform:translateY(8px);transition:opacity .3s ease, transform .3s ease}
+  .step.visible{display:block}
+  .step.show{opacity:1;transform:none}
+  .hint{padding:10px;border:1px dashed var(--border);border-radius:10px;background:rgba(255,255,255,.08);margin-bottom:10px;color:#ddd}
+  form{display:flex;gap:10px}
+  input[type="text"]{flex:1;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#222}
+  button{padding:10px 12px;border:1px solid #eecf4b;border-radius:10px;background:var(--accent);color:#2d0a0a;cursor:pointer}
+  button:hover{background:var(--accent-2)}
+</style>
+<link rel="stylesheet" href="../css/taskbar.css" />
+<link rel="stylesheet" href="../css/chrome.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>Summon 召唤 · 第三章</header>
+  <main>
+    <div class="title">六步输入 · 按序解锁</div>
+    <section class="step" data-step="1">
+      <div class="hint">提示 1：写下一个影像，曾在你脑海中出现。</div>
+      <form><input type="text" placeholder="例如：远去的列车" required /><button type="submit">提交</button></form>
+    </section>
+    <section class="step" data-step="2">
+      <div class="hint">提示 2：写下一个动作，它唤起了情绪。</div>
+      <form><input type="text" placeholder="例如：拥抱" required /><button type="submit">提交</button></form>
+    </section>
+    <section class="step" data-step="3">
+      <div class="hint">提示 3：写下一个味道，或许是记忆里的。</div>
+      <form><input type="text" placeholder="例如：橘子味" required /><button type="submit">提交</button></form>
+    </section>
+    <section class="step" data-step="4">
+      <div class="hint">提示 4：写下一个声音，它让你停下。</div>
+      <form><input type="text" placeholder="例如：风声" required /><button type="submit">提交</button></form>
+    </section>
+    <section class="step" data-step="5">
+      <div class="hint">提示 5：写下一个光影，它出现在相册里。</div>
+      <form><input type="text" placeholder="例如：夕阳" required /><button type="submit">提交</button></form>
+    </section>
+    <section class="step" data-step="6">
+      <div class="hint">提示 6：写下一个约定，它让你继续前行。</div>
+      <form><input type="text" placeholder="例如：不再逃避" required /><button type="submit">提交并生成结果</button></form>
+    </section>
+  </main>
+</div>
+<script>
+(function(){
+  const steps=[...document.querySelectorAll('.step')];
+  const results=[];
+  function revealStep(i){
+    const s=steps[i];
+    if(!s) return;
+    s.classList.add('visible');
+    requestAnimationFrame(()=> s.classList.add('show'));
+  }
+  steps.forEach((s,idx)=>{
+    const form=s.querySelector('form');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      const v=this.querySelector('input').value.trim();
+      if(!v){ alert('请输入内容'); return; }
+      results[idx]=v;
+      const next=idx+1;
+      if(next<steps.length){
+        revealStep(next);
+        steps[next].scrollIntoView({behavior:'smooth',block:'start'});
+      }else{
+        const type=decide(results);
+        const list=encodeURIComponent(JSON.stringify(results));
+        window.location.href=`Summon_result.html?type=${encodeURIComponent(type)}&list=${list}&from=3`;
+      }
+    });
+  });
+  revealStep(0);
+  function decide(arr){
+    const text=arr.join(' ').toLowerCase(); let score=0;
+    ['hope','love','happy','time','light','home'].forEach(k=>{ if(text.includes(k)) score+=2; });
+    ['fear','sad','lost','dark','pain','empty'].forEach(k=>{ if(text.includes(k)) score-=2; });
+    if(score>=4) return 'warm'; if(score<=-2) return 'cold'; return 'calm';
+  }
+})();
+</script>
+<script src="../js/chrome.js" defer></script>
+<script src="../js/taskbar.js" defer></script>
+</body>
+</html>

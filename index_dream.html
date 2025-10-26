@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>夜色玛奇莲 · 梦境首页</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* 顶部地址栏与底部状态栏样式 */
+    .addressbar{display:flex;gap:10px;align-items:center;padding:8px 12px;background:#0c0c0c;color:#eaeaea;border-bottom:1px solid rgba(255,255,255,.08)}
+    .addressbar .dot{width:12px;height:12px;border-radius:50%}
+    .addressbar .dot.red{background:#ff5f57}
+    .addressbar .dot.yellow{background:#ffbd2e}
+    .addressbar .dot.green{background:#28c940}
+    .addressbar .nav{display:flex;gap:8px;color:#d0d0d0}
+    .addressbar .nav .btn{padding:2px 8px;border:1px solid #3a3a3a;border-radius:8px;cursor:pointer}
+    .addressbar input.addr{flex:1;padding:8px 10px;background:#1c1c1c;color:#eaeaea;border:1px solid #3a3a3a;border-radius:10px}
+
+    .statusbar{position:fixed;left:0;right:0;bottom:0;background:#0c0c0c;color:#eaeaea;border-top:1px solid rgba(255,255,255,.08);padding:6px 12px;font-size:12px;display:flex;gap:12px;justify-content:space-between;align-items:center;z-index:10}
+    .statusbar .left, .statusbar .right{display:flex;gap:12px;align-items:center}
+  </style>
+</head>
+<body data-page-index="1/36">
+  <header class="topbar" aria-label="顶部状态栏"></header>
+  <div class="addressbar" aria-label="地址栏">
+    <div class="dot red" aria-hidden="true"></div>
+    <div class="dot yellow" aria-hidden="true"></div>
+    <div class="dot green" aria-hidden="true"></div>
+    <div class="nav" aria-label="导航">
+      <span class="btn" title="后退">←</span>
+      <span class="btn" title="前进">→</span>
+      <span class="btn" title="刷新">↻</span>
+    </div>
+    <input class="addr" type="text" value="https://cuberJ.github.io/index_dream.html" aria-label="地址" />
+  </div>
+
+  <section class="hero-image">
+    <figure>
+      <img src="picture/logo.png" alt="游戏配图" />
+      <figcaption>游戏配图</figcaption>
+    </figure>
+  </section>
+
+  <main class="container">
+    <section class="card" id="disclaimer">
+      <h2>声明</h2>
+      <p>本游戏纯属虚构，与任何现实组织或人物无关，仅用于娱乐与学习。</p>
+      <p>本游戏可视为我很喜欢的一部小说的同人作品。为防止剧透，小说的名称需要各位玩家在游戏结尾才能得知哦。</p>
+      <p>如果对游戏有任何问题或建议，欢迎联系我。</p>
+    </section>
+
+    <section class="card" id="introduction">
+      <h2>游戏的引言</h2>
+      <p>
+        你大学毕业，入职一家报社作为实习记者四处奔波。如今实习期即将结束，你渴望寻求一个大新闻，以获取转正资格。这时，你收到了一封匿名邮件。
+      </p>
+      <p>“紧急：Macellum超市有问题”</p>
+      <p>带着这个疑问，你打开了自己的邮件……</p>
+    </section>
+
+    <section class="card" id="how-to-play">
+      <h2>游戏玩法介绍</h2>
+        <p>本游戏的推进方式有两种：在特定页面搜索关键词，或者直接访问URL链接。</p>
+        <p>URL格式示例：https://cuberJ.github.io/cat.html、https://cuberJ.github.io/dog.html。</p>
+    </section>
+
+    <section class="card" id="entry">
+      <h2>游戏的入口</h2>
+      <p>准备好了吗？点击下方按钮，欢迎来到Macellum超市。</p>
+      <p><a class="cta" href="mail.html">进入游戏</a></p>
+    </section>
+  </main>
+
+  <footer class="statusbar" aria-label="底部状态栏">
+    <div class="left"><span>状态：在线</span><span>页面：1/36</span></div>
+    <div class="right"><span>本地时间</span><span id="time">--:--:--</span></div>
+  </footer>
+  <script>
+    (function(){
+      function fmt(n){return (n<10?'0':'')+n}
+      function tick(){const d=new Date();document.getElementById('time').textContent = fmt(d.getHours())+':'+fmt(d.getMinutes())+':'+fmt(d.getSeconds())}
+      tick(); setInterval(tick,1000);
+    })();
+  </script>
+</body>
+</html>

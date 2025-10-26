@@ -8,7 +8,9 @@
   :root{--gray:#ddd;--light:#f5f6f7;--text:#222}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;margin:0;background:var(--light);color:var(--text)}
   .wrap{max-width:1200px;margin:24px auto;background:#fff;border:1px solid var(--gray);border-radius:12px;overflow:hidden}
-  header{background:#000;color:#fff;padding:12px 16px}
+  header{background:#000;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+  header .back-btn{background:#fff;color:#111;border:1px solid var(--gray);border-radius:8px;padding:6px 10px;text-decoration:none}
+  header .back-btn:hover{background:#f5f5f5}
   main{padding:16px}
   .grid{display:flex;flex-direction:column;gap:24px}
   .card{border:1px solid var(--gray);border-radius:12px;overflow:hidden;background:#fff}
@@ -18,24 +20,39 @@
   .desc{color:#333;line-height:1.9;margin:0 0 10px;font-size:16px}
   .time{color:#666}
   .header{color:#584848;line-height:1.9;margin:0 0 10px;font-size:25px;}
+  /* 评论板块样式 */
+  .comments{border-top:1px solid var(--gray);background:#fafafa;padding:12px 16px}
+  .comments h4{margin:0 0 8px;font-size:15px;color:#444}
+  .comment{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed #e3e3e3}
+  .comment:last-child{border-bottom:none}
+  .comment .tag{display:inline-block;font-size:12px;color:#555;background:#fff;border:1px solid #cfcfcf;border-radius:999px;padding:3px 8px;white-space:nowrap}
+  .comment .text{margin:0;color:#333;line-height:1.8;flex:1}
 </style>
 <link rel="stylesheet" href="css/taskbar.css" />
 <link rel="stylesheet" href="css/chrome.css" />
 </head>
 <body>
 <div class="wrap">
-  <header>Macellum事迹</header>
+  <header>
+    <span>Macellum事迹</span>
+    <a class="back-btn" href="supermarket.html">返回超市</a>
+  </header>
   <main>
     <div class="grid">
       
       <div class="card">
-        
         <div class="info">
           <p class="header">关于账号越权登录事故预防的通知</p>
           <p class="desc">近期，不少友商的网站（如x安饭，x安温泉度假酒店等）疑似遭到非员工用户越权登录账号，引发内网信息泄露的问题。</p>
           <p class="desc">为保护超市系统安全，已在超市主页下架员工登录界面。新登录界面链接已由各位主管口头宣贯，密码也均重置。请各位员工及时修改密码。</p>
           <div class="time">发布时间：2024-09-22</div>
         </div>
+        <section class="comments" aria-label="评论区">
+          <h4>相关评论</h4>
+          <div class="comment" data-id="2258_anni"><span class="tag">@2258_anni</span><p class="text">我们也收到提醒，账号安全要紧，重置密码很及时。</p></div>
+          <div class="comment" data-id="md0201"><span class="tag">@MD0201</span><p class="text">建议统一启用双因素认证，并定期进行安全演练。</p></div>
+          <div class="comment" data-id="guest_384"><span class="tag">@guest_384</span><p class="text">员工登录入口改到哪里了？请更新主页公告。</p></div>
+        </section>
       </div>
 
       <div class="card">
@@ -46,7 +63,14 @@
           <p class="desc">员工小荷与主管张佳的行为，践行了Macellum超市的服务精神。在此对两位员工的行为进行嘉奖和公示表扬。</p>
           <div class="time">发布时间：2024-07-12</div>
         </div>
+        <section class="comments" aria-label="评论区">
+          <h4>相关评论</h4>
+          <div class="comment" data-id="2258_anni"><span class="tag">@2258_anni</span><p class="text">为小荷点赞！培训真的很关键，关键时刻能救命。</p></div>
+          <div class="comment" data-id="zhang_jia"><span class="tag">@zhang_jia</span><p class="text">后续将组织全员急救演练，完善应急响应流程。</p></div>
+          <div class="comment" data-id="reporter_001"><span class="tag">@reporter_001</span><p class="text">能否联系家属做个采访？公共安全科普值得传播。</p></div>
+        </section>
       </div>
+
       <div class="card">
         <div class="info">
           <p class="header">每周促销活动即将展开</p>
@@ -54,6 +78,12 @@
           <p class="desc">本次促销线上线下同步进行，价格一致，也欢迎体验线上购买。</p>
           <div class="time">发布时间：2024-05-09</div>
         </div>
+        <section class="comments" aria-label="评论区">
+          <h4>相关评论</h4>
+          <div class="comment" data-id="2258_anni"><span class="tag">@2258_anni</span><p class="text">线上清单什么时候更新？想提前看看本周有哪些特价。</p></div>
+          <div class="comment" data-id="member_007"><span class="tag">@member_007</span><p class="text">生鲜类有折扣吗？希望有家庭套装的组合价。</p></div>
+          <div class="comment" data-id="guest_202"><span class="tag">@guest_202</span><p class="text">是否支持到店自提？下单后就近门店自提更方便。</p></div>
+        </section>
       </div>
     </div>
   </main>

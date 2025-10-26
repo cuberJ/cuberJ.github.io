@@ -83,7 +83,7 @@
         </div></div>
       </div>
     </div>
-    <p class="hint">点击新闻标题将在当前页面弹出详情框。</p>
+    <p class="hint">点击新闻标题将在新页面打开详情。</p>
   </main>
 </div>
 <div class="modal" id="newsModal" role="dialog" aria-modal="true" aria-label="新闻详情">
@@ -115,16 +115,9 @@
     document.querySelectorAll('.item .head').forEach(function(h){
       h.addEventListener('click', function(){
         var id = h.parentElement.id;
-        var data = map[id] || { title:'未找到该新闻', time:'', content:'您访问的新闻不存在或已被移除。' };
-        nTitle.textContent = data.title;
-        nTime.textContent = data.time;
-        nNumber.textContent = data.number;
-        var images = { n1: 'picture/新闻-溺水男子.png', n2: '', n3: '', n4: 'picture/新闻-神秘富豪.png', n5: '' };
-        var imgSrc = images[id] 
-        nContent.innerHTML = '<img src="'+ imgSrc +'"  />'
-          + '<p>'+ data.content +'</p>'
-          + '<p>'+ fixedText +'</p>';
-        modal.classList.add('show');
+        var linkMap = { n1:'News/NewsDetail_1.html', n2:'News/NewsDetail_2.html', n3:'News/NewsDetail_3.html', n4:'News/NewsDetail_4.html', n5:'News/NewsDetail_5.html' };
+        var href = linkMap[id] || 'news.html';
+        window.location.href = href;
       });
     });
     document.getElementById('newsClose').addEventListener('click', function(){

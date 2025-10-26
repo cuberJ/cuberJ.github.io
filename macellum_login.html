@@ -11,6 +11,7 @@
   header{background:#000;color:#fff;padding:12px 16px}
   main{padding:16px}
   h1{margin:0 0 12px;color:var(--red-dark)}
+  .notice{background:#fff8e1;border:1px solid #f7c54b;color:#5a4a1f;padding:10px 12px;border-radius:8px;margin:0 0 12px;font-size:14px;line-height:1.7}
   form{display:flex;flex-direction:column;gap:12px}
   input{padding:8px;border:1px solid var(--gray);border-radius:6px}
   button{padding:8px 12px;border:1px solid var(--gray);border-radius:8px;background:#fff;cursor:pointer}
@@ -29,6 +30,9 @@
   <header>员工账号登录</header>
   <main>
     <h1>登录</h1>
+    <div class="notice">
+      登录说明：请输入您的平台账号与密码，登录后可访问交易广场和个人中心。若忘记密码，请先通过找回流程重置；公共设备请勿保存密码。
+    </div>
     <form id="loginForm">
       <input type="text" id="username" placeholder="员工编号" />
       <input type="password" id="password" placeholder="密码" />

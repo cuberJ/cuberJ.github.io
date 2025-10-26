@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Summon 引导 · 暖红配色</title>
+<style>
+  :root{
+    --bg-start:#3a0e0e; --bg-end:#6b1f1f;
+    --text:#fff7e6; --muted:#e3c98b;
+    --accent:#ffd54f; --accent-2:#ffb300;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;min-height:100%;background:linear-gradient(145deg,var(--bg-start),var(--bg-end));color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif}
+  .panel{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .line{max-width:960px;text-align:center;color:var(--text);
+        font-family:'Kaiti SC','STKaiti','KaiTi','DFKai-SB',cursive;
+        font-size:clamp(28px,6vw,64px);line-height:1.6;text-shadow:0 2px 16px rgba(0,0,0,.5);
+        opacity:0;transform:translateY(30px);transition:opacity .6s ease, transform .6s ease}
+  .panel.active .line{opacity:1;transform:translateY(0)}
+  .panel.exit .line{opacity:0;transform:translateY(-20px)}
+  .start{display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center}
+  .start-btn{padding:12px 20px;border:1px solid #f7c54b;border-radius:999px;background:var(--accent);color:#2d0a0a;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(255,213,79,.35)}
+  .start-btn:hover{background:var(--accent-2)}
+</style>
+<link rel="stylesheet" href="../css/taskbar.css" />
+<link rel="stylesheet" href="../css/chrome.css" />
+</head>
+<body>
+  <section class="panel"><div class="line">夜色渐深，纸墨间的旧事缓缓重现。</div></section>
+  <section class="panel"><div class="line">请以心为灯，照见那些未曾言说的名字。</div></section>
+  <section class="panel"><div class="line">每一次回望，都是与自己达成的和解。</div></section>
+  <section class="panel"><div class="line">让风把犹疑带走，留下能被召唤的微光。</div></section>
+  <section class="panel start">
+    <div class="line">当你准备好，向下继续，抵达开始。</div>
+    <button class="start-btn" id="start">开始召唤</button>
+  </section>
+  <script>
+  (function(){
+    const panels=[...document.querySelectorAll('.panel')];
+    let current=null;
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        const p=entry.target;
+        if(entry.isIntersecting && entry.intersectionRatio>0.6){
+          if(current && current!==p){ current.classList.remove('active'); current.classList.add('exit'); }
+          p.classList.add('active'); p.classList.remove('exit'); current=p;
+        }else{
+          p.classList.remove('active');
+        }
+      });
+    },{threshold:[0.2,0.6]});
+    panels.forEach(p=>io.observe(p));
+    document.getElementById('start').addEventListener('click',function(){ location.href='Summon_1.html'; });
+  })();
+  </script>
+  <script src="../js/chrome.js" defer></script>
+  <script src="../js/taskbar.js" defer></script>
+</body>
+</html>

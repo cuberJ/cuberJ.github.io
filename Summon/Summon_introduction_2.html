@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Summon 引导 · 清冷渐变</title>
+<link rel="stylesheet" href="../css/taskbar.css" />
+<link rel="stylesheet" href="../css/chrome.css" />
+<style>
+  :root{
+    --bg1:#0e2640; --bg2:#0a2f2a; --bg3:#081a28;
+    --text:#f5faff; --muted:#cfe7ff;
+    --accent-cyan:#36d1ff; --accent-yellow:#ffd84d;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;min-height:100%;
+    background:
+      radial-gradient(1200px 500px at 10% 0%, rgba(0, 80, 120, .22) 0%, rgba(0,0,0,0) 60%),
+      radial-gradient(1000px 1000px at 90% 10%, rgba(0, 120, 100, .25) 0%, rgba(0,0,0,0) 60%),
+      linear-gradient(145deg, var(--bg1), var(--bg2) 60%, var(--bg3));
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif}
+  .panel{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .line{max-width:980px;text-align:center;color:var(--text);
+        font-family:'Kaiti SC','STKaiti','KaiTi','DFKai-SB',cursive;
+        font-size:clamp(28px,6vw,64px);line-height:1.6;text-shadow:0 3px 18px rgba(0,0,0,.5);
+        opacity:0;transform:translateY(32px);transition:opacity .7s ease, transform .7s ease}
+  .panel.active .line{opacity:1;transform:translateY(0)}
+  .panel.exit .line{opacity:0;transform:translateY(-24px)}
+  .hint{color:var(--muted);font-size:14px;margin-top:8px;text-align:center}
+  .start{display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center}
+  .start-btn{padding:12px 20px;border:1px solid rgba(255,216,77,.8);border-radius:999px;background:var(--accent-yellow);color:#0a2532;font-weight:700;cursor:pointer;box-shadow:0 10px 28px rgba(255,216,77,.35)}
+  .start-btn:hover{filter:brightness(1.05)}
+</style>
+</head>
+<body>
+  <section class="panel"><div class="line">海风带来新的线索，旧信封里的谜底尚未揭开。</div></section>
+  <section class="panel"><div class="line">你在路灯下疾走，试图从零碎的线索里拼凑真相。</div></section>
+  <section class="panel"><div class="line">别害怕黑夜，它让光更显珍贵。</div></section>
+  <section class="panel"><div class="line">当记忆与勇气交叠，召唤才真正开始。</div></section>
+  <section class="panel start">
+    <div class="line">向下抵达终点，那里有新的起点。</div>
+    <div class="hint">若准备就绪，请按下方按钮继续</div>
+    <button class="start-btn" id="start">开始召唤</button>
+  </section>
+  <script>
+  (function(){
+    const panels=[...document.querySelectorAll('.panel')];
+    let current=null;
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        const p=entry.target;
+        if(entry.isIntersecting && entry.intersectionRatio>0.6){
+          if(current && current!==p){ current.classList.remove('active'); current.classList.add('exit'); }
+          p.classList.add('active'); p.classList.remove('exit'); current=p;
+        }else{
+          p.classList.remove('active');
+        }
+      });
+    },{threshold:[0.2,0.6]});
+    panels.forEach(p=>io.observe(p));
+    document.getElementById('start').addEventListener('click',function(){ location.href='Summon_1.html'; });
+  })();
+  </script>
+  <script src="../js/chrome.js" defer></script>
+  <script src="../js/taskbar.js" defer></script>
+</body>
+</html>
