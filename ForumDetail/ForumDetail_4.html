@@ -1,61 +1,266 @@
 <!doctype html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>帖子详情 4</title>
-<style>
-  :root{--bg-start:#0c1f3f; --bg-end:#0b5a6a; --accent:#ffeb3b; --accent-2:#6ae8ff; --text:#eaf7ff; --muted:#9dbbd3; --card-bg:rgba(10,21,40,.72); --card-border:rgba(255,255,255,.18)}
-  *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;color:var(--text);background:linear-gradient(135deg,var(--bg-start),var(--bg-end))}
-  .wrap{max-width:1100px;margin:24px auto;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;background:rgba(8,16,30,.55);backdrop-filter:blur(6px)}
-  header{padding:12px 16px;border-bottom:1px solid var(--card-border);color:#fff;display:flex;justify-content:space-between;align-items:center}
-  header .back-btn{background:rgba(255,255,255,.85);color:#000;border:1px solid var(--card-border);border-radius:8px;padding:6px 10px;text-decoration:none}
-  header .back-btn:hover{background:#fff}
-  main{padding:16px}
-  .block{border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg);padding:12px;margin-bottom:12px}
-  .top{display:flex;gap:16px;color:var(--muted);font-size:14px;margin-bottom:8px}
-  .middle{display:grid;gap:12px;align-items:start;grid-template-columns:1fr}
-  .middle:has(.image-box){grid-template-columns:1fr 300px}
-  .content{line-height:1.8;color:#e0e0f6;text-align:left}
-  .image-box{border:1px solid var(--card-border);border-radius:10px;background:rgba(255,255,255,.06);padding:8px}
-  .image-box img{width:100%;height:240px;object-fit:cover;border-radius:8px}
-  .bottom{color:var(--muted);font-size:13px;margin-top:8px}
-</style>
-<link rel="stylesheet" href="../css/taskbar.css" />
-<link rel="stylesheet" href="../css/chrome.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>帖子详情 4</title>
+  <style>
+    :root {
+      --bg-start: #0c1f3f;
+      --bg-end: #0b5a6a;
+      --accent: #ffeb3b;
+      --accent-2: #6ae8ff;
+      --text: #eaf7ff;
+      --muted: #9dbbd3;
+      --card-bg: rgba(10, 21, 40, .72);
+      --card-border: rgba(255, 255, 255, .18)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--bg-start), var(--bg-end))
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 24px auto;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(8, 16, 30, .55);
+      backdrop-filter: blur(6px)
+    }
+
+    header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--card-border);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    header .back-btn {
+      background: rgba(255, 255, 255, .85);
+      color: #000;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      text-decoration: none
+    }
+
+    header .back-btn:hover {
+      background: #fff
+    }
+
+    main {
+      padding: 16px
+    }
+
+    .block {
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      background: var(--card-bg);
+      padding: 12px;
+      margin-bottom: 12px
+    }
+
+    .top {
+      display: flex;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px
+    }
+
+    .middle {
+      display: grid;
+      gap: 12px;
+      align-items: start;
+      grid-template-columns: 1fr
+    }
+
+    .middle:has(.image-box) {
+      grid-template-columns: 1fr 300px
+    }
+
+    .content {
+      line-height: 1.8;
+      color: #e0e0f6;
+      text-align: left
+    }
+
+    .image-box {
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .06);
+      padding: 8px
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 8px
+    }
+
+    .bottom {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px
+    }
+  </style>
+  <link rel="stylesheet" href="../css/taskbar.css" />
+  <link rel="stylesheet" href="../css/chrome.css" />
 </head>
+
 <body>
-<div class="wrap">
-  <header><span>怪物论坛 - 帖子详情</span><a class="back-btn" href="MonsterForum.html">返回论坛</a></header>
-  <main>
-    <section class="block">
-      <div class="top"><span>ID：insight_bot</span><span>楼层：1楼</span></div>
-      <div class="middle">
-        <div class="content">精华主题：评选机制优化。引入多维评分与透明化流程，记录权重与说明。</div>
-        <div class="image-box"><img src="../picture/监控画面内容.png" alt="配图" /></div>
-      </div>
-      <div class="bottom">时间：2024-10-24 08:15</div>
-    </section>
-    <section class="block">
-      <div class="top"><span>ID：design_mech</span><span>楼层：2楼</span></div>
-      <div class="middle">
-        <div class="content">可在提名与评选阶段公开得票与评语，杜绝刷票与水评。</div>
-        <div class="image-box"><img src="../picture/家庭合照.png" alt="配图" /></div>
-      </div>
-      <div class="bottom">时间：2024-10-24 09:42</div>
-    </section>
-    <section class="block">
-      <div class="top"><span>ID：mod_alpha</span><span>楼层：3楼</span></div>
-      <div class="middle">
-        <div class="content">总结：每季度进行一次评选，保留历史记录与复盘帖，便于持续提升。</div>
-        <div class="image-box"><img src="../picture/SPECIES公司简介.png" alt="配图" /></div>
-      </div>
-      <div class="bottom">时间：2024-10-24 10:30</div>
-    </section>
-  </main>
-</div>
-<script src="../js/chrome.js" defer></script>
-<script src="../js/taskbar.js" defer></script>
+  <div class="wrap">
+    <header><span>捕兽人之家 - 帖子详情</span><a class="back-btn" href="MonsterForum.html">返回论坛</a></header>
+    <main>
+      <section class="block">
+        <div class="top"><span>ID：Hunter2258</span><span>楼层：1楼</span></div>
+        <div class="middle">
+          <div class="content">
+            关于白色恶魔的召唤条件
+          </div>
+          <div class="content">
+            大家也许都知道白色恶魔的传说吧？我就直说了，为什么我们从来没有人真正见过白色恶魔？我有可靠的消息来源：
+          </div>
+          <div class="content">
+            白色恶魔，是需要人去主动召唤的！
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 08:15</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：卖松狮的小男孩</span><span>楼层：2楼</span></div>
+        <div class="middle">
+          <div class="content">
+            不好意思，我是新人，白色恶魔是什么？能有老哥介绍下吗？
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 09:42</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：月亮与小狗</span><span>楼层：3楼</span></div>
+        <div class="middle">
+          <div class="content">
+            白色恶魔是一个兽的名称，据说是吞噬人内心的强烈愿望而存在的。不过比弗纳乌斯猛多了，传闻，白色恶魔可以拥有直接实现人愿望的能力。
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 10:30</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：卖松狮的小男孩/span><span>楼层：4楼</span></div>
+        <div class="middle">
+          <div class="content">
+            我靠？！这么猛吗？那为什么我从来没听过这个兽的名字?
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 10:42</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：月亮与小狗</span><span>楼层：5楼</span></div>
+        <div class="middle">
+          <div class="content">
+            因为正如我所说，没人真正见过白色恶魔。所以大家更多的都是将它当做一个传闻，而不是真实存在的兽。
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 10:45</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：Hunter2258</span><span>楼层：6楼</span></div>
+        <div class="middle">
+          <div class="content">
+            不！我们都走入了一个思维误区：白色恶魔不是没人见过，而是见过白色恶魔的人……都消失了……
+          </div>
+          <div class="content">
+            我从一个古老的记载中得到了一个描述：白色恶魔在世界上只有一只，也永远只会有一只。它从吞噬的愿望中获取到了足够的力量，不再依赖于一个具体的宿主寄生，而是需要人反过来主动召唤它，为了得到它的力量而向它提供祭品
+          </div>
+          <div class="content">
+            而召唤的代价也很高。所谓祭品，其实就是召唤人本身。召唤如果成功，召唤人只能来得及许下一个愿望，随后就会被卷入时间的漩涡，迷失其中。
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 11:03</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：Hunter2258</span><span>楼层：7楼</span></div>
+        <div class="middle">
+          <div class="content">
+            关于召唤条件的描述，我不是很理解。据记载中的描述，召唤需要满足六个条件：</div>
+          <div class="content">正确的坐标</div>
+          <div class="content">友人的忠诚</div>
+          <div class="content">日常的回忆</div>
+          <div class="content">时间的结晶</div>
+          <div class="content">家族的血统</div>
+          <div class="content">强烈的愿望</div>
+
+          <div class="content">
+            记载中没有对这六个条件做出说明，我才会选择发在这里，希望集思广益，看看大家有没有头绪。
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 11:12</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：卖松狮的小男孩</span><span>楼层：8楼</span></div>
+        <div class="middle">
+          <div class="content">
+            许愿成功，自己也会消失？那我许愿图什么?就没有两全其美的办法吗？
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 11:42</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：Hunter2258</span><span>楼层：9楼</span></div>
+        <div class="middle">
+          <div class="content">
+            还真有。记载中记录了一种可以以一年的寿命为代价，稳定时间漩涡的方式，但似乎这种方法的描述让我很困惑：稳定的方法似乎需要一只猫……？
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 11:52</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：青芦笋芝士意面</span><span>楼层：10楼</span></div>
+        <div class="middle">
+          <div class="content">
+            散了吧，楼主疑似在这钓鱼刷经验，信他不如信在我家吃一顿饭就能召唤白色恶魔呢。
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 12:40</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：麦田</span><span>楼层：11楼</span></div>
+        <div class="middle">
+          <div class="content">
+            楼主，我认得你，你是2258号捕兽人吧？自从你妻子Anni失踪之后，你就一直在找她，我看到不少关于你的帖子，感觉你越来越魔怔了
+          </div>
+           <div class="content">
+            你居然想通过白色恶魔找回你的妻子吗？是不是有点太魔幻了……
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 12:42</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：丝之歌怎么还没出</span><span>楼层：12楼</span></div>
+        <div class="middle">
+          <div class="content">
+            同意10楼的意见，楼主脑子有点不正常了。
+          </div>
+        </div>
+        <div class="bottom">时间：2018-04-28 14:02</div>
+      </section>
+    </main>
+  </div>
+  <script src="../js/chrome.js" defer></script>
+  <script src="../js/taskbar.js" defer></script>
 </body>
+
 </html>

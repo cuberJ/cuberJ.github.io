@@ -1,61 +1,208 @@
 <!doctype html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>帖子详情 3</title>
-<style>
-  :root{--bg-start:#0c1f3f; --bg-end:#0b5a6a; --accent:#ffeb3b; --accent-2:#6ae8ff; --text:#eaf7ff; --muted:#9dbbd3; --card-bg:rgba(10,21,40,.72); --card-border:rgba(255,255,255,.18)}
-  *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;color:var(--text);background:linear-gradient(135deg,var(--bg-start),var(--bg-end))}
-  .wrap{max-width:1100px;margin:24px auto;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;background:rgba(8,16,30,.55);backdrop-filter:blur(6px)}
-  header{padding:12px 16px;border-bottom:1px solid var(--card-border);color:#fff;display:flex;justify-content:space-between;align-items:center}
-  header .back-btn{background:rgba(255,255,255,.85);color:#000;border:1px solid var(--card-border);border-radius:8px;padding:6px 10px;text-decoration:none}
-  header .back-btn:hover{background:#fff}
-  main{padding:16px}
-  .block{border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg);padding:12px;margin-bottom:12px}
-  .top{display:flex;gap:16px;color:var(--muted);font-size:14px;margin-bottom:8px}
-  .middle{display:grid;gap:12px;align-items:start;grid-template-columns:1fr}
-  .middle:has(.image-box){grid-template-columns:1fr 300px}
-  .content{line-height:1.8;color:#e0e0f6;text-align:left}
-  .image-box{border:1px solid var(--card-border);border-radius:10px;background:rgba(255,255,255,.06);padding:8px}
-  .image-box img{width:100%;height:240px;object-fit:cover;border-radius:8px}
-  .bottom{color:var(--muted);font-size:13px;margin-top:8px}
-</style>
-<link rel="stylesheet" href="../css/taskbar.css" />
-<link rel="stylesheet" href="../css/chrome.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>帖子详情 3</title>
+  <style>
+    :root {
+      --bg-start: #0c1f3f;
+      --bg-end: #0b5a6a;
+      --accent: #ffeb3b;
+      --accent-2: #6ae8ff;
+      --text: #eaf7ff;
+      --muted: #9dbbd3;
+      --card-bg: rgba(10, 21, 40, .72);
+      --card-border: rgba(255, 255, 255, .18)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--bg-start), var(--bg-end))
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 24px auto;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(8, 16, 30, .55);
+      backdrop-filter: blur(6px)
+    }
+
+    header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--card-border);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    header .back-btn {
+      background: rgba(255, 255, 255, .85);
+      color: #000;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      text-decoration: none
+    }
+
+    header .back-btn:hover {
+      background: #fff
+    }
+
+    main {
+      padding: 16px
+    }
+
+    .block {
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      background: var(--card-bg);
+      padding: 12px;
+      margin-bottom: 12px
+    }
+
+    .top {
+      display: flex;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px
+    }
+
+    .middle {
+      display: grid;
+      gap: 12px;
+      align-items: start;
+      grid-template-columns: 1fr
+    }
+
+    .middle:has(.image-box) {
+      grid-template-columns: 1fr 300px
+    }
+
+    .content {
+      line-height: 1.8;
+      color: #e0e0f6;
+      text-align: left
+    }
+
+    .image-box {
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .06);
+      padding: 8px
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 8px
+    }
+
+    .bottom {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px
+    }
+  </style>
+  <link rel="stylesheet" href="../css/taskbar.css" />
+  <link rel="stylesheet" href="../css/chrome.css" />
 </head>
+
 <body>
-<div class="wrap">
-  <header><span>怪物论坛 - 帖子详情</span><a class="back-btn" href="MonsterForum.html">返回论坛</a></header>
-  <main>
-    <section class="block">
-      <div class="top"><span>ID：helper77</span><span>楼层：1楼</span></div>
-      <div class="middle">
-        <div class="content">求助：帖子图片加载缓慢。讨论可能的原因与解决方案：图片过大、格式不合适、缺少懒加载、无缓存策略等。</div>
-        <div class="image-box"><img src="../picture/监控画面内容.png" alt="配图" /></div>
-      </div>
-      <div class="bottom">时间：2024-10-23 09:40</div>
-    </section>
-    <section class="block">
-      <div class="top"><span>ID：perf_hunter</span><span>楼层：2楼</span></div>
-      <div class="middle">
-        <div class="content">建议统一图片最大宽度并启用自动压缩。移动端优先使用 WebP。</div>
-        <div class="image-box"><img src="../picture/家庭合照.png" alt="配图" /></div>
-      </div>
-      <div class="bottom">时间：2024-10-23 10:22</div>
-    </section>
-    <section class="block">
-      <div class="top"><span>ID：ops_master</span><span>楼层：3楼</span></div>
-      <div class="middle">
-        <div class="content">可以在图片组件中加入占位与加载进度，并在滚动视图中启用 IntersectionObserver 延迟加载。</div>
-        <div class="image-box"><img src="../picture/SPECIES公司简介.png" alt="配图" /></div>
-      </div>
-      <div class="bottom">时间：2024-10-23 12:05</div>
-    </section>
-  </main>
-</div>
-<script src="../js/chrome.js" defer></script>
-<script src="../js/taskbar.js" defer></script>
+  <div class="wrap">
+    <header><span>怪物论坛 - 帖子详情</span><a class="back-btn" href="MonsterForum.html">返回论坛</a></header>
+    <main>
+      <section class="block">
+        <div class="top"><span>ID：helper77</span><span>楼层：1楼</span></div>
+        <div class="middle">
+          <div class="content">本月常见兽种信息。各位捕兽人可以关注一下。</div>
+          <div class="content">注意事项：本月兽的交易市场将进行维护，进入临时调整为门票制。如有急需买卖的捕兽人，请购买Macellum超市的当日特价商品作为门票。</div>
+        </div>
+        <div class="bottom">时间：2024-10-23 09:40</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：perf_hunter</span><span>楼层：2楼</span></div>
+        <div class="middle">
+
+          <h3>弗纳乌斯：</h3>
+          <div class="content">吞噬梦想的兽。对梦想有病态般执着追求的人，容易成为弗纳乌斯的猎物。</div>
+          <div class="content">弗纳乌斯善于藏匿自身，因此被寄生后非常难以识别，在市场上很稀有，即使是敏锐的捕兽人也难以轻易识别出弗纳乌斯的存在。</div>
+          <div class="content">曾有捕兽人借助弗纳乌斯的力量，让其他人陷入自己构筑好的梦境中。梦境里的时间在现实中近乎停滞，即使是宿主在梦境中一晃多年，现实中可能才仅过数小时。</div>
+          <div class="content">
+            不过可惜的是，梦境和现实之间存在难以跨越的鸿沟。梦境虽好，但沉迷美梦难以自拔，外界的人即使想唤醒沉睡之人，送入梦境的信息也会被弗纳乌斯扭曲吞噬，难以被美梦之人理解。因此，弗纳乌斯的力量看似美好，却是温柔的毒药。
+          </div>
+        </div>
+        <div class="bottom">时间：2024-10-23 10:22</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：ops_master</span><span>楼层：3楼</span></div>
+        <div class="middle">
+          <h3>希尔：</h3>
+          <div class="content">吞噬冷漠情绪的兽。</div>
+          <div class="content">希尔是一种网络时代产生的年轻的兽种。对于看热闹不嫌事大的看客来说，他们冷漠的围观，就是希尔最好的美食。</div>
+          <div class="content">
+            对一则毫无根据的谣言，数千人沉默无言的转发，会一步步壮大希尔的力量。当积攒足够的情绪后，希尔拥有将谣言变为现实的力量。当谣言成为现实，更多的看客会加入到这一场狂欢中，进一步强化下一此的转发。</div>
+          <div class="content">希尔的力量难以被把控，因此具有极高的危险性。不推荐独立捕兽人尝试控制希尔力量的做法。</div>
+        </div>
+        <div class="bottom">时间：2024-10-23 12:05</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：ops_master</span><span>楼层：4楼</span></div>
+        <div class="middle">
+          <h3>但他林：</h3>
+          <div class="content">吞噬狂热情绪的兽。常见于狂热的追星族或者极端的宗教群体中。</div>
+          <div class="content">
+            但他林是一种较为弱小也是较为常见的兽，独自存在的时候攻击力较弱，即使是新手捕兽人也可以较为轻松的捕捉。然而，但他林往往以群体的形式出现，面对成百上千的狂热情绪，捕兽人应当避其锋芒。</div>
+          <div class="content">但他林会鼓动宿主辱骂、攻击宿主所在团体之外的人，当群体斗殴、富有攻击性质的追星行为出现的时候，应当引起捕兽人的关注。</div>
+          <div class="content">
+            但他林的力量可以被控制用于治疗抑郁等症状。但据说，有人曾经试图通过煽动、发表极端言论、引发争吵等方式，系统培养但他林的存在，但是狂热的情绪如同火焰一般，可放而不可收，小心引火烧身。捕兽人应当谨慎使用但他林的力量。
+          </div>
+        </div>
+        <div class="bottom">时间：2024-10-23 12:05</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：ops_master</span><span>楼层：5楼</span></div>
+        <div class="middle">
+          <h3>丹卡拉比：</h3>
+          <div class="content">吞噬回忆的兽。回忆是一个人宝贵的财产，但心中有遗憾的人，往往会沉溺过去，试图重新来过，弥补心中的伤痕。</div>
+          <div class="content">
+            丹卡拉比会潜入宿主的内心，让宿主一遍遍沉溺于过去的经历，在多次回顾中，逐渐美化过去，扭曲过去的记忆，从而失去对当下和未来的希望与追求，从而使得宿主的生活逐渐走向困顿，进而引发宿主对往昔的进一步怀念。</div>
+          <div class="content">
+            丹卡拉比很稀有，但力量极为强大，甚至可以扭曲现实。在可控的范围内借助其力量，可以提取存在于过去的回忆中的事物。因此，丹卡拉比也是捕兽人中最受欢迎的兽种。有趣的是，即使是非本人的回忆，只要提供足够的细节，丹卡拉比也可以从中抽取出一些来自过去的信息或者物品。
+          </div>
+        </div>
+        <div class="bottom">时间：2024-10-23 12:05</div>
+      </section>
+      <section class="block">
+        <div class="top"><span>ID：ops_master</span><span>楼层：6楼</span></div>
+        <div class="middle">
+          <h3>安杜马里：</h3>
+          <div class="content">吞噬时间的兽</div>
+          <div class="content">
+            准确来说，安杜马里吞噬的是宿主对时间的感知，而非物理意义上的时间。忙碌到迷失自我的人，容易被安杜马里盯上，成为兽的猎物。宿主会愈发感觉自己的时间不够用，成为一个无休止运转的工作机器，直到将自己活活累死。</div>
+          <div class="content">有时候，安杜马里还会吞噬宿主周边的人的时间。这也就是为什么，一个工作狂的身边，往往会慢慢出现更多的工作狂。</div>
+          <div class="content">安杜马里的力量可以在控制下可以影响人对时间的感知。在受伤的时候，捕兽人会加快自身对时间的感知，减少痛苦的持续时间。</div>
+          <div class="content"> 医者难自医，还请广大捕兽人注意自身安全，莫要让安杜马里趁虚而入。</div>
+        </div>
+        <div class="bottom">时间：2024-10-23 12:05</div>
+      </section>
+    </main>
+  </div>
+  <script src="../js/chrome.js" defer></script>
+  <script src="../js/taskbar.js" defer></script>
 </body>
+
 </html>
