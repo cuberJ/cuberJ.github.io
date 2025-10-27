@@ -15,8 +15,9 @@
   main{padding:16px}
   .block{border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg);padding:12px;margin-bottom:12px}
   .top{display:flex;gap:16px;color:var(--muted);font-size:14px;margin-bottom:8px}
-  .middle{display:grid;grid-template-columns:1fr 300px;gap:12px;align-items:start}
-  .content{line-height:1.8;color:#e0e0f6}
+  .middle{display:grid;gap:12px;align-items:start;grid-template-columns:1fr}
+  .middle:has(.image-box){grid-template-columns:1fr 300px}
+  .content{line-height:1.8;color:#e0e0f6;text-align:left}
   .image-box{border:1px solid var(--card-border);border-radius:10px;background:rgba(255,255,255,.06);padding:8px}
   .image-box img{width:100%;height:240px;object-fit:cover;border-radius:8px}
   .bottom{color:var(--muted);font-size:13px;margin-top:8px}
@@ -26,29 +27,49 @@
 </head>
 <body>
 <div class="wrap">
-  <header><span>怪物论坛 - 帖子详情</span><a class="back-btn" href="MonsterForum.html">返回论坛</a></header>
+  <header><span>捕兽人之家 - 帖子详情</span><a class="back-btn" href="MonsterForum.html">返回论坛</a></header>
   <main>
     <section class="block">
-      <div class="top"><span>ID：perf_hunter</span><span>楼层：1楼</span></div>
+      <div class="top"><span>ID：helper77</span><span>楼层：1楼</span></div>
       <div class="middle">
-        <div class="content">精华主题：性能优化案例。通过压缩、懒加载、SSR 与缓存策略综合提升页面速度。</div>
-        <div class="image-box"><img src="../picture/监控画面内容.png" alt="配图" /></div>
+        <div class="content">捕兽人新手须知。</div>
+        <div class="content">欢迎来到捕兽人之家论坛，如果你是一名新手捕兽人，这里就是你入门的最好途径。</div>
+        <div class="content">请记住，捕兽是一件危险的事情，无论何时，请保持警惕，不要低估你的猎物，这是捕兽的最高要素。</div>
       </div>
-      <div class="bottom">时间：2024-10-27 11:12</div>
+      <div class="bottom">时间：2010-03-04 11:12</div>
     </section>
     <section class="block">
       <div class="top"><span>ID：helper77</span><span>楼层：2楼</span></div>
       <div class="middle">
-        <div class="content">尤其在移动端，低端设备的渲染路径要尽量简化；资源按需加载。</div>
-        <div class="image-box"><img src="../picture/家庭合照.png" alt="配图" /></div>
+        <div class="content">首先，什么是兽？</div>
+        <div class="content">有内心空洞的人，就有兽，有兽的存在，就有捕兽人和交易的市场。是的，这就是我们的城市某一部分高速运转的核心</div>
+    <div class="content">
+        我们很难用一种具体的语言描述“兽”是什么。我们只知道，有人类历史记载的那一刻，兽就已经存在了。人类和兽的斗争，跨越了漫漫的历史长河
+    </div>
+    <div class="content">
+        兽依靠人类的内心存活。兽不会吞噬我们的身体，兽只吞噬我们灵魂中的”情绪“。兽最喜欢极端的情绪，不管这种情绪是正面的还是负面的。极致的喜悦悲痛，对回忆的无限沉溺，对梦想的不顾一切的病态追求，极端的孤僻，狂热的崇拜，都会吸引兽的注意。
+    </div>
+    <div class="content">
+        兽有很多种。每种兽会依赖不同的情绪生存，当兽吞噬完宿主的情绪后，就会自行离开，寻找下一个宿主。而被吞噬的宿主，下场不尽相同，但通常会很可悲。因此，在认识到兽的存在后，捕兽人这一职业就诞生了。
+    </div>
+    <div class="content">
+        兽很难被直接观测到。除了少数天赋异禀的人经过训练，可以用眼睛直接看到兽，大部分捕兽人都只能依靠兽存在的痕迹来推测，来追踪，来捕捉。如果你是一个新手捕兽人，请多加训练你的五感，你的鼻子，你的感知，你的推理将会是你最好的捕捉工具。
+    </div>    
       </div>
       <div class="bottom">时间：2024-10-27 12:05</div>
     </section>
     <section class="block">
       <div class="top"><span>ID：design_mech</span><span>楼层：3楼</span></div>
       <div class="middle">
-        <div class="content">优化不仅限于技术，内容呈现方式也要避免无意义长列表与图片堆叠。</div>
-        <div class="image-box"><img src="../picture/SPECIES公司简介.png" alt="配图" /></div>
+        <div class="content">
+    我们要怎么消灭兽
+</div>
+<div class="content">
+    很遗憾，兽的存在，某种程度上是人类的情绪的一种具象化体现。只要人类还存在，兽这个“生物”的存在就无法被真正消灭。甚至在科技和网络愈加发达的今天，我们的情绪更加多样化，致使兽的种类还在增加。
+</div>
+<div class="content">
+    不过，兽的个体可以被控制，被净化，甚至是被我们使用。兽吞噬人的情感，也会影响人的情感，甚至一些稀有的兽，可以实现扭曲现实和记忆的效果。经验丰富的捕兽人可以借助兽的力量，在可控的范围内实现多种奇异的效果。
+</div>
       </div>
       <div class="bottom">时间：2024-10-27 14:33</div>
     </section>
