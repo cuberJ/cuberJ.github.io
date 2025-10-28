@@ -86,14 +86,35 @@
   const searchBtn=document.querySelector('.nav .search-btn');
   function goSearch(){
     const input=(searchInput?.value||'').trim();
-    if(!input){ alert('请输入要搜索的怪物名称'); return; }
-    const base='https://cuberj.github.io/';
-    let target=input;
-    if(!(target.startsWith('http://')||target.startsWith('https://'))){
-      if(target.startsWith('/')) target=target.slice(1);
-      target=base+target;
+    if(!input){ alert('请输入要搜索的关键词'); return; }
+    // 优先复用全局跳转逻辑（含关键词映射）
+    if(typeof window.navigate==='function'){
+      window.navigate(input);
+      return;
     }
-    window.location.href=target;
+    // 兜底：基本前缀拼接 + 简易关键词映射
+    const base='https://cuberj.github.io/';
+    // 完整URL直接跳转
+    if(/^https?:\/\//i.test(input)){ window.location.href=input; return; }
+    // 路径拼接跳转
+    if(/[\/]/.test(input) || /\.(html?|png|jpg|jpeg|gif)$/i.test(input)){
+      let path=input; if(path.startsWith('/')) path=path.slice(1);
+      window.location.href=base+path; return;
+    }
+    const keywordMap={
+      '超市':'supermarket.html',
+      '市场':'TempTradeMarket.html',
+      '交易市场':'TempTradeMarket.html',
+      '论坛':'ForumDetail/MonsterForum.html',
+      '登录':'ForumLogin.html',
+      '首页':'index.html',
+      '新闻':'news.html',
+      '邮件':'mail.html'
+    };
+    const key=input.toLowerCase();
+    let mapped=keywordMap[key];
+    if(!mapped){ for(const k in keywordMap){ const kk=(k||'').toLowerCase(); if(key.includes(kk)||kk.includes(key)){ mapped=keywordMap[k]; break; } } }
+    if(mapped){ window.location.href=base+mapped; } else { alert('搜索无效，请重新输入'); }
   }
   searchInput && searchInput.addEventListener('keydown',function(e){ if(e.key==='Enter') goSearch(); });
   searchBtn && searchBtn.addEventListener('click', goSearch);

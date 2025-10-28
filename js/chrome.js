@@ -36,19 +36,50 @@
       target.setAttribute('data-min-hidden', hidden ? 'false' : 'true');
     });
 
-    // 地址栏回车跳转 + 跳转按钮：将输入前追加目标域名
+    // 地址栏回车跳转 + 跳转按钮：前缀拼接 + 关键词映射
     var base = 'https://cuberj.github.io/';
+    var keywordMap = {
+      // 中文常用词
+      '玛奇莲超市':'supermarket.html',
+      '兽的交易市场':'TempTradeMarket.html',
+      '捕兽人之家':'ForumDetail/MonsterForum.html',
+      '捕兽人之家登录页面':'ForumLogin.html',
+      '游戏首页':'index.html',
+
+    };
     function navigate(v){
       if(!v) return;
-      var path = (v||'').trim();
-      if(path.startsWith('http://') || path.startsWith('https://')){
+      var input = (v||'').trim();
+      if(/^https?:\/\//i.test(input)){
         // 若已是完整URL，直接跳转
-        location.href = path;
+        location.href = input;
         return;
       }
-      // 去除开头斜杠，避免出现双斜杠
-      if(path.startsWith('/')) path = path.slice(1);
-      location.href = base + path;
+      // 如果看起来是路径（含 / 或 .html），直接拼接域名跳转
+      if(/[\/]/.test(input) || /\.(html?|png|jpg|jpeg|gif)$/i.test(input)){
+        var path = input;
+        if(path.startsWith('/')) path = path.slice(1);
+        location.href = base + path;
+        return;
+      }
+      // 关键词映射（支持包含匹配）
+      var key = input.toLowerCase();
+      var mapped = keywordMap[key];
+      if(!mapped){
+        for(var k in keywordMap){
+          var kk = (k||'').toLowerCase();
+          // 双向包含匹配：输入包含关键词，或关键词包含输入
+          if(key.indexOf(kk) !== -1 || kk.indexOf(key) !== -1){
+            mapped = keywordMap[k];
+            break;
+          }
+        }
+      }
+      if(mapped){
+        location.href = base + mapped;
+      } else {
+        alert('搜索无效，请重新输入');
+      }
     }
     urlInput && urlInput.addEventListener('keydown', function(e){
       if(e.key==='Enter'){
