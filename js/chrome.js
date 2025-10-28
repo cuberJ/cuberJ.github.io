@@ -16,7 +16,7 @@
 
     // 初始化地址栏为当前URL
     var urlInput=document.getElementById('global-url');
-    if(urlInput) urlInput.value=window.location.href;
+    if(urlInput) urlInput.placeholder="请输入要查询的关键字......";
 
 
     // 关闭（模拟）：隐藏页面主体并提示
