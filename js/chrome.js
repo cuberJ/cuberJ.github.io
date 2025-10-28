@@ -41,11 +41,10 @@
     var keywordMap = {
       // 中文常用词
       '玛奇莲超市':'supermarket.html',
-      '兽的交易市场':'TempTradeMarket.html',
-      '捕兽人之家':'ForumDetail/MonsterForum.html',
-      '捕兽人之家登录页面':'ForumLogin.html',
+      '兽的临时交易市场':'TempTradeMarket.html',
+      '捕兽人之家':'ForumLogin.html',
       '游戏首页':'index.html',
-
+      '员工登录':'macellumLogin.html'
     };
     function navigate(v){
       if(!v) return;
