@@ -39,6 +39,8 @@
     .content{color:var(--text)}
     .date{color:var(--muted);white-space:nowrap}
     .muted{color:var(--muted);font-size:13px;margin-top:12px}
+    .image-box{border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.06);padding:8px;margin-top:6px}
+    .image-box img{width:100%;height:200px;object-fit:cover;border-radius:8px}
   </style>
   <link rel="stylesheet" href="../css/taskbar.css" />
   <link rel="stylesheet" href="../css/chrome.css" />
@@ -50,7 +52,7 @@
       <section class="panel" aria-label="账号信息">
         <h2>账号信息</h2>
         <div class="row"><span class="label">用户ID：</span><span>2258</span></div>
-        <div class="row"><span class="label">昵称：</span><span>Anni</span></div>
+        <div class="row"><span class="label">密码：</span><span>Anni</span></div>
         <div class="row"><button class="btn primary" type="button" title="展示用">修改资料</button></div>
       </section>
 
@@ -59,20 +61,89 @@
         <div class="mail-list">
           <div class="mail-item">
             <div class="left">
-              <div class="line meta"><span>来源：</span><strong>系统通知</strong></div>
-              <div class="content">欢迎进入怪物论坛用户中心，祝你有一个愉快的浏览体验！</div>
+              <div class="line meta"><span>来源：</span><strong>Lian</strong></div>
+              <div class="content">米都斯卡亚家族的其他成员也许会介意你当年的冒犯，但我个人对你反而很有兴趣。</div>
+              <div class="content">我们在寻找白色恶魔这件事情上相信会达成一致的，SPECIES公司会赞助你在寻找它的一切努力上的开支，如果你愿意，请来联系我们。</div>
+              <!-- 可选配图：将 hidden 移除并替换 src -->
+              <div class="image-box" hidden>
+                <img src="../picture/监控画面内容.png" alt="配图" />
+              </div>
             </div>
             <div class="date">2025-10-25 10:00</div>
           </div>
           <div class="mail-item">
             <div class="left">
-              <div class="line meta"><span>来源：</span><strong>论坛助手</strong></div>
-              <div class="content">已同步你的收藏贴与精华贴列表，点击顶部返回论坛继续浏览。</div>
+              <div class="line meta"><span>来源：</span><strong>Rama</strong></div>
+              <div class="content">家族内部一团乱，先生在姐姐走了之后身体垮了。米都斯卡亚家族的人居然还有点人性，这是我没想到的。不过如果连自己女儿离世都没有反应……那也挺讽刺的</div>
+              <div class="content">我趁乱带着米拉尔沃斯逃出小岛了，目前已来到本市，自有办法生存，无需暴露你们的身份，勿念。替我和米拉尔沃斯向多莉问好。</div>
+              <!-- 可选配图：将 hidden 移除并替换 src -->
+              <div class="image-box" hidden>
+                <img src="../picture/家庭合照.png" alt="配图" />
+              </div>
             </div>
-            <div class="date">2025-10-25 10:02</div>
+            <div class="date">2014-08-01 10:02</div>
+          </div>
+          <div class="mail-item">
+            <div class="left">
+              <div class="line meta"><span>来源：</span><strong>Rama</strong></div>
+              <div class="content">不要寻找它，不要召唤它。我错了，千万不要寻找，藏好多莉，藏好自己。</div>
+              <!-- 可选配图：将 hidden 移除并替换 src -->
+              <div class="image-box" hidden>
+                <img src="../picture/监控画面内容.png" alt="配图" />
+              </div>
+            </div>
+            <div class="date">2014-08-01 10:02</div>
+          </div>
+          <div class="mail-item">
+            <div class="left">
+              <div class="line meta"><span>来源：</span><strong>Rama</strong></div>
+              <div class="content">Anni是对的，我的猜测也是对的，结晶需要岛上的日落时分才能获取。但我还缺少一个人……我一定会找到合适的人，把Anni带回来的。</div>
+              <!-- 可选配图：将 hidden 移除并替换 src -->
+              <div class="image-box" hidden>
+                <img src="../picture/SPECIES公司简介.png" alt="配图" />
+              </div>
+            </div>
+            <div class="date">2014-08-01 10:02</div>
+          </div>
+          <div class="mail-item">
+            <div class="left">
+              <div class="line meta"><span>来源：</span><strong>Rama</strong></div>
+              <div class="content">你们父女二人躲好，切勿暴露。多莉还小，不能连父亲也没有了。家族的人只在乎她的血脉，而不能给她真正的家。</div>
+               <div class="content">姐姐是因为我的失误才落海的，我一定会想办法带姐姐回来的，哪怕是借助它的力量我也在所不惜。</div>
+              <!-- 可选配图：将 hidden 移除并替换 src -->
+              <div class="image-box" hidden>
+                <img src="../picture/监控画面内容.png" alt="配图" />
+              </div>
+            </div>
+            <div class="date">2013-7-19 10:02</div>
+          </div>
+          <div class="mail-item">
+            <div class="left">
+              <div class="line meta"><span>来源：</span><strong>Rama</strong></div>
+              <div class="content">东西已经准备好了，等你出发之后我会在岛上接应你，记得带好你的装备。</div>
+               <div class="content">姐姐和多莉能不能从岛上再次逃脱，就看我们俩了。</div>
+              <!-- 可选配图：将 hidden 移除并替换 src -->
+              <div class="image-box" hidden>
+                <img src="../picture/多莉成长记录.png" alt="配图" />
+              </div>
+            </div>
+            <div class="date">2013-7-14 11:02</div>
+          </div>
+          <div class="mail-item">
+            <div class="left">
+              <div class="line meta"><span>来源：</span><strong>Anni</strong></div>
+              <div class="content">我没有选择了，我偷偷离开岛屿的事情暴露了，如今他们已经找到我了。如果我不回去，他们会对你下手的……这恐怕是我们最后一次联系了……</div>
+              <div class="content">千万别来找我，太危险了。但我会好好保护她，不让她被家族伤害。毕竟她的身体里也因为我，流着家族的血脉，家族的人应该不会对她怎样的。</div>
+              <div class="content">永远爱你，遇见你是我人生中最美好的事情。</div>
+              <!-- 可选配图：将 hidden 移除并替换 src -->
+              <div class="image-box" hidden>
+                <img src="../picture/家庭合照.png" alt="配图" />
+              </div>
+            </div>
+            <div class="date">2013-04-13 10:02</div>
           </div>
         </div>
-        <p class="muted">以上消息为静态展示，用于与 maintainer 页面框架保持一致。</p>
+        <p class="muted">欢迎进入捕兽人之家，祝你有一个愉快的浏览体验！。</p>
       </section>
     </main>
   </div>

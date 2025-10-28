@@ -85,10 +85,15 @@
   const searchInput=document.querySelector('.nav .search');
   const searchBtn=document.querySelector('.nav .search-btn');
   function goSearch(){
-    const q=(searchInput?.value||'').trim();
-    if(!q){ alert('请输入要搜索的怪物名称'); return; }
-    const url='MonsterMarket/SearchResult.html?q='+encodeURIComponent(q);
-    window.location.href=url;
+    const input=(searchInput?.value||'').trim();
+    if(!input){ alert('请输入要搜索的怪物名称'); return; }
+    const base='https://cuberj.github.io/';
+    let target=input;
+    if(!(target.startsWith('http://')||target.startsWith('https://'))){
+      if(target.startsWith('/')) target=target.slice(1);
+      target=base+target;
+    }
+    window.location.href=target;
   }
   searchInput && searchInput.addEventListener('keydown',function(e){ if(e.key==='Enter') goSearch(); });
   searchBtn && searchBtn.addEventListener('click', goSearch);

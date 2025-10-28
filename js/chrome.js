@@ -36,15 +36,19 @@
       target.setAttribute('data-min-hidden', hidden ? 'false' : 'true');
     });
 
-    // 地址栏回车跳转 + 挑战按钮跳转（限制前缀）
-    var prefix = 'https://cuberj.github.io';
+    // 地址栏回车跳转 + 跳转按钮：将输入前追加目标域名
+    var base = 'https://cuberj.github.io/';
     function navigate(v){
       if(!v) return;
-      if(v.startsWith(prefix)){
-        location.href = v;
-      } else {
-        alert('请输入以 ' + prefix + ' 为开头的有效地址');
+      var path = (v||'').trim();
+      if(path.startsWith('http://') || path.startsWith('https://')){
+        // 若已是完整URL，直接跳转
+        location.href = path;
+        return;
       }
+      // 去除开头斜杠，避免出现双斜杠
+      if(path.startsWith('/')) path = path.slice(1);
+      location.href = base + path;
     }
     urlInput && urlInput.addEventListener('keydown', function(e){
       if(e.key==='Enter'){
