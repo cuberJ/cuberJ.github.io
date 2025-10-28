@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Monster · 搜索结果</title>
+<style>
+  :root{
+    /* 与 MonsterMarket 页面保持一致（MonsterForum 深蓝配色） */
+    --bg-start:#0c1f3f;
+    --bg-end:#0b5a6a;
+    --accent:#ffeb3b;
+    --accent-2:#6ae8ff;
+    --text:#eaf7ff;
+    --muted:#9dbbd3;
+    --card-bg:rgba(10,21,40,.72);
+    --card-border:rgba(255,255,255,.18);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;background:linear-gradient(135deg,var(--bg-start),var(--bg-end));color:var(--text)}
+  .wrap{max-width:1100px;margin:24px auto;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;background:rgba(8,16,30,.55);backdrop-filter:blur(6px)}
+  header{padding:12px 16px;border-bottom:1px solid var(--card-border);color:#fff;display:flex;justify-content:space-between;align-items:center}
+  .back{background:#fff;color:#111;border:1px solid var(--card-border);border-radius:8px;padding:6px 10px;text-decoration:none}
+  main{padding:16px}
+  .title{font-size:28px;font-weight:800;letter-spacing:1px;color:var(--accent);margin:0 0 12px;text-shadow:0 2px 8px rgba(0,0,0,.35)}
+  .meta{color:var(--muted);font-size:14px;margin-bottom:12px}
+  .results{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+  .result{border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg);padding:12px}
+  .result h3{margin:0 0 6px;color:#fff}
+  .result p{margin:0;color:#e0e0f6;line-height:1.8}
+  .result .link{margin-top:8px}
+  .result .link a{padding:6px 10px;border:1px solid #f7c54b;border-radius:8px;background:var(--accent);color:#2d0a0a;text-decoration:none}
+  .empty{border:1px dashed var(--card-border);border-radius:12px;background:rgba(255,255,255,.06);padding:12px;color:#e0e0f6}
+</style>
+<link rel="stylesheet" href="../css/taskbar.css" />
+<link rel="stylesheet" href="../css/chrome.css" />
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span>搜索结果</span>
+    <a class="back" href="../TempTradeMarket.html">返回临时交易市场</a>
+  </header>
+  <main>
+    <div class="title">Monster · Search Result</div>
+    <div class="meta" id="meta">关键词：<span id="kw"></span> · 共 <span id="count">0</span> 条结果</div>
+    <section class="results" id="results" aria-label="搜索结果列表"></section>
+  </main>
+</div>
+<script>
+(function(){
+  function getQuery(name){
+    const params=new URLSearchParams(window.location.search);
+    return params.get(name) || '';
+  }
+  function buildItem(title, desc, href){
+    const el=document.createElement('article');
+    el.className='result';
+    el.innerHTML=
+      '<h3>'+title+'</h3>'+
+      '<p>'+desc+'</p>'+
+      '<div class="link"><a href="'+href+'">查看详情</a></div>';
+    return el;
+  }
+  const q=(getQuery('q')||'').trim();
+  document.getElementById('kw').textContent=q || '(空)';
+  const list=document.getElementById('results');
+  let items=[];
+  const s=q.toLowerCase();
+  const isDankalabi = q.includes('丹卡拉比') || s.includes('dankalabi') || q.includes('丹卡');
+  const isFunawusi = q.includes('弗纳乌斯') || s.includes('funawusi') || q.includes('弗纳');
+  if(isDankalabi){
+    items=[
+      buildItem('丹卡拉比 · 资料卡', '基本信息、体征与习性概述。', 'Monster_dankalabi.html'),
+      buildItem('丹卡拉比 · 生态观察', '环境偏好与交互行为记录。', 'Monster_dankalabi.html'),
+      buildItem('丹卡拉比 · 危险评估', '接触风险与防护建议。', 'Monster_dankalabi.html')
+    ];
+  }else if(isFunawusi){
+    items=[
+      buildItem('弗纳乌斯 · 传说起源', '文本逸闻与符号解读。', 'Monster_funawusi.html'),
+      buildItem('弗纳乌斯 · 追踪日志', '近距离观测的轨迹与线索。', 'Monster_funawusi.html')
+    ];
+  }else{
+    const empty=document.createElement('div');
+    empty.className='empty';
+    empty.textContent='无相关信息';
+    list.appendChild(empty);
+  }
+  items.forEach(i=>list.appendChild(i));
+  document.getElementById('count').textContent=String(items.length);
+})();
+</script>
+<script src="../js/chrome.js" defer></script>
+<script src="../js/taskbar.js" defer></script>
+</body>
+</html>
