@@ -102,19 +102,13 @@
       window.location.href=base+path; return;
     }
     const keywordMap={
-      '超市':'supermarket.html',
-      '市场':'TempTradeMarket.html',
-      '交易市场':'TempTradeMarket.html',
-      '论坛':'ForumDetail/MonsterForum.html',
-      '登录':'ForumLogin.html',
-      '首页':'index.html',
-      '新闻':'news.html',
-      '邮件':'mail.html'
+      '丹卡拉比':'MonsterMarket/Monster_dankalabi.html',
+      '弗纳乌斯':'MonsterMarket/Monster_fanawusi.html'
     };
     const key=input.toLowerCase();
     let mapped=keywordMap[key];
     if(!mapped){ for(const k in keywordMap){ const kk=(k||'').toLowerCase(); if(key.includes(kk)||kk.includes(key)){ mapped=keywordMap[k]; break; } } }
-    if(mapped){ window.location.href=base+mapped; } else { alert('搜索无效，请重新输入'); }
+    if(mapped){ window.location.href=base+mapped; } else { alert('您搜索的兽尚未有人发起交易，请尝试搜索别的兽'); }
   }
   searchInput && searchInput.addEventListener('keydown',function(e){ if(e.key==='Enter') goSearch(); });
   searchBtn && searchBtn.addEventListener('click', goSearch);

@@ -61,19 +61,9 @@
         location.href = base + path;
         return;
       }
-      // 关键词映射（支持包含匹配）
+      // 关键词映射（仅完全匹配，不做模糊匹配）
       var key = input.toLowerCase();
       var mapped = keywordMap[key];
-      if(!mapped){
-        for(var k in keywordMap){
-          var kk = (k||'').toLowerCase();
-          // 双向包含匹配：输入包含关键词，或关键词包含输入
-          if(key.indexOf(kk) !== -1 || kk.indexOf(key) !== -1){
-            mapped = keywordMap[k];
-            break;
-          }
-        }
-      }
       if(mapped){
         location.href = base + mapped;
       } else {

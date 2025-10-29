@@ -47,10 +47,12 @@
   <main>
     <div class="forum-title">捕兽人论坛</div>
     <div class="forum-nav">
-    <a href="#" class="active" data-tab="posts">看贴</a>
-    <a href="#" data-tab="featured">精华贴</a>
-    <button class="search-btn" type="button">兽的交易市场</button>
-  </div>
+      <a href="#" class="active" data-tab="posts">看贴</a>
+      <a href="#" data-tab="featured">精华贴</a>
+      <input class="search" type="text" placeholder="搜索论坛关键词（完全匹配）" aria-label="搜索" />
+      <button class="search-btn" type="button" title="搜索">搜索</button>
+      <button class="market-btn" type="button">兽的交易市场</button>
+    </div>
 
     <div class="posts" id="posts">
       <article class="post">
@@ -96,7 +98,22 @@
     sections.posts.style.display=tab==='posts'?'flex':'none';
     sections.featured.style.display=tab==='featured'?'flex':'none';
   }));
-  const marketBtn=document.querySelector('.search-btn');
+  const searchInput=document.querySelector('.forum-nav .search');
+  const searchBtn=document.querySelector('.forum-nav .search-btn');
+  function goForumSearch(){
+    const term=(searchInput?.value||'').trim();
+    if(!term){ alert('请输入搜索词'); return; }
+    // 仅支持完全匹配：白色恶魔 或 弗纳乌斯
+    if(term==='白色恶魔' || term==='弗纳乌斯'){
+      location.href = 'ForumSearch.html?q=' + encodeURIComponent(term);
+    } else {
+      alert('未找到该关键词的搜索栏目（支持：白色恶魔 / 弗纳乌斯）');
+    }
+  }
+  searchInput && searchInput.addEventListener('keydown',function(e){ if(e.key==='Enter') goForumSearch(); });
+  searchBtn && searchBtn.addEventListener('click', goForumSearch);
+
+  const marketBtn=document.querySelector('.market-btn');
   if(marketBtn){
     marketBtn.addEventListener('click',function(){
       alert('非常抱歉，原交易市场维护中。请尝试通过其他方式进入临时交易市场。');
