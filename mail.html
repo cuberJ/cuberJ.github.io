@@ -30,6 +30,10 @@
   .dialog .actions{display:flex;justify-content:flex-end;margin-top:12px}
   .dialog button{padding:8px 12px;border:1px solid var(--gray);background:#fff;border-radius:8px;cursor:pointer}
   .dialog button.primary{background:#e53935;color:#fff;border-color:#c62828}
+  /* 统一“文本被选中”时的颜色（PC/移动一致） */
+  ::selection{color:#000;background:#ffeb3b}
+  ::-moz-selection{color:#000;background:#ffeb3b}
+  ::-webkit-selection{color:#000;background:#ffeb3b}
 </style>
 <link rel="stylesheet" href="css/taskbar.css" />
 <link rel="stylesheet" href="css/chrome.css" />
@@ -60,7 +64,7 @@
 <script>
 (function(){
   const mails = [
-        {id:'mail-1', sender:'未知用户', email:'匿名加密邮箱', preview:'<span>紧急：玛奇莲超市有问题</span> ', time:'2024-10-23 18:45', content:'<span>玛奇莲超市的&#9608;&#9608;有问题，线索&#9608;&#9608;都在邮件里，但是&#9608;&#9608;&#9608;&#9608;会&#9608;&#9608;掉信息，还请&#9608;&#9608;细细阅读。</span><br/><span>请搜索：<strong>【玛奇莲超市】</strong></span><br/><span style="color:#fff">   主管&#9608;佳的登录&#9608;&#9608;的密&#9608;现在&#9608;&#9608;成了zha&#9608;gji&#9608;0904</span>'},
+        {id:'mail-1', sender:'未知用户', email:'匿名加密邮箱', preview:'<span>紧急：玛奇莲超市有问题</span> ', time:'2024-10-23 18:45', content:'<span>玛奇莲超市的&#9608;&#9608;有问题，线索&#9608;&#9608;都在邮件里，但是&#9608;&#9608;&#9608;&#9608;会&#9608;&#9608;掉信息，还请&#9608;&#9608;<strong>细细阅读这封邮件</strong>。</span><br/><span>请搜索：<strong>【玛奇莲超市】</strong></span><br/><span style="color:#fff">   主管&#9608;佳的登录&#9608;&#9608;的密&#9608;现在&#9608;&#9608;成了zha&#9608;gji&#9608;090&#9608;</span>'},
     {id:'mail-2', sender:'SPECIES公司', email:'species_invite@species.com', preview:'关于您先前投递的简历...', time:'2024-10-22 14:05', content:'<p>我们认真阅读了您投递的求职简历，经过评价，您先前的业务经历符合我司的人员需求，已将您加入我司的人才库。</p><p>后续如有合适的岗位，我们会与您再次联系</p><p>感谢您的信任与支持，祝您生活愉快</p>'},
         {id:'mail-3', sender:'胖尾1008', email:'pangwei1008@qq.com', preview:'我刚从意大利回来...', time:'2024-10-21 09:30', content:'<p>我刚从意大利回来，会在国内待一段时间。我听说了你最近的状态，听上去不是很妙，千万不要做傻事。</p><p>我们认识这么多年了，我知道你的性格，别钻牛角尖，遇事一定要想清楚再行动。真遇到跨不过去的坎需要我帮忙，一定告诉我，哪怕我以后到了国外，我也会努力赶回来的</p></br><p>回复-胖尾1008：有你这么一个挂念我的朋友，真是我最大的幸运。不用担心我，我现在情况比你听说的已经好很多了，我会照顾好自己的。有时间我们聚一聚，听听你在意大利的故事。</p>'}
   ];
