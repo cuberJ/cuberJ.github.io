@@ -47,20 +47,19 @@
 </head>
 <body data-page-index="32/36">
 <div class="wrap">
-  <header>怪物 · 弗纳乌斯</header>
+  <header>弗纳乌斯</header>
   <main>
-    <div class="title">Monster · Funawusi</div>
+    <div class="title">弗纳乌斯</div>
     <section class="intro" aria-label="文字介绍">
-      弗纳乌斯是一种源自虚拟世界设定的怪物资料条目，页面配色延续临时交易市场的暖色系结构以保持统一的视觉语言。下方可输入任意网页链接，系统会根据链接关键词展示对应的提示图片与说明文字。
+      SPECIES公司为您提供弗纳乌斯的力量。您可以在此可以进入公司的<strong>【内部访问空间】</strong>
     </section>
 
     <section class="link-input" aria-label="网页链接输入区">
-      <h3>输入网页链接，查看提示</h3>
-      <form id="linkForm">
-        <input id="linkInput" type="url" placeholder="例如：https://cuberj.github.io/Nightshade玛奇莲/develop/news.html" aria-label="网页链接" />
+      <h3>输入网页链接，跳转到公司内部访问空间</h3>
+      <form id="linkForm" novalidate>
+        <input id="linkInput" type="text" placeholder="例如：diamond / time / happy" aria-label="搜索内容" />
         <button type="submit" title="解析链接">解析</button>
       </form>
-      <p style="color:#ffead1;margin:8px 0 0">不同的关键词对应不同的图片与说明：如包含 <code>monster/funawusi</code>、<code>supermarket/玛奇莲</code>、<code>temp/market/trade</code>、<code>news/doi</code> 等。</p>
     </section>
 
     <!-- 弹窗：图片 + 居中文案 -->
@@ -89,26 +88,7 @@
   const gotoBtn=document.getElementById('modal-goto');
 
   function pickContent(v){
-    const s=(v||'').toLowerCase();
-    // 校验 URL 格式
-    let isValid=true;
-    try{ new URL(s); }catch(e){ isValid=false; }
-    const map = {
-      diamond: 'photo_diamond.html',
-      persuit: 'photo_persuit.html',
-      disappear: 'photo_disappear.html',
-      time: 'photo_time.html',
-      happy: 'photo_happy.html'
-    };
-    let target='';
-    for(const key in map){
-      if(s.includes(key)){ target = '../photoIntroduction/' + map[key]; break; }
-    }
-    if(isValid && target){
-      return {src:'picture/家庭合照.png', msg:'解析完成，收获到了一些回忆', ok:true, target};
-    }
-    const failMsg = isValid ? '未识别的链接，请检查输入内容。' : '请输入有效的 URL 链接。';
-    return {src:'picture/监控画面内容.png', msg:failMsg, ok:false};
+    return {ok:false, msg:'该网址没有可以解析的内容'};
   }
 
   function showModal(data){
@@ -129,8 +109,11 @@
   form.addEventListener('submit', function(e){
     e.preventDefault();
     const v=input.value.trim();
-    const data=pickContent(v);
-    showModal(data);
+    if(v==='https://cuberJ.github.io/SPECIES/speciesIntro.html'){
+      window.location.href='../Summon/Summon_1.html';
+      return;
+    }
+    alert('该网址没有可以解析的内容');
   });
   closeBtn.addEventListener('click', hideModal);
   if(gotoBtn){

@@ -71,14 +71,11 @@
   const isFunawusi = q.includes('弗纳乌斯') || s.includes('funawusi') || q.includes('弗纳');
   if(isDankalabi){
     items=[
-      buildItem('丹卡拉比 · 资料卡', '基本信息、体征与习性概述。', 'Monster_dankalabi.html'),
-      buildItem('丹卡拉比 · 生态观察', '环境偏好与交互行为记录。', 'Monster_dankalabi.html'),
-      buildItem('丹卡拉比 · 危险评估', '接触风险与防护建议。', 'Monster_dankalabi.html')
+      buildItem('丹卡拉比', '助您获取有效的信息和物品', 'Monster_dankalabi.html'),
     ];
   }else if(isFunawusi){
     items=[
-      buildItem('弗纳乌斯 · 传说起源', '文本逸闻与符号解读。', 'Monster_funawusi.html'),
-      buildItem('弗纳乌斯 · 追踪日志', '近距离观测的轨迹与线索。', 'Monster_funawusi.html')
+      buildItem('弗纳乌斯', 'SPECIES公司长期提供专用内部通道', 'Monster_funawusi.html'),
     ];
   }else{
     const empty=document.createElement('div');

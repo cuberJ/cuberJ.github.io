@@ -51,16 +51,16 @@
   <main>
     <div class="title">丹卡拉比的召唤仪式</div>
     <section class="intro" aria-label="文字介绍">
-      请输入您需要丹卡拉比召唤的回忆信息。
+      卖方提供经过可控的丹卡拉比的力量。借助丹卡拉比对回忆的提取能力，您可以从一些新闻中获取有用的信息或者物资。
     </section>
 
     <section class="link-input" aria-label="网页链接输入区">
-      <h3>输入网页链接，格式为：https://cuberj.github.io/Nightshade玛奇莲/develop/xxx.html</h3>
-      <form id="linkForm">
-        <input id="linkInput" type="url" placeholder="例如：https://cuberj.github.io/develop/news.html" aria-label="网页链接" />
-        <button type="submit" title="解析链接">解析</button>
+      <h3>输入新闻编号，Doi-xxxxxx</h3>
+      <form id="linkForm" novalidate>
+        <input id="linkInput" type="text" placeholder="例如：Doi-xxxx" aria-label="搜索内容" />
+        <button type="submit" title="提取">提取</button>
       </form>
-      <p style="color:#ffead1;margin:8px 0 0">不同的关键词对应不同的图片与说明：如包含 <code>monster/dankalabi</code>、<code>supermarket/玛奇莲</code>、<code>temp/market/trade</code>、<code>news/doi</code> 等。</p>
+      <p style="color:#ffead1;margin:8px 0 0"></p>
     </section>
 
     <!-- 弹窗：图片 + 居中文案 -->
@@ -91,32 +91,23 @@
   function pickContent(v){
     const raw=(v||'').trim();
     const s=raw;
-    console.log(s)
-    // 校验链接：允许完整 URL 或简易相对路径
-    let isValid=false;
-    try{
-      if(/^https?:\/\//.test(raw)) { new URL(raw); isValid=true; }
-      else { isValid = /^[\w\-./%]+$/.test(raw); }
-    }catch(e){ isValid=false; }
-
-    // 至少六种匹配：按链接包含的关键词展示不同内容
-    // 1-5：新闻详情 -> 回忆相册
-    if(s.includes('NewsDetail_1')){
+    
+    if(s.includes('DOI-F423E1')){
       return {src:'../picture/时间结晶.png', msg:'回忆·时间的结晶', ok:true, target:'../photoIntroduction/photo_time.html'};
     }
-    if(s.includes('NewsDetail_2')){
+    if(s.includes('DOI-C9713W')){
       return {src:'../picture/游戏时光.png', msg:'回忆·快乐时光', ok:true, target:'../photoIntroduction/photo_happy.html'};
     }
-    if(s.includes('NewsDetail_3')){
+    if(s.includes('DOI-GF0324')){
       return {src:'../picture/折纸小狗.png', msg:'回忆·看不见的朋友', ok:true, target:'../photoIntroduction/photo_disappear.html'};
     }
-    if(s.includes('NewsDetail_4')){
+    if(s.includes('DOI-AMY089')){
       return {src:'../picture/猫眼石.png', msg:'回忆·名贵钻石', ok:true, target:'../photoIntroduction/photo_diamond.html'};
     }
-    if(s.includes('NewsDetail_5')){
+    if(s.includes('NDOI-746I8H')){
       return {src:'../picture/宣传海报.png', msg:'回忆·支持者的斗争', ok:true, target:'../photoIntroduction/photo_persuit.html'};
     }
-    const failMsg = isValid ? '未识别的链接，请检查输入内容。' : '请输入有效的网址链接。';
+    const failMsg = '未识别的新闻编号，请检查输入内容。';
     return {src:'picture/监控画面内容.png', msg:failMsg, ok:false};
   }
 
