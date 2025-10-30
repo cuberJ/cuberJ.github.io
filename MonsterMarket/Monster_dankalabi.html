@@ -18,7 +18,7 @@
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans',Arial,'PingFang SC','Microsoft YaHei',sans-serif;background:linear-gradient(135deg,var(--bg-start),var(--bg-end));color:var(--text)}
-  .wrap{max-width:1100px;margin:24px auto;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;background:rgba(8,16,30,.55);backdrop-filter:blur(6px)}
+  .wrap{max-width:1100px;margin:24px auto;border:1px solid var(--card-border);border-radius:16px;overflow:visible;background:rgba(8,16,30,.55);backdrop-filter:blur(6px)}
   header{padding:12px 16px;border-bottom:1px solid var(--card-border);color:#fff}
   main{padding:16px}
   .title{font-size:28px;font-weight:800;letter-spacing:1px;color:var(--accent);margin:0 0 12px;text-shadow:0 2px 8px rgba(0,0,0,.35)}
@@ -31,12 +31,12 @@
   .link-input button:hover{background:var(--accent-2)}
 
   /* 弹窗 */
-  .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999;overflow:auto;padding:16px}
   .modal.show{display:flex}
-  .modal .box{width:min(90vw,720px);border:1px solid var(--card-border);border-radius:14px;background:rgba(30,8,8,.88);color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+  .modal .box{width:min(92vw,720px);max-height:86vh;overflow:auto;border:1px solid var(--card-border);border-radius:14px;background:rgba(30,8,8,.88);color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.45)}
   .modal .inner{padding:14px}
   .modal .image{display:flex;justify-content:center;align-items:center}
-  .modal .image img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--card-border);background:#120606}
+  .modal .image img{max-width:100%;max-height:50vh;height:auto;object-fit:contain;border-radius:10px;border:1px solid var(--card-border);background:#120606}
   .modal .text{margin-top:12px;text-align:center;color:#ffead1;line-height:1.8}
   .modal .actions{display:flex;justify-content:flex-end;margin-top:10px;gap:8px}
   .modal .goto{padding:8px 12px;border:1px solid #f7c54b;border-radius:8px;background:var(--accent);color:#2d0a0a;cursor:pointer}
@@ -57,7 +57,7 @@
     <section class="link-input" aria-label="网页链接输入区">
       <h3>输入网页链接，格式为：https://cuberj.github.io/Nightshade玛奇莲/develop/xxx.html</h3>
       <form id="linkForm">
-        <input id="linkInput" type="url" placeholder="例如：https://cuberj.github.io/Nightshade玛奇莲/develop/news.html" aria-label="网页链接" />
+        <input id="linkInput" type="url" placeholder="例如：https://cuberj.github.io/develop/news.html" aria-label="网页链接" />
         <button type="submit" title="解析链接">解析</button>
       </form>
       <p style="color:#ffead1;margin:8px 0 0">不同的关键词对应不同的图片与说明：如包含 <code>monster/dankalabi</code>、<code>supermarket/玛奇莲</code>、<code>temp/market/trade</code>、<code>news/doi</code> 等。</p>
@@ -89,25 +89,34 @@
   const gotoBtn=document.getElementById('modal-goto');
 
   function pickContent(v){
-    const s=(v||'').toLowerCase();
-    // 校验 URL 格式
-    let isValid=true;
-    try{ new URL(s); }catch(e){ isValid=false; }
-    const map = {
-      diamond: 'photo_diamond.html',
-      persuit: 'photo_persuit.html',
-      disappear: 'photo_disappear.html',
-      time: 'photo_time.html',
-      happy: 'photo_happy.html'
-    };
-    let target='';
-    for(const key in map){
-      if(s.includes(key)){ target = '../photoIntroduction/' + map[key]; break; }
+    const raw=(v||'').trim();
+    const s=raw;
+    console.log(s)
+    // 校验链接：允许完整 URL 或简易相对路径
+    let isValid=false;
+    try{
+      if(/^https?:\/\//.test(raw)) { new URL(raw); isValid=true; }
+      else { isValid = /^[\w\-./%]+$/.test(raw); }
+    }catch(e){ isValid=false; }
+
+    // 至少六种匹配：按链接包含的关键词展示不同内容
+    // 1-5：新闻详情 -> 回忆相册
+    if(s.includes('NewsDetail_1')){
+      return {src:'../picture/时间结晶.png', msg:'回忆·时间的结晶', ok:true, target:'../photoIntroduction/photo_time.html'};
     }
-    if(isValid && target){
-      return {src:'picture/家庭合照.png', msg:'解析完成，收获到了一些回忆', ok:true, target};
+    if(s.includes('NewsDetail_2')){
+      return {src:'../picture/游戏时光.png', msg:'回忆·快乐时光', ok:true, target:'../photoIntroduction/photo_happy.html'};
     }
-    const failMsg = isValid ? '未识别的链接，请检查输入内容。' : '请输入有效的 URL 链接。';
+    if(s.includes('NewsDetail_3')){
+      return {src:'../picture/折纸小狗.png', msg:'回忆·看不见的朋友', ok:true, target:'../photoIntroduction/photo_disappear.html'};
+    }
+    if(s.includes('NewsDetail_4')){
+      return {src:'../picture/猫眼石.png', msg:'回忆·名贵钻石', ok:true, target:'../photoIntroduction/photo_diamond.html'};
+    }
+    if(s.includes('NewsDetail_5')){
+      return {src:'../picture/宣传海报.png', msg:'回忆·支持者的斗争', ok:true, target:'../photoIntroduction/photo_persuit.html'};
+    }
+    const failMsg = isValid ? '未识别的链接，请检查输入内容。' : '请输入有效的网址链接。';
     return {src:'picture/监控画面内容.png', msg:failMsg, ok:false};
   }
 
@@ -120,10 +129,14 @@
     }
     modal.classList.add('show');
     modal.setAttribute('aria-hidden','false');
+    // 禁止背景滚动，防止移动端页面缩小或无法关闭
+    document.body.style.overflow = 'hidden';
   }
   function hideModal(){
     modal.classList.remove('show');
     modal.setAttribute('aria-hidden','true');
+    // 恢复背景滚动
+    document.body.style.overflow = '';
   }
 
   form.addEventListener('submit', function(e){

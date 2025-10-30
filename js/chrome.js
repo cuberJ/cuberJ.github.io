@@ -44,7 +44,8 @@
       '兽的临时交易市场':'TempTradeMarket.html',
       '捕兽人之家':'ForumLogin.html',
       '游戏首页':'index.html',
-      '员工登录':'macellumLogin.html'
+      '员工登录':'macellumLogin.html',
+      'SPECIES':'SPECIES/speciesIntro.html'
     };
     function navigate(v){
       if(!v) return;
