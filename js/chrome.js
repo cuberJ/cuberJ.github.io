@@ -45,7 +45,9 @@
       '捕兽人之家':'ForumLogin.html',
       '游戏首页':'index.html',
       '员工登录':'macellumLogin.html',
-      'species':'SPECIES/speciesIntro.html'
+      'species':'SPECIES/speciesIntro.html',
+      '米拉尔沃斯':'BlackCatHome.html',
+      '结束梦境':'index_dream.html'
     };
     function navigate(v){
       if(!v) return;

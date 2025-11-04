@@ -5,34 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>夜色玛奇莲 · 梦境首页</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/chrome.css" />
   <style>
-    /* 顶部地址栏与底部状态栏样式 */
-    .addressbar{display:flex;gap:10px;align-items:center;padding:8px 12px;background:#0c0c0c;color:#eaeaea;border-bottom:1px solid rgba(255,255,255,.08)}
-    .addressbar .dot{width:12px;height:12px;border-radius:50%}
-    .addressbar .dot.red{background:#ff5f57}
-    .addressbar .dot.yellow{background:#ffbd2e}
-    .addressbar .dot.green{background:#28c940}
-    .addressbar .nav{display:flex;gap:8px;color:#d0d0d0}
-    .addressbar .nav .btn{padding:2px 8px;border:1px solid #3a3a3a;border-radius:8px;cursor:pointer}
-    .addressbar input.addr{flex:1;padding:8px 10px;background:#1c1c1c;color:#eaeaea;border:1px solid #3a3a3a;border-radius:10px}
-
+    /* 仅保留底部状态栏样式；顶部地址栏由全局脚本注入 */
     .statusbar{position:fixed;left:0;right:0;bottom:0;background:#0c0c0c;color:#eaeaea;border-top:1px solid rgba(255,255,255,.08);padding:6px 12px;font-size:12px;display:flex;gap:12px;justify-content:space-between;align-items:center;z-index:10}
     .statusbar .left, .statusbar .right{display:flex;gap:12px;align-items:center}
+
+    /* 精致入口输入区样式 */
+    .entry-input{display:flex;gap:12px;align-items:center;max-width:520px;margin:12px auto 0;padding:16px;border:1px solid rgba(255,255,255,.15);border-radius:12px;background:rgba(255,255,255,.06);backdrop-filter:blur(4px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+    .entry-input input{flex:1;padding:12px 14px;background:#1c1c1c;color:#eaeaea;border:1px solid #3a3a3a;border-radius:10px;font-size:16px;outline:none;transition:border-color .2s, box-shadow .2s}
+    .entry-input input::placeholder{color:#bdbdbd}
+    .entry-input input:focus{border-color:#ffbd2e;box-shadow:0 0 0 3px rgba(255,189,46,.25)}
+    .entry-input .cta{padding:12px 18px;border:none;border-radius:10px;background:#e53935;color:#fff;font-weight:600;cursor:pointer;transition:transform .05s ease, background .2s ease;white-space:nowrap}
+    .entry-input .cta:hover{background:#d32f2f}
+    .entry-input .cta:active{transform:scale(.98)}
+    @media (max-width:520px){.entry-input{flex-direction:column;gap:10px}.entry-input .cta{width:100%}}
+    /* 轻量 glitch 样式 */
+    .glitch{position:relative;display:inline-block;text-shadow:1px 0 rgba(229,57,53,.8), -1px 0 rgba(255,189,46,.6);animation:glitch 1.2s infinite steps(8,end)}
+    .corrupt{font-family:SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace;letter-spacing:.4px;background:rgba(229,57,53,.08);border-radius:6px;padding:0 4px}
+    @keyframes glitch{0%{transform:translate(0)}20%{transform:translate(0,-0.6px)}40%{transform:translate(-0.6px,0)}60%{transform:translate(0.6px,0)}80%{transform:translate(0,0.6px)}100%{transform:translate(0)}}
   </style>
 </head>
 <body data-page-index="1/36">
   <header class="topbar" aria-label="顶部状态栏"></header>
-  <div class="addressbar" aria-label="地址栏">
-    <div class="dot red" aria-hidden="true"></div>
-    <div class="dot yellow" aria-hidden="true"></div>
-    <div class="dot green" aria-hidden="true"></div>
-    <div class="nav" aria-label="导航">
-      <span class="btn" title="后退">←</span>
-      <span class="btn" title="前进">→</span>
-      <span class="btn" title="刷新">↻</span>
-    </div>
-    <input class="addr" type="text" value="https://cuberJ.github.io/index_dream.html" aria-label="地址" />
-  </div>
+  <!-- 顶部由全局 chrome.js 注入统一地址栏（移除本地 addressbar） -->
 
   <section class="hero-image">
     <figure>
@@ -42,32 +38,37 @@
   </section>
 
   <main class="container">
-    <section class="card" id="disclaimer">
-      <h2>声明</h2>
-      <p>本游戏纯属虚构，与任何现实组织或人物无关，仅用于娱乐与学习。</p>
-      <p>本游戏可视为我很喜欢的一部小说的同人作品。为防止剧透，小说的名称需要各位玩家在游戏结尾才能得知哦。</p>
-      <p>如果对游戏有任何问题或建议，欢迎联系我。</p>
-    </section>
+    
 
     <section class="card" id="introduction">
-      <h2>游戏的引言</h2>
-      <p>
-        你大学毕业，入职一家报社作为实习记者四处奔波。如今实习期即将结束，你渴望寻求一个大新闻，以获取转正资格。这时，你收到了一封匿名邮件。
-      </p>
-      <p>“紧急：玛奇莲超市有问题”</p>
-      <p>带着这个疑问，你打开了自己的邮件……</p>
+      <p>你大学毕业，入职一家报社作为实习记者四处奔波。如今实习期即将结束，你渴望寻求一个大新闻，以获取转正资格。这时，你收到了一封匿名邮件。</p>
+      <p class="corrupt">“紧急：玛奇莲超市有问题” · 信号稳定[✓]</p>
+      <p>打开邮件时，界面短暂闪动<span class="glitch" aria-hidden="true">﹟</span>，你决定继续查看。</p>
+      <p>你决定继续查看<span class="glitch">▒▦※█</span></p>
+      <p>你查看了<span class="glitch">▒▦※█</span></p>
     </section>
 
     <section class="card" id="how-to-play">
-      <h2>游戏玩法介绍</h2>
-        <p>本游戏的推进方式有两种：在特定页面搜索关键词，或者直接访问URL链接。</p>
-        <p>URL格式示例：https://cuberJ.github.io/cat.html、https://cuberJ.github.io/dog.html。</p>
+      <p>推进方式：在顶部搜索栏搜索关键词，或者在某些特定页面内进行搜索（如论坛类页面）。</p>
+      <p class="corrupt">URL 示例：https://cuberJ.github.io/cat.html ｜ https://cuberJ.github.io/dog.html ｜ 状态：处理中... [△]</p>
+      <p>注意：某些页面可能出现<span class="glitch">404</span>或少量乱码，请忽略并继续推进。</p>
+      <p>靠近真相时，文本将更不稳定，但结构仍保持可读。</p>
+    </section>
+
+    <section class="card" id="disclaimer">
+      <p class="corrupt">本游戏纯属虚构｜校验中... 0x3F7[OK]</p>
+      <p>与任何现实组织或人物无关，仅用于娱乐与学习。</p>
+      <p>当系统不稳定时，文本可能出现：<span class="glitch">▒▦※█</span>、顺序错乱、重复叠加。</p>
+      <p class="corrupt">异常标记：SIG/FAULT · CRC_mismatch · RECOVERING...</p>
     </section>
 
     <section class="card" id="entry">
-      <h2>游戏的入口</h2>
-      <p>准备好了吗？点击下方按钮，欢迎来到玛奇莲超市。</p>
-      <p><a class="cta" href="mail.html">进入游戏</a></p>
+      <h2>逃离时间漩涡</h2>
+      <p>“这是什么地方？”你不知道自己身在何处，但就在一片迷茫之中，你想起了那个地方，也许是唯一能拯救你的地方。你心中默念着那个地方的名字——</p>
+      <div class="entry-input">
+        <input id="entryInput" type="text" placeholder="请输入要跳转的地点名" aria-label="输入内容" />
+        <button id="entryGo" type="button" class="cta">前往</button>
+      </div>
     </section>
   </main>
 
@@ -80,7 +81,27 @@
       function fmt(n){return (n<10?'0':'')+n}
       function tick(){const d=new Date();document.getElementById('time').textContent = fmt(d.getHours())+':'+fmt(d.getMinutes())+':'+fmt(d.getSeconds())}
       tick(); setInterval(tick,1000);
+
+      // 入口跳转逻辑：输入“黑猫奶茶店”则跳转到 BlackCatHome_2.html，否则跳转到 ./END/END_3.html
+      var input = document.getElementById('entryInput');
+      var btn = document.getElementById('entryGo');
+      function navigate(){
+        var v = (input ? input.value.trim() : '');
+        if(v === '黑猫奶茶店'){
+          window.location.href = 'BlackCatHome_2.html';
+        } else {
+          window.location.href = './END/END_3.html';
+        }
+      }
+      if(input){
+        input.addEventListener('keydown', function(e){ if(e.key === 'Enter') navigate(); });
+      }
+      if(btn){
+        btn.addEventListener('click', navigate);
+      }
     })();
   </script>
+  <script src="js/chrome.js" defer></script>
+  <script src="js/taskbar.js" defer></script>
 </body>
 </html>
