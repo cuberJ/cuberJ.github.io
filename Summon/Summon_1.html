@@ -24,76 +24,146 @@
   input[type="text"]{flex:1;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#222}
   button{padding:10px 12px;border:1px solid #f7c54b;border-radius:10px;background:var(--accent);color:#2d0a0a;cursor:pointer}
   button:hover{background:var(--accent-2)}
+  .narrative{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--card);margin-bottom:12px}
+  .narrative p{margin:0 0 10px;line-height:1.7;color:#dbe6ff}
+  .actions{display:flex;justify-content:center;gap:12px;margin-top:8px}
+  .msg{padding:10px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.08);color:#e6f0ff}
+  .wish{display:none;border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--card);margin-bottom:12px}
+  .wish.visible{display:block}
+  .result{display:none;border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--card);margin-bottom:12px}
 </style>
 <link rel="stylesheet" href="../css/taskbar.css" />
 <link rel="stylesheet" href="../css/chrome.css" />
 </head>
 <body>
 <div class="wrap">
-  <header>Summon 召唤 · 第一章</header>
+  <header>召唤 · 白色恶魔</header>
   <main>
-    <div class="title">六步输入 · 按序解锁</div>
+    <div class="title">召唤所需 · 六项条件</div>
+    <div class="narrative">
+      <p>你知道，如果此时离开，这些关系到你身份的谜团只会永远被埋葬。</p>
+      <p>“万一所谓的代价只是一种唬人的说法呢？”抱着这种心态，你带着一往无前的决心，点进了网页。</p>
+      <p>和你想象的不同，点开的网页既不是一个能把你从电脑屏幕吸进一个神秘的空间的传送门，也不是一个充满神秘文件的仓库。里面只有很简单的几个输入框，和一段提示语。</p>
+      <p>召唤所需：  <br> 正确的坐标 <br> 家族的血统 <br> 友人的忠诚 <br> 日常的回忆 <br> 时间的结晶 <br> 强烈的愿望</p>
+    </div>
     <section class="step" data-step="1">
-      <div class="hint">提示 1：写下你最难忘的一句话。</div>
-      <form><input type="text" placeholder="例如：愿光常在" required /><button type="submit">提交</button></form>
+      
+          <div class="hint">谁是你忠诚的友人？</div>
+          <p>你努力回想，有什么线索可以证明，谁是你<strong>可靠的朋友</strong>呢？</p>
+        <form><input type="text" placeholder="请输入友人的名字，或者能够代表友人身份的网名" required /><button type="submit">提交</button></form>
+      
     </section>
+    
+
     <section class="step" data-step="2">
-      <div class="hint">提示 2：写下一个地点，它让你安心。</div>
-      <form><input type="text" placeholder="例如：家" required /><button type="submit">提交</button></form>
+      <div class="hint">请献上日常的回忆</div>
+      <p>你开始思考，手头什么东西可以算作<strong>日常的回忆</strong>呢？</p>
+      <form><input type="text" placeholder="请输入可以作为日常回忆证明的物品描述" required /><button type="submit">提交</button></form>
     </section>
+
     <section class="step" data-step="3">
-      <div class="hint">提示 3：写下一个人名（可化名），他值得被记住。</div>
-      <form><input type="text" placeholder="例如：Anni" required /><button type="submit">提交</button></form>
+      <div class="hint">你是家族的成员吗？请输入你所属的家族</div>
+      <p>直觉告诉你，似乎只有那个答案是最有可能的了……</p>
+      <form><input type="text" placeholder="请输入名称" required /><button type="submit">提交</button></form>
     </section>
+
     <section class="step" data-step="4">
-      <div class="hint">提示 4：写下一个时间节点，它改变了你。</div>
-      <form><input type="text" placeholder="例如：2022 夏天" required /><button type="submit">提交</button></form>
+      <div class="hint">你是否拥有时间的结晶?</div>
+      <p>你开始翻找起先前通过兽的力量获取到的时间结晶……</p>
+      <form><input type="text" placeholder="请输入存放时间的结晶的位置" required /><button type="submit">提交</button></form>
     </section>
-    <section class="step" data-step="5">
-      <div class="hint">提示 5：写下一个关键词，代表希望或恐惧。</div>
-      <form><input type="text" placeholder="例如：光 / 暗" required /><button type="submit">提交</button></form>
+
+    <section class="wish" id="wish">
+      <div class="msg" id="wishMsg">只有愿望强烈之人，才能召唤白色恶魔</div>
+      <div class="actions"><button type="button" id="wishBtn">我希望召唤白色恶魔</button></div>
+      <div></div>
     </section>
-    <section class="step" data-step="6">
-      <div class="hint">提示 6：写下一个承诺，你会努力做到。</div>
-      <form><input type="text" placeholder="例如：珍惜当下" required /><button type="submit">提交并生成结果</button></form>
+
+    <div class="narrative" id="address" style="display:none;">
+      <p>网页里弹出了一个定位。是SPECIES公司的总部所在地。</p>
+      <p>六个条件，和论坛中所说的传闻完全一致。以此类推，那召唤白色恶魔的人，会不会真的要被卷入时间的漩涡，从而消失？</p>
+      <p>“高昂的代价是你真正愿意付出的吗？”</p>
+      <p>你的记忆里，母亲就是一个不存在的身份，而你的父亲一直在刻意回避提及你的母亲</p>
+      <p>你的内心多年来一直渴求着一个答案。此刻，这个渴求达到了巅峰。</p>
+      <p>你的目光变得坚定起来。无论代价是什么，今天，这个仪式，你非去不可。</p>
+    </div>
+
+    <section class="result" id="result">
+      <div class="actions"><button type="button" id="goBtn">前往召唤地点</button></div>
     </section>
   </main>
 </div>
 <script>
 (function(){
   const steps=[...document.querySelectorAll('.step')];
-  const results=[];
+  const wishSection=document.getElementById('wish');
+  const wishBtn=document.getElementById('wishBtn');
+  const wishMsg=document.getElementById('wishMsg');
+  const resultSection=document.getElementById('result');
+  const addressBox=document.getElementById('address');
+  const expected=['胖尾1008','家庭的记忆','米都斯卡亚','保险箱'];
+  let wishClicks=0;
+  const messages=[
+    '您的愿望似乎还不够强烈……',
+    '您的愿望似乎还不够强烈…………',
+    '您的愿望似乎还不够强烈………………',
+    '您的愿望似乎还不够强烈……………………',
+    '您真的想要这么做吗？',
+    '高昂的代价是你真正愿意付出的吗？',
+    '有意思，看来真的有个合适的人走到这里了',
+    '您证明了您对实现愿望的渴望。请携带【时间的结晶】来此。'
+  ];
+
   function revealStep(i){
     const s=steps[i];
     if(!s) return;
     s.classList.add('visible');
     requestAnimationFrame(()=> s.classList.add('show'));
   }
+
   steps.forEach((s,idx)=>{
     const form=s.querySelector('form');
     form.addEventListener('submit',function(e){
       e.preventDefault();
       const v=this.querySelector('input').value.trim();
       if(!v){ alert('请输入内容'); return; }
-      results[idx]=v;
+      if(v !== expected[idx]){
+        alert('您的此条件尚不够召唤白色恶魔……。');
+        return;
+      }
+      // 输入正确：隐藏当前板块并显示下一段
+      s.classList.remove('show','visible');
+      s.style.display='none';
       const next=idx+1;
-      if(next<steps.length){
+      if(next<4){
         revealStep(next);
         steps[next].scrollIntoView({behavior:'smooth',block:'start'});
       }else{
-        const type=decide(results);
-        const list=encodeURIComponent(JSON.stringify(results));
-        window.location.href=`Summon_result.html?type=${encodeURIComponent(type)}&list=${list}&from=1`;
+        // 第三个答案填写完毕后，展示愿望强烈验证
+        wishSection.classList.add('visible');
+        wishSection.scrollIntoView({behavior:'smooth',block:'start'});
       }
     });
   });
+
+  // 初始显示第一步
   revealStep(0);
-  function decide(arr){
-    const text=arr.join(' ').toLowerCase(); let score=0;
-    ['hope','love','happy','time','light','home'].forEach(k=>{ if(text.includes(k)) score+=2; });
-    ['fear','sad','lost','dark','pain','empty'].forEach(k=>{ if(text.includes(k)) score-=2; });
-    if(score>=4) return 'warm'; if(score<=-2) return 'cold'; return 'calm';
-  }
+
+  // 愿望强烈验证：点击五次，依次弹出消息
+  wishBtn.addEventListener('click',function(){
+    wishClicks++;
+    const idx=Math.min(wishClicks-1,messages.length-1);
+    wishMsg.textContent=messages[idx];
+    if(wishClicks>=8){
+      addressBox.style.display='block';
+      resultSection.style.display='block';
+    }
+  });
+
+  // 前往召唤地点
+  document.getElementById('goBtn').addEventListener('click',function(){
+    window.location.href='../END/END_2.html';
+  });
 })();
 </script>
 <script src="../js/chrome.js" defer></script>

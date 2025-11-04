@@ -45,7 +45,7 @@
       '捕兽人之家':'ForumLogin.html',
       '游戏首页':'index.html',
       '员工登录':'macellumLogin.html',
-      'SPECIES':'SPECIES/speciesIntro.html'
+      'species':'SPECIES/speciesIntro.html'
     };
     function navigate(v){
       if(!v) return;
@@ -65,6 +65,7 @@
       // 关键词映射（仅完全匹配，不做模糊匹配）
       var key = input.toLowerCase();
       var mapped = keywordMap[key];
+      console.log('关键词映射结果:', mapped, key);
       if(mapped){
         location.href = base + mapped;
       } else {
