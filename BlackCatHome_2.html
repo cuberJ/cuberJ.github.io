@@ -7,14 +7,15 @@
   <style>
     /* 简约黑白配色主题（与 BlackCatHome 一致） */
     :root {
-      --black: #1a1a1a;
-      --dark-gray: #2d2d2d;
-      --gray: #666;
-      --light-gray: #e5e5e5;
-      --white: #ffffff;
-      --cream: #f8f6f0;
-      --accent: #8b4513; /* 奶茶色调 */
-      --accent-light: #d2b48c;
+      /* 夜色蓝绿配色（来源于 BlackCatHome） */
+      --black: #0b1e2b;            /* 深蓝黑主背景 */
+      --dark-gray: #0e2a36;        /* 深蓝绿次级背景 */
+      --gray: #9cc7d4;             /* 浅青文字 */
+      --light-gray: rgba(69, 225, 255, 0.35); /* 青色描边 */
+      --white: #ffffff;            /* 亮色文字 */
+      --cream: #0e2a36;            /* 面板底色（深色） */
+      --accent: #ffd300;           /* 明黄色强调 */
+      --accent-light: #45e1ff;     /* 荧光青强调 */
       --green: #27c93f;
       --yellow: #ffbd2e;
       --close: #ff5f56;
@@ -25,8 +26,8 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: var(--cream);
-      color: var(--black);
+      background: linear-gradient(180deg, #0b1e2b 0%, #0b3a2a 100%);
+      color: var(--white);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
       line-height: 1.6;
     }
@@ -37,8 +38,8 @@
       border: 1px solid var(--light-gray);
       border-radius: 12px;
       overflow: hidden;
-      background: var(--white);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      background: rgba(11, 30, 43, 0.65);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     }
     
     /* 顶部浏览器框架 */
@@ -99,8 +100,8 @@
       padding: 10px 12px;
       border: 1px solid var(--light-gray);
       border-radius: 8px;
-      background: var(--white);
-      color: var(--black);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
     }
     
     /* 页面标题 */
@@ -184,12 +185,12 @@
       gap: 0;
       padding: 0;
       border-bottom: 1px solid var(--light-gray);
-      background: var(--white);
+      background: var(--black);
     }
     
     nav.menu a {
       flex: 1;
-      color: var(--black);
+      color: var(--white);
       text-decoration: none;
       font-weight: 500;
       padding: 20px 24px;
@@ -204,8 +205,8 @@
     }
     
     nav.menu a:hover {
-      background: var(--cream);
-      color: var(--accent);
+      background: rgba(69, 225, 255, 0.12);
+      color: var(--accent-light);
     }
     
     nav.menu a.active {
@@ -231,7 +232,7 @@
       margin: 0 0 24px;
       font-size: 24px;
       font-weight: 300;
-      color: var(--black);
+      color: var(--white);
       text-align: center;
       position: relative;
     }
@@ -272,7 +273,7 @@
       text-align: center;
       padding: 20px;
       border-radius: 8px;
-      background: var(--cream);
+      background: rgba(11, 30, 43, 0.5);
     }
     
     .feature-icon {
@@ -284,7 +285,7 @@
     .feature h4 {
       margin: 0 0 8px;
       font-size: 18px;
-      color: var(--black);
+      color: var(--white);
     }
     
     .feature p {
@@ -302,12 +303,12 @@
     }
     
     .tea-item {
-      background: var(--white);
-      border: 1px solid var(--light-gray);
+      background: rgba(11, 30, 43, 0.48);
+      border: 1px solid rgba(69, 225, 255, 0.25);
       border-radius: 12px;
       overflow: hidden;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
     
     .tea-item:hover {
@@ -317,22 +318,24 @@
     
     .tea-image {
       height: 120px;
-      background: var(--cream);
+      background: var(--dark-gray);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 48px;
-      border-bottom: 1px solid var(--light-gray);
+      border-bottom: 1px solid rgba(69, 225, 255, 0.25);
     }
     
     .tea-info {
       padding: 20px;
+      background: rgba(11, 30, 43, 0.62);
+      border-top: 1px solid rgba(69, 225, 255, 0.18);
     }
     
     .tea-name {
       font-size: 18px;
       font-weight: 600;
-      color: var(--black);
+      color: var(--white);
       margin: 0 0 8px;
     }
     
@@ -383,7 +386,29 @@
         grid-template-columns: 1fr;
       }
     }
-  </style>
+    /* Intro panels scroll reveal */
+  .intro-panels .panel{min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:24px 24px;padding-top:18vh}
+  .intro-panels .line{max-width:800px;text-align:center;color:var(--white);opacity:0;transform:translateY(24px);transition:opacity .5s ease, transform .5s ease}
+  .intro-panels .panel.active .line{opacity:1;transform:none}
+  .intro-panels .hint{text-align:center;color:var(--gray);margin-top:12px}
+  /* Invisible selectable text */
+  .invisible{color:transparent;text-shadow:none;font-family: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;  font-size:16px; line-height:1.9}
+  .invisible::selection{color:#82c4e8 !important; -webkit-text-fill-color:#d9f2ff !important; background:rgba(69,225,255,.16)}
+  .invisible::-moz-selection{color:#d9f2ff !important; background:rgba(69,225,255,.16)}
+  /* 提升简介文本字号与行距 */
+  .intro-panels .line p{font-size:18px; line-height:1.9}
+  /* Qty controls */
+  .qty{margin-top:10px;display:flex;align-items:center;gap:10px}
+  .btn-qty{padding:4px 10px;border:1px solid var(--light-gray);border-radius:6px;background:rgba(69,225,255,.08);color:var(--white);cursor:pointer}
+  .btn-qty:hover{background:rgba(69,225,255,.18)}
+  .count{min-width:24px;text-align:center;color:var(--accent)}
+  .checkout{margin-top:24px;text-align:center}
+  .checkout button{padding:10px 18px;border:1px solid var(--light-gray);border-radius:8px;background:var(--accent);color:var(--black);cursor:pointer}
+  /* 结算页链接样式：居中、优雅 */
+  .prophecy{margin-top:14px;text-align:center}
+  .prophecy-link{color:var(--accent-light);text-decoration:none;font-weight:500;letter-spacing:.5px}
+  .prophecy-link:hover{color:var(--accent)}
+</style>
   <link rel="stylesheet" href="css/taskbar.css" />
   <link rel="stylesheet" href="css/chrome.css" />
 </head>
@@ -400,7 +425,7 @@
     <!-- 图片展示区域 -->
     <section class="hero">
       <div class="hero-content">
-        <img class="cat-photo" src="https://images.pexels.com/photos/569170/pexels-photo-569170.jpeg?auto=compress&cs=tinysrgb&w=400" alt="黑猫" />
+        <img class="cat-photo" src="picture/咪咪的设定图.png" alt="黑猫" />
         <h2>温暖你的每一天</h2>
         <p>精选茶叶 · 匠心调制 · 简约生活</p>
       </div>
@@ -416,29 +441,36 @@
     <main class="content">
       <!-- 奶茶店简介 -->
       <section id="intro" class="section active">
-        <h3>关于黑猫奶茶店</h3>
-        <div class="intro-content">
-          <p>黑猫奶茶店成立于2020年，是一家专注于提供高品质奶茶和温馨用餐环境的精品茶饮店。我们坚持使用优质茶叶和新鲜食材，为每一位顾客调制出独特而美味的茶饮。</p>
-          <p>店内采用简约现代的装修风格，以黑白色调为主，营造出宁静舒适的氛围。无论是独自品茶还是与朋友聚会，这里都是您放松身心的理想场所。</p>
-          <p>我们的使命是通过每一杯精心调制的茶饮，为您的生活增添一份温暖与美好。</p>
-        </div>
-        
-        <div class="features">
-          <div class="feature">
-            <span class="feature-icon">🍃</span>
-            <h4>精选茶叶</h4>
-            <p>严选优质茶园茶叶，确保每一杯茶的纯正口感</p>
-          </div>
-          <div class="feature">
-            <span class="feature-icon">🥛</span>
-            <h4>新鲜食材</h4>
-            <p>每日新鲜配送的牛奶和配料，保证最佳品质</p>
-          </div>
-          <div class="feature">
-            <span class="feature-icon">👨‍🍳</span>
-            <h4>匠心调制</h4>
-            <p>专业调茶师精心调制，每一杯都是艺术品</p>
-          </div>
+        <h3>这里是黑猫奶茶店</h3>
+        <div class="intro-panels">
+          <div class="panel"><div class="line">
+            <p>亲爱的孩子，相信你能走到这里，你已经尽力了。</p>
+            <p>你在这条路上走的太多，太久，太累了，是时候休息一下了。</p>
+            <p class="invisible">这里是梦和现实的交汇处，也是我最后能将信息传达给你的地方。</p>
+            <p class="invisible">你可以在这里遵循你的内心，选择继续梦境或者结束梦境。</p>
+          </div></div>
+          <div class="panel"><div class="line">
+            <p>白色恶魔的力量太强大，即使是借助苛刻的召唤条件，也无法保证成功。很可惜，这一次，你确实失败了。</p>
+            <p>你的父亲当年答应了我们的邀请，但最终也和你现在一样，遭遇了失败。</p>
+            <p class="invisible">很遗憾，在这里，你依然想不起关于我的真实记忆，除非你自己选择彻底离开这个梦境。</p>
+            <p class="invisible">我知道，他们一定会千方百计阻挠你醒来，藏匿我发给你的这些信息，诱惑你再次召唤白色恶魔。但是我还是希望你能放弃召唤它。</p>
+          </div></div>
+          <div class="panel"><div class="line">
+            <p>不要灰心，孩子，我会陪在你的身边，只要你愿意继续，我会一直支持你。</p>
+            <p>我能感受到你内心燃起的强烈愿望，能感受到你内心中无比坚定的信念，这是你最宝贵的力量，请珍惜它，善用它。</p>
+            <p class="invisible">我知道这很难，但是你要知道，我也曾经如你一般地失去重要的人。在人的一生中，像是这样永远回不来的事物还有很多……</p>
+          </div></div>
+          <div class="panel"><div class="line">
+            <p>你已经离成功很接近了，甚至是前所未有的接近，再试一次，白色恶魔已经近在咫尺了。</p>
+            <p class="invisible">尽管拼尽全力，他们依然会抓不住你的手，从你眼前消失，从你的生命里退场，随着你的记忆变得越来越淡，就像一个影子，更有甚者，连影子也没有……</p>
+          </div></div>
+          <div class="panel"><div class="line">
+            <p>时间不多了，这里只是时间巨浪中一个小小的立足点，在时间再次陷入混乱前，孩子，请务必快一点。</p>
+            <p><strong><u>来一杯饮料稍作休息</u></strong>,我们时刻欢迎你的回归</p>
+            <p class="invisible">时间不多了，这里只是时间巨浪中一个小小的立足点，在时间再次陷入混乱前，</p>
+            <p class="invisible"><strong><u>万千种选择中，只有2258才能带你回家</u></strong>,我和咪咪会在现实世界里等你。</p>
+          </div></div>
+          
         </div>
       </section>
 
@@ -449,75 +481,99 @@
           <div class="tea-item">
             <div class="tea-image">🧋</div>
             <div class="tea-info">
-              <h4 class="tea-name">经典珍珠奶茶</h4>
+              <h4 class="tea-name">1号 · 经典珍珠奶茶</h4>
               <p class="tea-description">香浓奶茶配上Q弹珍珠，经典不败的选择</p>
               <p class="tea-price">¥18</p>
+              <div class="qty"><button class="btn-qty" data-id="1" data-action="dec">−</button><span class="count" data-id="1">0</span><button class="btn-qty" data-id="1" data-action="inc">＋</button></div>
             </div>
           </div>
           
           <div class="tea-item">
-            <div class="tea-image">🍵</div>
+            <div class="tea-image">☕️</div>
             <div class="tea-info">
-              <h4 class="tea-name">茉莉花茶拿铁</h4>
-              <p class="tea-description">清香茉莉花茶与丝滑牛奶的完美融合</p>
+              <h4 class="tea-name">2号 · 招牌黑猫奶茶</h4>
+              <p class="tea-description">本店特色，老板力荐</p>
               <p class="tea-price">¥22</p>
+              <div class="qty"><button class="btn-qty" data-id="2" data-action="dec">−</button><span class="count" data-id="2">0</span><button class="btn-qty" data-id="2" data-action="inc">＋</button></div>
             </div>
           </div>
           
           <div class="tea-item">
             <div class="tea-image">🍓</div>
             <div class="tea-info">
-              <h4 class="tea-name">草莓芝士奶盖</h4>
+              <h4 class="tea-name">3号 · 草莓芝士奶盖</h4>
               <p class="tea-description">新鲜草莓配上浓郁芝士奶盖，酸甜可口</p>
               <p class="tea-price">¥25</p>
+              <div class="qty"><button class="btn-qty" data-id="3" data-action="dec">−</button><span class="count" data-id="3">0</span><button class="btn-qty" data-id="3" data-action="inc">＋</button></div>
             </div>
           </div>
           
           <div class="tea-item">
             <div class="tea-image">🥭</div>
             <div class="tea-info">
-              <h4 class="tea-name">芒果西米露</h4>
+              <h4 class="tea-name">4号 · 芒果西米露</h4>
               <p class="tea-description">热带芒果的香甜配上Q弹西米，夏日首选</p>
               <p class="tea-price">¥20</p>
+              <div class="qty"><button class="btn-qty" data-id="4" data-action="dec">−</button><span class="count" data-id="4">0</span><button class="btn-qty" data-id="4" data-action="inc">＋</button></div>
             </div>
           </div>
           
           <div class="tea-item">
-            <div class="tea-image">🍫</div>
+            <div class="tea-image">🍃</div>
             <div class="tea-info">
-              <h4 class="tea-name">巧克力奶昔</h4>
-              <p class="tea-description">浓郁巧克力与香草冰淇淋的甜蜜邂逅</p>
+              <h4 class="tea-name">5号 · 特色红茶</h4>
+              <p class="tea-description">老板本人的最爱，冬日首选</p>
               <p class="tea-price">¥24</p>
+              <div class="qty"><button class="btn-qty" data-id="5" data-action="dec">−</button><span class="count" data-id="5">0</span><button class="btn-qty" data-id="5" data-action="inc">＋</button></div>
             </div>
           </div>
           
           <div class="tea-item">
             <div class="tea-image">🍑</div>
             <div class="tea-info">
-              <h4 class="tea-name">蜜桃乌龙茶</h4>
+              <h4 class="tea-name">6号 · 蜜桃乌龙茶</h4>
               <p class="tea-description">清香乌龙茶底配上甜美蜜桃，清爽怡人</p>
               <p class="tea-price">¥19</p>
+              <div class="qty"><button class="btn-qty" data-id="6" data-action="dec">−</button><span class="count" data-id="6">0</span><button class="btn-qty" data-id="6" data-action="inc">＋</button></div>
             </div>
           </div>
           
           <div class="tea-item">
             <div class="tea-image">🥥</div>
             <div class="tea-info">
-              <h4 class="tea-name">椰香拿铁</h4>
+              <h4 class="tea-name">7号 · 椰香拿铁</h4>
               <p class="tea-description">浓郁咖啡与椰浆的热带风情组合</p>
               <p class="tea-price">¥21</p>
+              <div class="qty"><button class="btn-qty" data-id="7" data-action="dec">−</button><span class="count" data-id="7">0</span><button class="btn-qty" data-id="7" data-action="inc">＋</button></div>
+            </div>
+          </div>
+          
+          <div class="tea-item">
+            <div class="tea-image">🍵</div>
+            <div class="tea-info">
+              <h4 class="tea-name">8号 · 绿豆汤</h4>
+              <p class="tea-description">新鲜熬煮，清热败火</p>
+              <p class="tea-price">¥17</p>
+              <div class="qty"><button class="btn-qty" data-id="8" data-action="dec">−</button><span class="count" data-id="8">0</span><button class="btn-qty" data-id="8" data-action="inc">＋</button></div>
             </div>
           </div>
           
           <div class="tea-item">
             <div class="tea-image">🍇</div>
             <div class="tea-info">
-              <h4 class="tea-name">葡萄气泡茶</h4>
-              <p class="tea-description">新鲜葡萄汁配上清爽气泡，口感层次丰富</p>
-              <p class="tea-price">¥17</p>
+              <h4 class="tea-name">9号 · 冷萃葡萄茶</h4>
+              <p class="tea-description">清爽冷萃葡萄茶，低温萃取保留清香</p>
+              <p class="tea-price">¥16</p>
+              <div class="qty"><button class="btn-qty" data-id="9" data-action="dec">−</button><span class="count" data-id="9">0</span><button class="btn-qty" data-id="9" data-action="inc">＋</button></div>
             </div>
           </div>
         </div>
+        <div class="checkout"><button id="checkoutBtn">结算</button></div>
+      </section>
+      <section id="checkout" class="section">
+        <h3>结算</h3>
+        <div id="checkoutSummary"></div>
+        <div class="checkout"><button id="backToMenu">返回菜单</button></div>
       </section>
     </main>
   </div>
@@ -553,7 +609,87 @@
     }
     applyMailIcon();
   </script>
-  <script src="js/chrome.js" defer></script>
-  <script src="js/taskbar.js" defer></script>
+
+
+<!-- 交互逻辑：简介滚动展示、数量增减与结算 -->
+<script>
+(function(){
+  // 滚动展示面板
+  const panels=[...document.querySelectorAll('.intro-panels .panel')];
+  if(panels.length){
+    let current=null;
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        const p=entry.target;
+        if(entry.isIntersecting && entry.intersectionRatio>0.6){
+          if(current && current!==p){ current.classList.remove('active'); current.classList.add('exit'); }
+          p.classList.add('active'); p.classList.remove('exit'); current=p;
+        }else{
+          p.classList.remove('active');
+        }
+      });
+    },{threshold:[0.2,0.6]});
+    panels.forEach(p=>io.observe(p));
+  }
+  // 点单数量与结算
+  const prices={1:18,2:22,3:25,4:20,5:24,6:19,7:21,8:17,9:16};
+  const names={1:'经典珍珠奶茶',2:'茉莉花茶拿铁',3:'草莓芝士奶盖',4:'芒果西米露',5:'巧克力奶昔',6:'蜜桃乌龙茶',7:'椰香拿铁',8:'葡萄气泡茶',9:'冷萃绿茶'};
+  const counts={1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0};
+  function updateCount(id){
+    const els=document.querySelectorAll(`.count[data-id="${id}"]`);
+    els.forEach(el=> el.textContent = counts[id]);
+  }
+  document.querySelectorAll('.btn-qty').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      const id=parseInt(this.dataset.id,10);
+      const act=this.dataset.action;
+      if(act==='inc'){ counts[id]++; }
+      else{ counts[id]=Math.max(0, counts[id]-1); }
+      updateCount(id);
+    });
+  });
+  const checkoutBtn=document.getElementById('checkoutBtn');
+  if(checkoutBtn){
+    checkoutBtn.addEventListener('click',function(){
+      const box=document.getElementById('checkoutSummary');
+      box.innerHTML='';
+      let total=0; let any=false;
+      for(let i=1;i<=9;i++){
+        if(counts[i]>0){
+          any=true;
+          const line=document.createElement('p');
+          const sub=counts[i]*prices[i];
+          line.textContent=`${i}号饮料 · ${names[i]} × ${counts[i]} = ¥${sub}`;
+          box.appendChild(line);
+          total+=sub;
+        }
+      }
+      if(!any){
+        const line=document.createElement('p'); line.textContent='尚未选择任何饮料。'; box.appendChild(line);
+      }
+      const totalLine=document.createElement('p'); totalLine.style.fontWeight='600'; totalLine.textContent=`总计：¥${total}`; box.appendChild(totalLine);
+      // 结算链接：特殊组合与默认宿命
+      const combo = (counts[2]===2 && counts[5]===1 && counts[8]===1);
+      const prophecy = document.createElement('p'); prophecy.className='prophecy';
+      const a = document.createElement('a'); a.className='prophecy-link';
+      a.href = combo ? 'END/END_5.html' : 'END/END_softHole.html';
+      a.textContent = combo ? '接受命运对你我无情的嘲弄吧。' : '来吧孩子，这是你注定的宿命。';
+      prophecy.appendChild(a); box.appendChild(prophecy);
+      // 显示结算“页面”
+      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+      document.getElementById('checkout').classList.add('active');
+    });
+  }
+  const back=document.getElementById('backToMenu');
+  if(back){ back.addEventListener('click',function(){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById('menu').classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+    const menuLink=document.querySelector('.nav-link[data-section="menu"]'); if(menuLink) menuLink.classList.add('active');
+  }); }
+})();
+</script>
+<script src="js/chrome.js" defer></script>
+<script src="js/taskbar.js" defer></script>
 </body>
 </html>

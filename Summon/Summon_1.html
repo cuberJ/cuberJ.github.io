@@ -55,8 +55,8 @@
     <section class="step" data-step="1">
       
           <div class="hint">谁是你忠诚的友人？</div>
-          <p>你努力回想，有什么线索可以证明，谁是你<strong>可靠的朋友</strong>呢？</p>
-        <form><input type="text" value="胖尾1008" placeholder="请输入友人的名字，或者能够代表友人身份的网名" required /><button type="submit">提交</button></form>
+          <p>你努力回想，有什么线索可以表示，谁是你<strong>可靠的朋友</strong>呢？</p>
+        <form><input type="text"  placeholder="请输入友人的名字" required /><button type="submit">提交</button></form>
       
     </section>
     
@@ -64,19 +64,19 @@
     <section class="step" data-step="2">
       <div class="hint">请献上日常的回忆</div>
       <p>你开始思考，手头什么东西可以算作<strong>日常的回忆</strong>呢？</p>
-      <form><input type="text" value="家庭的记忆" placeholder="请输入可以作为日常回忆证明的物品描述" required /><button type="submit">提交</button></form>
+      <form><input type="text"  placeholder="请输入可以作为日常回忆证明的物品描述" required /><button type="submit">提交</button></form>
     </section>
 
     <section class="step" data-step="3">
       <div class="hint">你是家族的成员吗？请输入你所属的家族</div>
       <p>直觉告诉你，似乎只有那个答案是最有可能的了……</p>
-      <form><input type="text" value="米都斯卡亚" placeholder="请输入名称" required /><button type="submit">提交</button></form>
+      <form><input type="text"  placeholder="请输入名称" required /><button type="submit">提交</button></form>
     </section>
 
     <section class="step" data-step="4">
       <div class="hint">你是否拥有时间的结晶?</div>
       <p>你开始翻找起先前通过兽的力量获取到的时间结晶……</p>
-      <form><input type="text" value="保险箱" placeholder="请输入存放时间的结晶的位置" required /><button type="submit">提交</button></form>
+      <form><input type="text" placeholder="请输入存放时间的结晶的位置" required /><button type="submit">提交</button></form>
     </section>
 
     <section class="wish" id="wish">
@@ -108,7 +108,7 @@
   const wishMsg=document.getElementById('wishMsg');
   const resultSection=document.getElementById('result');
   const addressBox=document.getElementById('address');
-  const expected=['胖尾1008','家庭的记忆','米都斯卡亚','保险箱'];
+  const expected=['沈少青','家庭的记忆','米都斯卡亚','保险箱'];
   let wishClicks=0;
   const messages=[
     '您的愿望似乎还不够强烈……',
@@ -175,10 +175,10 @@
       alertBox.classList.add('visible');
       setTimeout(function(){
         alertBox.classList.remove('visible');
-        window.location.href='../END/END_2.html';
+        window.location.href='../END/END_failSummon.html';
       },500);
     }else{
-      window.location.href='../END/END_2.html';
+      window.location.href='../END/END_failSummon.html';
     }
   });
 })();

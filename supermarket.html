@@ -44,7 +44,6 @@
     .slide{flex:0 0 100%;height:220px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff}
     .s1{background-image:url('picture/超市宣传图1.png');background-size:auto 100%;}
     .s2{background-image:url('picture/超市宣传图2.png');background-size:auto 100%;}
-    .s3{background:linear-gradient(135deg,#f48fb1,#ad1457)}
     .arrows{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 8px}
     .arrow{background:rgba(0,0,0,.35);color:#fff;border:none;border-radius:6px;font-size:20px;width:36px;height:36px;cursor:pointer}
     .dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:6px}
@@ -102,7 +101,6 @@
         <div class="slides" id="slides">
           <div class="slide s1">全城狂欢 · 红色大促</div>
           <div class="slide s2">会员日 · 满减不停</div>
-          <div class="slide s3">生鲜到家 · 当日达</div>
         </div>
         <div class="arrows">
           <button class="arrow" id="prev">‹</button>
@@ -147,7 +145,7 @@
     // 轮播逻辑
     const slides = document.getElementById('slides');
     const dotBox = document.getElementById('dots');
-    let idx = 0; const totalSlides = 3;
+    let idx = 0; const totalSlides = 2;
     for(let i=0;i<totalSlides;i++){ const d=document.createElement('div'); d.className='dotp'+(i===0?' active':''); dotBox.appendChild(d); }
     function updateDots(){
       [...dotBox.children].forEach((d,i)=>{ d.classList.toggle('active', i===idx); });

@@ -7,15 +7,15 @@
   <style>
     /* 简约黑白配色主题 */
     :root {
-      /* 夜色蓝绿配色（参考附件） */
-      --black: #0b1e2b;            /* 深蓝黑主背景 */
-      --dark-gray: #0e2a36;        /* 深蓝绿次级背景 */
-      --gray: #9cc7d4;             /* 浅青文字 */
-      --light-gray: rgba(69, 225, 255, 0.35); /* 青色描边 */
-      --white: #ffffff;            /* 亮色文字 */
-      --cream: #0e2a36;            /* 面板底色（深色） */
-      --accent: #ffd300;           /* 明黄色强调 */
-      --accent-light: #45e1ff;     /* 荧光青强调 */
+      /* 浅色奶茶主题（来源于 BlackCatHome_2） */
+      --black: #1a1a1a;
+      --dark-gray: #2d2d2d;
+      --gray: #666;
+      --light-gray: #e5e5e5;
+      --white: #ffffff;
+      --cream: #f8f6f0;
+      --accent: #8b4513; /* 奶茶色调 */
+      --accent-light: #d2b48c;
       --green: #27c93f;
       --yellow: #ffbd2e;
       --close: #ff5f56;
@@ -26,8 +26,8 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(180deg, #0b1e2b 0%, #0b3a2a 100%);
-      color: var(--white);
+      background: var(--cream);
+      color: var(--black);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
       line-height: 1.6;
     }
@@ -38,8 +38,8 @@
       border: 1px solid var(--light-gray);
       border-radius: 12px;
       overflow: hidden;
-      background: rgba(11, 30, 43, 0.65);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      background: var(--white);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
     
     /* 顶部浏览器框架 */
@@ -100,8 +100,8 @@
       padding: 10px 12px;
       border: 1px solid var(--light-gray);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--white);
+      background: var(--white);
+      color: var(--black);
     }
     
     /* 页面标题 */
@@ -130,7 +130,7 @@
     .hero {
       position: relative;
       height: 280px;
-      background: linear-gradient(180deg, #0b1e2b 0%, #0b3a2a 100%);
+      background: linear-gradient(135deg, #123524 0%, #0f2e1e 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -185,12 +185,12 @@
       gap: 0;
       padding: 0;
       border-bottom: 1px solid var(--light-gray);
-      background: var(--black);
+      background: var(--white);
     }
     
     nav.menu a {
       flex: 1;
-      color: var(--white);
+      color: var(--black);
       text-decoration: none;
       font-weight: 500;
       padding: 20px 24px;
@@ -205,8 +205,8 @@
     }
     
     nav.menu a:hover {
-      background: rgba(69, 225, 255, 0.12);
-      color: var(--accent-light);
+      background: var(--cream);
+      color: var(--accent);
     }
     
     nav.menu a.active {
@@ -232,7 +232,7 @@
       margin: 0 0 24px;
       font-size: 24px;
       font-weight: 300;
-      color: var(--white);
+      color: var(--black);
       text-align: center;
       position: relative;
     }
@@ -273,7 +273,7 @@
       text-align: center;
       padding: 20px;
       border-radius: 8px;
-      background: rgba(11, 30, 43, 0.5);
+      background: var(--cream);
     }
     
     .feature-icon {
@@ -285,7 +285,7 @@
     .feature h4 {
       margin: 0 0 8px;
       font-size: 18px;
-      color: var(--white);
+      color: var(--black);
     }
     
     .feature p {
@@ -303,12 +303,12 @@
     }
     
     .tea-item {
-      background: rgba(11, 30, 43, 0.6);
+      background: var(--white);
       border: 1px solid var(--light-gray);
       border-radius: 12px;
       overflow: hidden;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
     
     .tea-item:hover {
@@ -318,7 +318,7 @@
     
     .tea-image {
       height: 120px;
-      background: var(--dark-gray);
+      background: var(--cream);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -333,7 +333,7 @@
     .tea-name {
       font-size: 18px;
       font-weight: 600;
-      color: var(--white);
+      color: var(--black);
       margin: 0 0 8px;
     }
     
