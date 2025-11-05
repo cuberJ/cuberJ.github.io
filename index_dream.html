@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>夜色玛奇莲 · 梦境首页</title>
+  <title>玛奇莲超市 · 梦境首页</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/chrome.css" />
   <style>
@@ -82,7 +82,7 @@
       function tick(){const d=new Date();document.getElementById('time').textContent = fmt(d.getHours())+':'+fmt(d.getMinutes())+':'+fmt(d.getSeconds())}
       tick(); setInterval(tick,1000);
 
-      // 入口跳转逻辑：输入“黑猫奶茶店”则跳转到 BlackCatHome_2.html，否则跳转到 ./END/END_3.html
+      // 入口跳转逻辑：输入“黑猫奶茶店”则跳转到 BlackCatHome_2.html，否则跳转到 ./END/END_repeat.html
       var input = document.getElementById('entryInput');
       var btn = document.getElementById('entryGo');
       function navigate(){
@@ -90,7 +90,7 @@
         if(v === '黑猫奶茶店'){
           window.location.href = 'BlackCatHome_2.html';
         } else {
-          window.location.href = './END/END_3.html';
+          window.location.href = './END/END_repeat.html';
         }
       }
       if(input){
