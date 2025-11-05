@@ -393,7 +393,7 @@
   .intro-panels .hint{text-align:center;color:var(--gray);margin-top:12px}
   /* Invisible selectable text */
   .invisible{color:transparent;text-shadow:none;font-family: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;  font-size:16px; line-height:1.9}
-  .invisible::selection{color:#82c4e8 !important; -webkit-text-fill-color:#d9f2ff !important; background:rgba(69,225,255,.16)}
+  .invisible::selection{color:#82c4e8 !important; -webkit-text-fill-color:#82c4e8 !important; background:rgba(69,225,255,.16)}
   .invisible::-moz-selection{color:#d9f2ff !important; background:rgba(69,225,255,.16)}
   /* 提升简介文本字号与行距 */
   .intro-panels .line p{font-size:18px; line-height:1.9}
@@ -450,7 +450,7 @@
             <p class="invisible">你可以在这里遵循你的内心，选择继续梦境或者结束梦境。</p>
           </div></div>
           <div class="panel"><div class="line">
-            <p>白色恶魔的力量太强大，即使是借助苛刻的召唤条件，也无法保证成功。很可惜，这一次，你确实失败了。</p>
+            <p>白色恶魔的力量太强大，即使是借助苛刻的召唤条件，也无法保证成功。很可惜，这一次你还是失败了。</p>
             <p>你的父亲当年答应了我们的邀请，但最终也和你现在一样，遭遇了失败。</p>
             <p class="invisible">很遗憾，在这里，你依然想不起关于我的真实记忆，除非你自己选择彻底离开这个梦境。</p>
             <p class="invisible">我知道，他们一定会千方百计阻挠你醒来，藏匿我发给你的这些信息，诱惑你再次召唤白色恶魔。但是我还是希望你能放弃召唤它。</p>
@@ -672,7 +672,7 @@
       const combo = (counts[2]===2 && counts[5]===1 && counts[8]===1);
       const prophecy = document.createElement('p'); prophecy.className='prophecy';
       const a = document.createElement('a'); a.className='prophecy-link';
-      a.href = combo ? 'END/END_5.html' : 'END/END_softHole.html';
+      a.href = combo ? 'END/END_Final.html' : 'END/END_softHole.html';
       a.textContent = combo ? '接受命运对你我无情的嘲弄吧。' : '来吧孩子，这是你注定的宿命。';
       prophecy.appendChild(a); box.appendChild(prophecy);
       // 显示结算“页面”
