@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>连锁超市 · 模拟浏览器购物主页</title>
+  <title>玛奇莲连锁超市</title>
   <style>
     /* 颜色：白/红/淡灰/黑 */
     :root {
@@ -39,9 +39,10 @@
     .options.hidden{display:none}
 
     /* 宣传轮播 */
-    .promo{position:relative;overflow:hidden;border-bottom:1px solid var(--gray)}
+    .promo{position:relative;overflow:hidden;border-bottom:1px solid var(--gray);height:clamp(160px, 22vh, 220px)}
     .slides{display:flex;width:300%;transition:transform .5s ease}
-    .slide{flex:0 0 100%;height:220px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff}
+    .slide{flex:0 0 100%;height:100%;display:flex;align-items:center;justify-content:center;color:#fff;background-position:center;background-repeat:no-repeat;background-size:contain}
+    .slide-title{font-size:28px;font-weight:700;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.45)}
     .s1{background-image:url('picture/超市宣传图1.png');background-size:auto 100%;}
     .s2{background-image:url('picture/超市宣传图2.png');background-size:auto 100%;}
     .arrows{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 8px}
@@ -96,18 +97,7 @@
   <div class="wrap">
     <header>连锁超市</header>
     <main>
-      <!-- 宣传栏（轮播） -->
-      <section class="promo" id="top">
-        <div class="slides" id="slides">
-          <div class="slide s1">全城狂欢 · 红色大促</div>
-          <div class="slide s2">会员日 · 满减不停</div>
-        </div>
-        <div class="arrows">
-          <button class="arrow" id="prev">‹</button>
-          <button class="arrow" id="next">›</button>
-        </div>
-        <div class="dots" id="dots"></div>
-      </section>
+     
 
       <!-- 导航栏 -->
       <nav class="menu">
@@ -142,29 +132,17 @@
 
 
 
-    // 轮播逻辑
-    const slides = document.getElementById('slides');
-    const dotBox = document.getElementById('dots');
-    let idx = 0; const totalSlides = 2;
-    for(let i=0;i<totalSlides;i++){ const d=document.createElement('div'); d.className='dotp'+(i===0?' active':''); dotBox.appendChild(d); }
-    function updateDots(){
-      [...dotBox.children].forEach((d,i)=>{ d.classList.toggle('active', i===idx); });
-    }
-    function go(n){ idx=(n+totalSlides)%totalSlides; slides.style.transform=`translateX(-${idx*100}%)`; updateDots(); }
-    document.getElementById('prev').onclick=()=>go(idx-1);
-    document.getElementById('next').onclick=()=>go(idx+1);
-    setInterval(()=>go(idx+1), 3500);
 
     // 商品与购物车
     const items=[
-      {id:'apple',name:'苹果',price:3.5,emoji:'🥔'},
+      {id:'apple',name:'土豆',price:3.5,emoji:'🥔'},
       {id:'milk',name:'牛奶',price:5.0,emoji:'🥛'},
       {id:'bread',name:'面包',price:4.0,emoji:'🍞'},
       {id:'egg',name:'鸡蛋',price:0.8,emoji:'🥚'},
       {id:'coffee',name:'咖啡',price:12.0,emoji:'☕'},
       {id:'detergent',name:'洗衣液',price:25.0,emoji:'🧴'},
       {id:'tissue',name:'纸巾',price:8.9,emoji:'🧻'},
-      {id:'toothpaste',name:'牙膏',price:14.5,emoji:'🪥'}
+      {id:'toothpaste',name:'牙刷',price:14.5,emoji:'🪥'}
     ];
     const cart={};
     const products=document.getElementById('products');
