@@ -93,7 +93,7 @@
   <link rel="stylesheet" href="css/taskbar.css" />
   <link rel="stylesheet" href="css/chrome.css" />
 </head>
-<body data-page-index="6/36">
+<body data-page-index="10/43">
   <div class="wrap">
     <header>连锁超市</header>
     <main>
@@ -135,14 +135,14 @@
 
     // 商品与购物车
     const items=[
-      {id:'apple',name:'土豆',price:3.5,emoji:'🥔'},
+      {id:'potato',name:'土豆',price:3.5,emoji:'🥔'},
       {id:'milk',name:'牛奶',price:5.0,emoji:'🥛'},
       {id:'bread',name:'面包',price:4.0,emoji:'🍞'},
       {id:'egg',name:'鸡蛋',price:0.8,emoji:'🥚'},
       {id:'coffee',name:'咖啡',price:12.0,emoji:'☕'},
       {id:'detergent',name:'洗衣液',price:25.0,emoji:'🧴'},
       {id:'tissue',name:'纸巾',price:8.9,emoji:'🧻'},
-      {id:'toothpaste',name:'牙刷',price:14.5,emoji:'🪥'}
+      {id:'apple',name:'苹果',price:14.5,emoji:'🍎'}
     ];
     const cart={};
     const products=document.getElementById('products');
@@ -185,7 +185,7 @@
       const selected = items.filter(it=> (cart[it.id]||0) > 0);
       let lines = selected.map(it=>`${it.name} x${cart[it.id]} = ¥${(it.price*cart[it.id]).toFixed(2)}`);
       let msg = (lines.length? lines.join('\n')+'\n':'') + `总计：${totalEl.textContent}`;
-      const onlyThree = (cart['apple']===1) && (cart['bread']===1) && (cart['toothpaste']===1) && selected.length===3;
+      const onlyThree = (cart['potato']===1) && (cart['bread']===1) && (cart['apple']===1) && selected.length===3;
       if(onlyThree){
         msg += '\n临时交易市场链接关键字：【兽的临时交易市场】';
       }
