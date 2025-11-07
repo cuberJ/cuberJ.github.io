@@ -171,12 +171,12 @@
   document.getElementById('goBtn').addEventListener('click',function(){
     const alertBox = document.getElementById('alertBox');
     if(alertBox){
-      alertBox.textContent = '来找我和【米拉尔沃斯】';
+      alertBox.textContent = '你不可能成功的。来找我和【米拉尔沃斯】';
       alertBox.classList.add('visible');
       setTimeout(function(){
         alertBox.classList.remove('visible');
         window.location.href='../END/END_failedSummon.html';
-      },1500);
+      },2200);
     }else{
       window.location.href='../END/END_failedSummon.html';
     }
