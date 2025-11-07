@@ -8,9 +8,9 @@
     var manual = document.body.dataset.pageIndex || '';
     var pageHtml = manual ? ('<span class="spacer"></span><span class="page-index" aria-label="页面编号">'+manual+'</span>') : '';
     tb.innerHTML = [
-      '<a href="https://cuberj.github.io/user.html" aria-label="用户信息">👤 用户信息</a>',
-      '<a href="https://cuberj.github.io/news.html" aria-label="每日新闻">📰 每日新闻</a>',
-      '<a href="https://cuberj.github.io/mail.html" class="mail" aria-label="邮件">\n  <span class="none">📭 邮件</span>\n  <span class="has">📬 有未读邮件</span>\n</a>',
+      '<a href="https://macellum-supermarket.netlify.app/user.html" aria-label="用户信息">👤 用户信息</a>',
+      '<a href="https://macellum-supermarket.netlify.app/news.html" aria-label="每日新闻">📰 每日新闻</a>',
+      '<a href="https://macellum-supermarket.netlify.app/mail.html" class="mail" aria-label="邮件">\n  <span class="none">📭 邮件</span>\n  <span class="has">📬 有未读邮件</span>\n</a>',
       pageHtml
     ].join('');
     document.body.appendChild(tb);
