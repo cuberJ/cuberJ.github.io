@@ -392,7 +392,7 @@
   .intro-panels .panel.active .line{opacity:1;transform:none}
   .intro-panels .hint{text-align:center;color:var(--gray);margin-top:12px}
   /* Invisible selectable text */
-  .invisible{color: #FFFFFF; -webkit-text-fill-color: #FFFFFF; text-shadow:none; user-select:text; -webkit-user-select:text; -moz-user-select:text; font-family: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;  font-size:16px; line-height:1.9}
+  .invisible{color: #FFFFFF;user-select: none; -webkit-text-fill-color: #FFFFFF; text-shadow:none; user-select:text; -webkit-user-select:text; -moz-user-select:text; font-family: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;  font-size:16px; line-height:1.9}
   .invisible::selection{color:#82c4e8 !important; -webkit-text-fill-color:#82c4e8 !important; background:#000000}
   .invisible::-moz-selection{color:#82c4e8 !important; background:#000000}
   @media (hover:none), (pointer:coarse){
@@ -712,27 +712,37 @@
   }); }
 })();
 </script>
-<!-- Hover reveal for .invisible: 1.5s hover to show, leave to hide -->
+<!-- Hover reveal for .invisible: 1.5s hover to show, leave to hide; mobile 1s long-press shows with black bg -->
 <script>
 (function(){
   const HOVER_DELAY_MS = 1500;
+  const PRESS_DELAY_MS = 1000;
+  const MOVE_CANCEL_PX = 10;
   const els = document.querySelectorAll('.invisible');
   els.forEach(el => {
-    let timerId = null;
+    let hoverTimer = null;
+    let pressTimer = null;
+    let startX = 0, startY = 0;
     const reveal = () => {
       el.style.color = '#82c4e8';
       el.style.webkitTextFillColor = '#82c4e8';
     };
+    const revealWithBg = () => {
+      reveal();
+      el.style.backgroundColor = '#000000';
+    };
     const reset = () => {
       el.style.color = '#FFFFFF';
       el.style.webkitTextFillColor = '#FFFFFF';
+      el.style.backgroundColor = '';
     };
+    // Desktop hover
     const onEnter = () => {
-      if (timerId) clearTimeout(timerId);
-      timerId = setTimeout(reveal, HOVER_DELAY_MS);
+      if (hoverTimer) clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(reveal, HOVER_DELAY_MS);
     };
     const onLeave = () => {
-      if (timerId) { clearTimeout(timerId); timerId = null; }
+      if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
       reset();
     };
     el.addEventListener('mouseenter', onEnter);
@@ -740,6 +750,30 @@
     // Keyboard accessibility
     el.addEventListener('focus', onEnter);
     el.addEventListener('blur', onLeave);
+    // Mobile long-press
+    const onTouchStart = (e) => {
+      const t = e.touches && e.touches[0];
+      if (t) { startX = t.clientX; startY = t.clientY; }
+      if (pressTimer) clearTimeout(pressTimer);
+      pressTimer = setTimeout(revealWithBg, PRESS_DELAY_MS);
+    };
+    const onTouchMove = (e) => {
+      const t = e.touches && e.touches[0];
+      if (!t) return;
+      const dx = Math.abs(t.clientX - startX);
+      const dy = Math.abs(t.clientY - startY);
+      if (dx > MOVE_CANCEL_PX || dy > MOVE_CANCEL_PX) {
+        if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+      }
+    };
+    const onTouchEnd = () => {
+      if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+      reset();
+    };
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: true });
+    el.addEventListener('touchend', onTouchEnd);
+    el.addEventListener('touchcancel', onTouchEnd);
   });
 })();
 </script>
