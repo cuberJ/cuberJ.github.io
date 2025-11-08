@@ -37,7 +37,7 @@
     });
 
     // 地址栏回车跳转 + 跳转按钮：前缀拼接 + 关键词映射
-    var base = 'https://macellum-supermarket.netlify.app/';
+    var base = 'http://macellum.icu/';
     var keywordMap = {
       // 中文常用词
       '玛奇莲超市':'supermarket.html',

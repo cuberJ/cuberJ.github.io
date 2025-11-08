@@ -57,7 +57,7 @@
     <section class="link-input" aria-label="网页链接输入区">
       <h3>输入网页链接，跳转到特殊访问空间</h3>
       <form id="linkForm" novalidate>
-        <input id="linkInput" type="text" placeholder="例如：https://macellum-supermarket.netlify.app/News/NewsDetail.html" aria-label="搜索内容" />
+        <input id="linkInput" type="text" placeholder="例如：http://macellum.icu/News/NewsDetail.html" aria-label="搜索内容" />
         <button type="submit" title="解析链接">解析</button>
       </form>
     </section>
@@ -109,7 +109,7 @@
   form.addEventListener('submit', function(e){
     e.preventDefault();
     const v=input.value.trim();
-    if(v==='https://macellum-supermarket.netlify.app/SPECIES/speciesIntro.html'){
+    if(v==='http://macellum.icu/SPECIES/speciesIntro.html'){
       window.location.href='../Summon/Summon_introduction_1.html';
       return;
     }
