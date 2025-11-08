@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,24 +9,141 @@
   <link rel="stylesheet" href="css/chrome.css" />
   <style>
     /* 仅保留底部状态栏样式；顶部地址栏由全局脚本注入 */
-    .statusbar{position:fixed;left:0;right:0;bottom:0;background:#0c0c0c;color:#eaeaea;border-top:1px solid rgba(255,255,255,.08);padding:6px 12px;font-size:12px;display:flex;gap:12px;justify-content:space-between;align-items:center;z-index:10}
-    .statusbar .left, .statusbar .right{display:flex;gap:12px;align-items:center}
+    .statusbar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #0c0c0c;
+      color: #eaeaea;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      padding: 6px 12px;
+      font-size: 12px;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10
+    }
+
+    .statusbar .left,
+    .statusbar .right {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
 
     /* 精致入口输入区样式 */
-    .entry-input{display:flex;gap:12px;align-items:center;max-width:520px;margin:12px auto 0;padding:16px;border:1px solid rgba(255,255,255,.15);border-radius:12px;background:rgba(255,255,255,.06);backdrop-filter:blur(4px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
-    .entry-input input{flex:1;padding:12px 14px;background:#1c1c1c;color:#eaeaea;border:1px solid #3a3a3a;border-radius:10px;font-size:16px;outline:none;transition:border-color .2s, box-shadow .2s}
-    .entry-input input::placeholder{color:#bdbdbd}
-    .entry-input input:focus{border-color:#ffbd2e;box-shadow:0 0 0 3px rgba(255,189,46,.25)}
-    .entry-input .cta{padding:12px 18px;border:none;border-radius:10px;background:#e53935;color:#fff;font-weight:600;cursor:pointer;transition:transform .05s ease, background .2s ease;white-space:nowrap}
-    .entry-input .cta:hover{background:#d32f2f}
-    .entry-input .cta:active{transform:scale(.98)}
-    @media (max-width:520px){.entry-input{flex-direction:column;gap:10px}.entry-input .cta{width:100%}}
+    .entry-input {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      max-width: 520px;
+      margin: 12px auto 0;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .06);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .15)
+    }
+
+    .entry-input input {
+      flex: 1;
+      padding: 12px 14px;
+      background: #1c1c1c;
+      color: #eaeaea;
+      border: 1px solid #3a3a3a;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s
+    }
+
+    .entry-input input::placeholder {
+      color: #bdbdbd
+    }
+
+    .entry-input input:focus {
+      border-color: #ffbd2e;
+      box-shadow: 0 0 0 3px rgba(255, 189, 46, .25)
+    }
+
+    .entry-input .cta {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 10px;
+      background: #e53935;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .05s ease, background .2s ease;
+      white-space: nowrap
+    }
+
+    .entry-input .cta:hover {
+      background: #d32f2f
+    }
+
+    .entry-input .cta:active {
+      transform: scale(.98)
+    }
+
+    @media (max-width:520px) {
+      .entry-input {
+        flex-direction: column;
+        gap: 10px
+      }
+
+      .entry-input .cta {
+        width: 100%
+      }
+    }
+
     /* 轻量 glitch 样式 */
-    .glitch{position:relative;display:inline-block;text-shadow:1px 0 rgba(229,57,53,.8), -1px 0 rgba(255,189,46,.6);animation:glitch 1.2s infinite steps(8,end)}
-    .corrupt{font-family:SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace;letter-spacing:.4px;background:rgba(229,57,53,.08);border-radius:6px;padding:0 4px}
-    @keyframes glitch{0%{transform:translate(0)}20%{transform:translate(0,-0.6px)}40%{transform:translate(-0.6px,0)}60%{transform:translate(0.6px,0)}80%{transform:translate(0,0.6px)}100%{transform:translate(0)}}
+    .glitch {
+      position: relative;
+      display: inline-block;
+      text-shadow: 1px 0 rgba(229, 57, 53, .8), -1px 0 rgba(255, 189, 46, .6);
+      animation: glitch 1.2s infinite steps(8, end)
+    }
+
+    .corrupt {
+      font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+      letter-spacing: .4px;
+      background: rgba(229, 57, 53, .08);
+      border-radius: 6px;
+      padding: 0 4px
+    }
+
+    @keyframes glitch {
+      0% {
+        transform: translate(0)
+      }
+
+      20% {
+        transform: translate(0, -0.6px)
+      }
+
+      40% {
+        transform: translate(-0.6px, 0)
+      }
+
+      60% {
+        transform: translate(0.6px, 0)
+      }
+
+      80% {
+        transform: translate(0, 0.6px)
+      }
+
+      100% {
+        transform: translate(0)
+      }
+    }
   </style>
 </head>
+
 <body>
   <header class="topbar" aria-label="顶部状态栏"></header>
   <!-- 顶部由全局 chrome.js 注入统一地址栏（移除本地 addressbar） -->
@@ -38,7 +156,7 @@
   </section>
 
   <main class="container">
-    
+
 
     <section class="card" id="introduction">
       <p>你大学毕业，入职一家报社作为实习记者四处奔波。如今实习期即将结束，你渴望寻求一个大新闻，以获取转正资格。这时，你收到了一封匿名邮件。</p>
@@ -50,7 +168,8 @@
 
     <section class="card" id="how-to-play">
       <p>推进方式：在顶部搜索栏搜索关键词，或者在某些特定页面内进行搜索（如论坛类页面）。</p>
-      <p class="corrupt">URL 示例：https://&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;io/cat.html  ｜ 状态：处理中... [△]</p>
+      <p class="corrupt">URL 示例：https://&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;io/cat.html ｜ 状态：处理中...
+        [△]</p>
       <p>注意：某些页面可能出现<span class="glitch">404</span>或少量乱码，请忽略并继续推进。</p>
       <p>靠近真相时，文本将更不稳定，但结构仍保持可读。</p>
     </section>
@@ -77,26 +196,26 @@
     <div class="right"><span>本地时间</span><span id="time">--:--:--</span></div>
   </footer>
   <script>
-    (function(){
-      function fmt(n){return (n<10?'0':'')+n}
-      function tick(){const d=new Date();document.getElementById('time').textContent = fmt(d.getHours())+':'+fmt(d.getMinutes())+':'+fmt(d.getSeconds())}
-      tick(); setInterval(tick,1000);
+    (function () {
+      function fmt(n) { return (n < 10 ? '0' : '') + n }
+      function tick() { const d = new Date(); document.getElementById('time').textContent = fmt(d.getHours()) + ':' + fmt(d.getMinutes()) + ':' + fmt(d.getSeconds()) }
+      tick(); setInterval(tick, 1000);
 
       // 入口跳转逻辑：输入“黑猫奶茶店”则跳转到 BlackCatHome_2.html，否则跳转到 ./END/END_repeat.html
       var input = document.getElementById('entryInput');
       var btn = document.getElementById('entryGo');
-      function navigate(){
+      function navigate() {
         var v = (input ? input.value.trim() : '');
-        if(v === '黑猫奶茶店'){
+        if (v === '黑猫奶茶店') {
           window.location.href = 'BlackCatHome_2.html';
         } else {
           window.location.href = './END/END_repeat.html';
         }
       }
-      if(input){
-        input.addEventListener('keydown', function(e){ if(e.key === 'Enter') navigate(); });
+      if (input) {
+        input.addEventListener('keydown', function (e) { if (e.key === 'Enter') navigate(); });
       }
-      if(btn){
+      if (btn) {
         btn.addEventListener('click', navigate);
       }
     })();
@@ -104,4 +223,5 @@
   <script src="js/chrome.js" defer></script>
   <script src="js/taskbar.js" defer></script>
 </body>
+
 </html>
