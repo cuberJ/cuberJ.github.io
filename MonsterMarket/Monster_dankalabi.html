@@ -142,6 +142,41 @@
     modal.setAttribute('aria-hidden','false');
     // 禁止背景滚动，防止移动端页面缩小或无法关闭
     document.body.style.overflow = 'hidden';
+
+    // 动态调整图片高度：保证图片 + 文案 + 按钮在弹窗内完整可见
+    try {
+      const box = modal.querySelector('.box');
+      const inner = modal.querySelector('.inner');
+      const actions = modal.querySelector('.actions');
+      const imageWrap = modal.querySelector('.image');
+      const viewportH = window.innerHeight || document.documentElement.clientHeight;
+      const boxVerticalPadding = 28; // 估算 .box 内外 padding 总和
+      // 先重置为较小上限，便于计算
+      img.style.maxHeight = '50vh';
+
+      // 计算固定区域高度（文案 + 按钮 + 内部间距）
+      const textH = text ? text.offsetHeight : 0;
+      const actionsH = actions ? actions.offsetHeight : 0;
+      const innerPad = 24; // 估算 .inner padding
+      const reserved = textH + actionsH + innerPad + boxVerticalPadding;
+      // 可用于图片的最大高度（不小于 140 像素）
+      const candidate = Math.max(100, Math.floor(viewportH * 0.4) - reserved);
+      img.style.maxHeight = candidate + 'px';
+      // 避免图片过高导致按钮溢出，若仍溢出则进一步缩小
+      const boxH = Math.floor(viewportH * 0.4);
+      if (inner && inner.scrollHeight > boxH) {
+        const overflow = inner.scrollHeight - boxH;
+        img.style.maxHeight = Math.max(100, candidate - overflow - 8) + 'px';
+      }
+      // 确保图片在容器内居中显示
+      if (imageWrap) {
+        imageWrap.style.alignItems = 'center';
+        imageWrap.style.justifyContent = 'center';
+      }
+    } catch(e) {
+      // 失败时退回较保守的上限
+      img.style.maxHeight = '40vh';
+    }
   }
   function hideModal(){
     modal.classList.remove('show');
