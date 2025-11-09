@@ -30,6 +30,11 @@
   .link-input button{padding:10px 12px;border:1px solid #f7c54b;border-radius:10px;background:var(--accent);color:#2d0a0a;cursor:pointer}
   .link-input button:hover{background:var(--accent-2)}
 
+  /* 返回交易市场按钮 */
+  .back{margin-top:16px}
+  .back .back-btn{display:inline-block;padding:10px 12px;border:1px solid #f7c54b;border-radius:10px;background:var(--accent);color:#2d0a0a;text-decoration:none;cursor:pointer}
+  .back .back-btn:hover{background:var(--accent-2)}
+
   /* 弹窗 */
   .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999;overflow:auto;padding:16px}
   .modal.show{display:flex}
@@ -76,6 +81,9 @@
         </div>
       </div>
     </div>
+  <section class="back" aria-label="返回交易市场">
+    <a class="back-btn" href="../TempTradeMarket.html" title="返回交易市场">返回交易市场</a>
+  </section>
   </main>
 </div>
 <script>
