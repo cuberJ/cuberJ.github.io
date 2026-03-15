@@ -6,18 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPECIES | 公司简介</title>
     <style>
-        body { margin: 0; background: #ffffff; color: #1a1a1a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-        .wrap { max-width: 980px; margin: 0 auto; padding: 40px 20px 60px; }
-        .title { font-size: 34px; font-weight: 900; letter-spacing: 1px; margin: 0 0 18px; }
-        .subtitle { font-size: 14px; color: #666; margin-bottom: 24px; line-height: 1.7; }
-        .card { background: #fafafa; border: 1px solid #e6e6e6; border-radius: 12px; padding: 22px; }
-        .p { font-size: 15px; line-height: 1.9; color: #222; margin: 0 0 14px; }
+        body { margin: 0; background: #f4f4f4; color: #1a1a1a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .topbar { position: fixed; top: 0; left: 0; right: 0; background: #f0f0f0; padding: 10px 12px; display: flex; gap: 10px; align-items: center; z-index: 100; border-bottom: 1px solid #e0e0e0; }
+        .search { flex: 1; background: #fff; border: 1px solid #d0d0d0; border-radius: 6px; height: 38px; padding: 0 12px; outline: none; font-size: 14px; }
+        .search:focus { border-color: #c0392b; box-shadow: 0 0 0 3px rgba(192,57,43,0.10); }
+        .search-btn { height: 38px; padding: 0 16px; border-radius: 6px; border: 1px solid #c0392b; background: #c0392b; color: #fff; font-weight: 900; cursor: not-allowed; opacity: 0.85; }
+        .wrap { max-width: 980px; margin: 0 auto; padding: 70px 20px 90px; }
+        .panel { background: #fff; border: 1px solid #d8d8d8; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.10); overflow: hidden; }
+        .panel-h { background: #111; color: #fff; padding: 10px 16px; font-weight: 900; }
+        .panel-b { padding: 18px 18px 22px; }
+        .h1 { margin: 0 0 14px; font-size: 28px; font-weight: 900; color: #c0392b; }
+        .hero { width: 100%; max-width: 720px; margin: 0 auto 18px; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; background: #fafafa; }
+        .hero img { width: 100%; display: block; }
+        .p { font-size: 14px; line-height: 1.85; color: #222; margin: 0 0 12px; }
         .p:last-child { margin-bottom: 0; }
         .muted { color: #555; }
-        .link { color: #2e7d32; text-decoration: underline; font-weight: 800; }
-        .footer { background: #f2f2f2; border-top: 1px solid #e0e0e0; padding: 16px 20px; }
-        .footer-inner { max-width: 980px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; color: #666; font-size: 13px; }
-        .admin-link { color: #333; font-weight: 900; cursor: pointer; text-decoration: underline; }
+        .link { color: #c0392b; text-decoration: underline; font-weight: 900; }
+
+        .bottombar { position: fixed; left: 0; right: 0; bottom: 0; height: 44px; background: #1b1b1b; color: rgba(255,255,255,0.88); display: flex; align-items: center; justify-content: space-between; padding: 0 12px; z-index: 120; border-top: 1px solid rgba(255,255,255,0.12); }
+        .dock { display: flex; align-items: center; gap: 14px; }
+        .dock-item { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); font-size: 12px; }
+        .dot { width: 10px; height: 10px; border-radius: 3px; background: rgba(255,255,255,0.25); }
+        .admin-link { color: rgba(255,255,255,0.92); font-weight: 900; cursor: pointer; text-decoration: underline; }
+        .counter { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 12px; opacity: 0.7; }
+
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; align-items: center; justify-content: center; z-index: 3000; }
         .dialog { width: 92%; max-width: 420px; background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; box-shadow: 0 18px 50px rgba(0,0,0,0.22); overflow: hidden; }
         .dialog-h { padding: 12px 14px; background: #f7f7f7; border-bottom: 1px solid #e6e6e6; display: flex; align-items: center; justify-content: space-between; }
@@ -25,30 +37,45 @@
         .dialog-close { border: 1px solid #ccc; background: #fff; border-radius: 10px; padding: 6px 10px; cursor: pointer; font-weight: 800; }
         .dialog-b { padding: 14px; }
         .field { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #ddd; outline: none; }
-        .field:focus { border-color: #2e7d32; box-shadow: 0 0 0 3px rgba(46,125,50,0.12); }
-        .btn { width: 100%; margin-top: 12px; padding: 10px 12px; border-radius: 10px; border: 1px solid #2e7d32; background: #2e7d32; color: #fff; font-weight: 900; cursor: pointer; }
+        .field:focus { border-color: #c0392b; box-shadow: 0 0 0 3px rgba(192,57,43,0.12); }
+        .btn { width: 100%; margin-top: 12px; padding: 10px 12px; border-radius: 10px; border: 1px solid #c0392b; background: #c0392b; color: #fff; font-weight: 900; cursor: pointer; }
         .btn:hover { opacity: 0.92; }
         .label { font-size: 13px; font-weight: 900; margin: 12px 0 8px; }
     </style>
 </head>
 <body>
+    <div class="topbar">
+        <input class="search" placeholder="请输入需要查询的关键字..." disabled>
+        <button class="search-btn" type="button" disabled>搜索</button>
+    </div>
+
     <div class="wrap">
-        <h1 class="title">SPECIES公司简介</h1>
-        <div class="subtitle">致力于提供全面的心理健康服务：心理治疗、心理咨询与精神疾病治疗。</div>
-        <div class="card">
+        <div class="panel">
+            <div class="panel-h">公司简介</div>
+            <div class="panel-b">
+                <h1 class="h1">关于SPECIES</h1>
+                <div class="hero">
+                    <img src="{% static 'photo/searchEngine.png' %}" alt="SPECIES">
+                </div>
             <p class="p">SPECIES公司自1999年由利安·米都斯卡亚先生创办以来，一直致力于提供全面的心理健康服务，涵盖心理治疗、心理咨询以及精神疾病治疗等多个领域。凭借其专业团队和先进治疗方法，公司在全球范围内建立了良好的声誉，并在精神类疾病治疗方面处于世界领先地位。</p>
             <p class="p">SPECIES公司在全球范围内设立了多个分部，以确保能够为不同地区的客户提供高质量的服务。这些分部不仅提供日常的心理健康服务，还积极参与社区活动，提高公众对心理健康问题的认识。此外，公司还拥有多个研究中心，专注于精神类疾病的前沿研究，不断探索新的治疗方法和技术，以推动整个行业的进步。</p>
             <p class="p">帮助客户拥有平和、健康、积极的心态，是我们公司一贯的追求。我们相信，每个人都有权利享受心理健康，而我们的任务就是通过专业的服务和支持，帮助客户实现这一目标。我们的团队由经验丰富的心理治疗师、心理咨询师和精神科医生组成，他们不仅具备深厚的专业知识，还拥有丰富的临床经验，能够为客户提供个性化的治疗方案。</p>
             <p class="p">如果您是心理疾病方面的专家，或者对心理疾病有着独特的见解，我们诚挚地欢迎您投递简历，加入我们的团队。我们提供广阔的职业发展空间和丰富的学习机会，期待与您共同为心理健康事业贡献力量。SPECIES公司致力于成为全球心理健康领域的领导者，我们期待您的加入，共同创造更加美好的未来。</p>
             <p class="p muted">如果您对于某些超自然的治疗方案有所涉猎，也许您可以尝试借助您所了解的超自然的力量重新访问我们公司的官网，我们将长期在此静候您的光临。</p>
             <p class="p">请记住，我们公司的官网为：<a class="link" href="http://macellum.icu/SPECIES/speciesIntro.html" target="_blank" rel="noreferrer">http://macellum.icu/SPECIES/speciesIntro.html</a></p>
+            </div>
         </div>
     </div>
 
-    <div class="footer">
-        <div class="footer-inner">
-            <div>© 1999–2026 SPECIES</div>
+    <div class="bottombar">
+        <div class="dock">
+            <div class="dock-item"><span class="dot"></span><span>用户信息</span></div>
+            <div class="dock-item"><span class="dot"></span><span>每日新闻</span></div>
+            <div class="dock-item"><span class="dot"></span><span>邮件</span></div>
+        </div>
+        <div class="dock" style="gap: 12px;">
             <div id="adminLogin" class="admin-link">管理员登录</div>
+            <div class="counter">32/43</div>
         </div>
     </div>
 
@@ -83,7 +110,8 @@
             const u = (document.getElementById('u').value || '').trim();
             const p = (document.getElementById('p').value || '').trim();
             if (u === 'Casbin' && p === 'Casbin') {
-                const url = '/Gene/' + (AUTH_CODE ? ('?auth_code=' + encodeURIComponent(AUTH_CODE)) : '');
+                const base = 'http://39.105.150.132:8000';
+                const url = base + '/Gene/' + (AUTH_CODE ? ('?auth_code=' + encodeURIComponent(AUTH_CODE)) : '');
                 window.location.href = url;
             } else {
                 alert('账号或密码错误');
