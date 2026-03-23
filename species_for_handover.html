@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -38,6 +37,10 @@
         .btn { width: 100%; margin-top: 12px; padding: 10px 12px; border-radius: 10px; border: 1px solid #c0392b; background: #c0392b; color: #fff; font-weight: 900; cursor: pointer; }
         .btn:hover { opacity: 0.92; }
         .label { font-size: 13px; font-weight: 900; margin: 12px 0 8px; }
+        .forgot { margin-top: 8px; font-size: 12px; color: #c0392b; text-decoration: underline; font-weight: 900; cursor: pointer; display: inline-block; }
+        .msg { margin-top: 10px; font-size: 13px; font-weight: 900; }
+        .msg.ok { color: #2e7d32; }
+        .msg.bad { color: #c0392b; }
     </style>
 </head>
 <body>
@@ -56,8 +59,6 @@
             <p class="p">SPECIES公司在全球范围内设立了多个分部，以确保能够为不同地区的客户提供高质量的服务。这些分部不仅提供日常的心理健康服务，还积极参与社区活动，提高公众对心理健康问题的认识。此外，公司还拥有多个研究中心，专注于精神类疾病的前沿研究，不断探索新的治疗方法和技术，以推动整个行业的进步。</p>
             <p class="p">帮助客户拥有平和、健康、积极的心态，是我们公司一贯的追求。我们相信，每个人都有权利享受心理健康，而我们的任务就是通过专业的服务和支持，帮助客户实现这一目标。我们的团队由经验丰富的心理治疗师、心理咨询师和精神科医生组成，他们不仅具备深厚的专业知识，还拥有丰富的临床经验，能够为客户提供个性化的治疗方案。</p>
             <p class="p">如果您是心理疾病方面的专家，或者对心理疾病有着独特的见解，我们诚挚地欢迎您投递简历，加入我们的团队。我们提供广阔的职业发展空间和丰富的学习机会，期待与您共同为心理健康事业贡献力量。SPECIES公司致力于成为全球心理健康领域的领导者，我们期待您的加入，共同创造更加美好的未来。</p>
-            <p class="p muted">如果您对于某些超自然的治疗方案有所涉猎，也许您可以尝试借助您所了解的超自然的力量重新访问我们公司的官网，我们将长期在此静候您的光临。</p>
-            <p class="p">请记住，我们公司的官网为：<a class="link" href="http://macellum.icu/species_for_handover.html" target="_blank" rel="noreferrer">http://macellum.icu/species_for_handover.html</a></p>
             </div>
         </div>
     </div>
@@ -67,7 +68,6 @@
         </div>
         <div class="dock" style="gap: 12px;">
             <div id="adminLogin" class="admin-link">管理员登录</div>
-            <div class="counter">32/43</div>
         </div>
     </div>
 
@@ -82,7 +82,23 @@
                 <input id="u" class="field" placeholder="请输入账号">
                 <div class="label">密码</div>
                 <input id="p" type="password" class="field" placeholder="请输入密码">
+                <div id="forgotPwd" class="forgot">忘记密码</div>
                 <button id="loginBtn" class="btn" type="button">登录</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="forgotOverlay" class="overlay" onclick="closeForgot()">
+        <div class="dialog" onclick="event.stopPropagation()">
+            <div class="dialog-h">
+                <div class="dialog-title">密保验证</div>
+                <button class="dialog-close" type="button" onclick="closeForgot()">关闭</button>
+            </div>
+            <div class="dialog-b">
+                <div class="label">你最爱的人的名字</div>
+                <input id="qa" class="field" placeholder="请输入答案">
+                <button id="qaBtn" class="btn" type="button">确认</button>
+                <div id="qaMsg" class="msg" style="display:none;"></div>
             </div>
         </div>
     </div>
@@ -92,16 +108,58 @@
         const overlay = document.getElementById('overlay');
         const adminLogin = document.getElementById('adminLogin');
         const loginBtn = document.getElementById('loginBtn');
+        const forgotOverlay = document.getElementById('forgotOverlay');
+        const forgotPwd = document.getElementById('forgotPwd');
+        const qaBtn = document.getElementById('qaBtn');
 
         function closeLogin() { overlay.style.display = 'none'; }
         function openLogin() { overlay.style.display = 'flex'; document.getElementById('u').focus(); }
 
+        function openForgot() {
+            forgotOverlay.style.display = 'flex';
+            const msg = document.getElementById('qaMsg');
+            msg.style.display = 'none';
+            msg.className = 'msg';
+            msg.innerText = '';
+            const qa = document.getElementById('qa');
+            qa.value = '';
+            qa.disabled = false;
+            qaBtn.disabled = false;
+            qa.focus();
+        }
+
+        function closeForgot() {
+            forgotOverlay.style.display = 'none';
+            document.getElementById('p').focus();
+        }
+
+        function verifyQa() {
+            const answer = (document.getElementById('qa').value || '').trim();
+            const msg = document.getElementById('qaMsg');
+            msg.style.display = 'block';
+            if (answer === 'Casbin') {
+                msg.className = 'msg ok';
+                msg.innerText = '正确密码为：Hades3254';
+                document.getElementById('qa').disabled = true;
+                qaBtn.disabled = true;
+                return;
+            }
+            msg.className = 'msg bad';
+            msg.innerText = '答案错误';
+        }
+
         adminLogin.addEventListener('click', openLogin);
+        forgotPwd.addEventListener('click', openForgot);
+        qaBtn.addEventListener('click', verifyQa);
+        document.getElementById('qa').addEventListener('keydown', (e) => {
+            if (e.isComposing) return;
+            if (e.key === 'Enter') verifyQa();
+        });
 
         function doLogin() {
             const u = (document.getElementById('u').value || '').trim();
             const p = (document.getElementById('p').value || '').trim();
-            if (u === 'Casbin' && p === 'Casbin') {
+            if (u === 'Casbin' && p === 'Hades3254') {
                 const base = 'http://39.105.150.132:8000';
                 const url = base + '/Gene/' + (AUTH_CODE ? ('?auth_code=' + encodeURIComponent(AUTH_CODE)) : '');
                 window.location.href = url;
