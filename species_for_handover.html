@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -41,6 +42,8 @@
         .msg { margin-top: 10px; font-size: 13px; font-weight: 900; }
         .msg.ok { color: #2e7d32; }
         .msg.bad { color: #c0392b; }
+        .back-btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 14px; border-radius: 10px; border: 1px solid #111; background: #111; color: #fff; font-weight: 900; text-decoration: none; margin-bottom: 14px; }
+        .back-btn:hover { opacity: 0.92; }
     </style>
 </head>
 <body>
@@ -49,11 +52,12 @@
 
     <div class="wrap">
         <div class="panel">
-            <div class="panel-h">公司简介</div>
+            <div class="panel-h">招聘简介</div>
             <div class="panel-b">
-                <h1 class="h1">关于SPECIES</h1>
+                <a id="backBtn" class="back-btn" href="/handover/?auth_code={{ auth_code|urlencode }}">返回</a>
+                <h1 class="h1">欢迎加入SPECIES公司</h1>
                 <div class="hero">
-                    <img src="../picture/SPECIES公司简介.png" alt="SPECIES">
+                    <img src="{% static 'photo/species_logo.jpg' %}" alt="SPECIES">
                 </div>
             <p class="p">欢迎来到SPECIES 2026年招聘计划。能够吸引您来此，是我们的幸运。我们相信，世界上不存在真正的巧合，能够找到这里的人，很有可能就是我们需要的人才。</p>
             <p class="p">SPECIES公司目前已成立多个新型科研部门，计划引进大量计算机科学与技术、神经外科、心理学、生物工程、分子生物学、人工智能等相关领域的人才</p>
@@ -104,13 +108,25 @@
     </div>
 
     <script>
-        const AUTH_CODE = "{{ auth_code|escapejs }}" || (new URLSearchParams(window.location.search).get('auth_code') || '');
+        const AUTH_CODE_TPL = "{{ auth_code|escapejs }}";
+
+        function resolveAuthCode() {
+            const fromUrl = new URLSearchParams(window.location.search).get('auth_code') || '';
+            const fromTpl = String(AUTH_CODE_TPL || '').trim();
+            const tplLooksUnrendered = fromTpl.includes('{{') || fromTpl.includes('}}');
+            const tplValid = fromTpl && !tplLooksUnrendered;
+            return String((fromUrl || (tplValid ? fromTpl : '')) || '').trim();
+        }
+
+        const AUTH_CODE = resolveAuthCode();
         const overlay = document.getElementById('overlay');
         const adminLogin = document.getElementById('adminLogin');
         const loginBtn = document.getElementById('loginBtn');
         const forgotOverlay = document.getElementById('forgotOverlay');
         const forgotPwd = document.getElementById('forgotPwd');
         const qaBtn = document.getElementById('qaBtn');
+        const backBtn = document.getElementById('backBtn');
+        if (backBtn) backBtn.href = '/handover/?auth_code=' + encodeURIComponent(AUTH_CODE || '');
 
         function closeLogin() { overlay.style.display = 'none'; }
         function openLogin() { overlay.style.display = 'flex'; document.getElementById('u').focus(); }
@@ -139,7 +155,7 @@
             msg.style.display = 'block';
             if (answer === 'Casbin') {
                 msg.className = 'msg ok';
-                msg.innerText = '正确密码为：Hades3254';
+                msg.innerText = '校验通过。您原先的密码为：Hades3254';
                 document.getElementById('qa').disabled = true;
                 qaBtn.disabled = true;
                 return;
