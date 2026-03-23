@@ -54,10 +54,10 @@
         <div class="panel">
             <div class="panel-h">招聘简介</div>
             <div class="panel-b">
-                <a id="backBtn" class="back-btn" href="/handover/?auth_code={{ auth_code|urlencode }}">返回</a>
+                <a id="backBtn" class="back-btn" href="http://39.105.150.132:8000/handover/?auth_code={{ auth_code|urlencode }}">返回</a>
                 <h1 class="h1">欢迎加入SPECIES公司</h1>
                 <div class="hero">
-                    <img src="{% static 'photo/species_logo.jpg' %}" alt="SPECIES">
+                    <img src="../picture/SPECIES公司简介.png" alt="SPECIES">
                 </div>
             <p class="p">欢迎来到SPECIES 2026年招聘计划。能够吸引您来此，是我们的幸运。我们相信，世界上不存在真正的巧合，能够找到这里的人，很有可能就是我们需要的人才。</p>
             <p class="p">SPECIES公司目前已成立多个新型科研部门，计划引进大量计算机科学与技术、神经外科、心理学、生物工程、分子生物学、人工智能等相关领域的人才</p>
@@ -126,7 +126,7 @@
         const forgotPwd = document.getElementById('forgotPwd');
         const qaBtn = document.getElementById('qaBtn');
         const backBtn = document.getElementById('backBtn');
-        if (backBtn) backBtn.href = '/handover/?auth_code=' + encodeURIComponent(AUTH_CODE || '');
+        if (backBtn) backBtn.href = 'http://39.105.150.132:8000/handover/?auth_code=' + encodeURIComponent(AUTH_CODE || '');
 
         function closeLogin() { overlay.style.display = 'none'; }
         function openLogin() { overlay.style.display = 'flex'; document.getElementById('u').focus(); }
